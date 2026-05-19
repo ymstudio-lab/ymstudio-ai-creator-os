@@ -3,6 +3,7 @@
 
   const elements = {
     moduleGrid: document.querySelector("[data-module-grid]"),
+    plannedGrid: document.querySelector("[data-planned-grid]"),
     search: document.querySelector("[data-search]"),
     workflow: document.querySelector("[data-workflow]"),
     summary: document.querySelector("[data-summary]"),
@@ -89,6 +90,29 @@
     elements.emptyState.hidden = items.length > 0;
   }
 
+  function renderPlannedModules() {
+    const cards = state.getLocalizedPlannedModules(getLanguage()).map((module) => {
+      const card = document.createElement("article");
+      card.className = "planned-card";
+
+      const topLine = document.createElement("div");
+      topLine.className = "module-topline";
+      topLine.append(
+        createTextElement("span", "workflow-pill", module.workflow),
+        createTextElement("span", "coming-pill", state.getCopy(getLanguage()).comingSoon)
+      );
+
+      const title = createTextElement("h3", "", module.name);
+      const value = createTextElement("p", "module-value", module.value);
+      const reason = createTextElement("p", "module-money", module.reason);
+
+      card.append(topLine, title, value, reason);
+      return card;
+    });
+
+    elements.plannedGrid.replaceChildren(...cards);
+  }
+
   function renderChecklist() {
     elements.checklist.replaceChildren(
       ...state.getLocalizedChecklist(getLanguage()).map((item) => {
@@ -138,6 +162,7 @@
     renderChecklist();
     renderRoadmap();
     renderArchitecture();
+    renderPlannedModules();
     applyFilters();
   }
 

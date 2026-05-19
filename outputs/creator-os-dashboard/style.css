@@ -154,18 +154,31 @@ h2 {
   gap: 14px;
 }
 
+.planned-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .module-card,
+.planned-card,
 .panel {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
 }
 
-.module-card {
+.module-card,
+.planned-card {
   display: grid;
   gap: 12px;
   padding: 16px;
   min-height: 340px;
+}
+
+.planned-card {
+  min-height: 230px;
+  background: #fbfbf8;
 }
 
 .module-topline {
@@ -194,6 +207,18 @@ h2 {
 .status-pill {
   background: #f6eadf;
   color: var(--warm);
+}
+
+.coming-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: #f1eee8;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
 }
 
 .module-card h3 {
@@ -292,6 +317,10 @@ h2 {
   .module-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .planned-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
@@ -307,6 +336,10 @@ h2 {
   }
 
   .module-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planned-grid {
     grid-template-columns: 1fr;
   }
 }

@@ -50,6 +50,21 @@ function testStatusSummary() {
   assert.strictEqual(summary.finalVerified, 6);
 }
 
+function testPlannedModules() {
+  assert.strictEqual(state.plannedModules.length, 4);
+  assert.deepStrictEqual(
+    state.plannedModules.map((module) => module.id),
+    [
+      "character-consistency-tool",
+      "comfyui-workflow-manager",
+      "script-generator",
+      "creator-dashboard-upgrade",
+    ]
+  );
+  assert.strictEqual(state.getLocalizedPlannedModules("ko")[0].name, "캐릭터 일관성 도구");
+  assert.strictEqual(state.getCopy("ko").comingSoon, "준비 중");
+}
+
 function testGithubChecklistData() {
   const checklist = state.getGithubChecklist();
   const koreanChecklist = state.getLocalizedChecklist("ko");
@@ -66,6 +81,7 @@ function testStaticUiBindings() {
   const app = fs.readFileSync(path.join(dashboardDir, "app.js"), "utf8");
   [
     "data-module-grid",
+    "data-planned-grid",
     "data-search",
     "data-workflow",
     "data-language",
@@ -91,6 +107,7 @@ function testStaticUiBindings() {
   testLinksExist,
   testWorkflowFiltering,
   testStatusSummary,
+  testPlannedModules,
   testGithubChecklistData,
   testStaticUiBindings,
 ].forEach((test) => test());

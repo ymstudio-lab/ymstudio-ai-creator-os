@@ -92,6 +92,53 @@
     },
   ];
 
+  const plannedModules = [
+    {
+      id: "character-consistency-tool",
+      name: "Character Consistency Tool",
+      nameKo: "캐릭터 일관성 도구",
+      workflow: "Production",
+      workflowKo: "제작",
+      value: "Character bible, reference notes, visual rules, seed/model notes, and scene consistency checks.",
+      valueKo: "캐릭터 설정, 참고 이미지 메모, 시각 규칙, seed/model 메모, 장면별 일관성 체크를 정리합니다.",
+      reason: "Good next module for AI video creators who need the same character across scenes.",
+      reasonKo: "여러 장면에서 같은 캐릭터를 유지해야 하는 AI 영상 제작자에게 가장 직접적인 다음 모듈입니다.",
+    },
+    {
+      id: "comfyui-workflow-manager",
+      name: "ComfyUI Workflow Manager",
+      nameKo: "ComfyUI 워크플로우 매니저",
+      workflow: "Automation",
+      workflowKo: "자동화",
+      value: "Workflow names, model notes, input/output rules, node presets, and reusable generation recipes.",
+      valueKo: "워크플로우 이름, 모델 메모, 입출력 규칙, 노드 프리셋, 반복 생성 레시피를 정리합니다.",
+      reason: "Useful for creators who reuse local image/video generation pipelines.",
+      reasonKo: "로컬 이미지/영상 생성 파이프라인을 반복해서 쓰는 제작자에게 유용합니다.",
+    },
+    {
+      id: "script-generator",
+      name: "Script Generator",
+      nameKo: "스크립트 생성기",
+      workflow: "Prompting",
+      workflowKo: "프롬프트",
+      value: "Hook, outline, scene narration, CTA, short-form scripts, and reusable script templates.",
+      valueKo: "훅, 개요, 장면 내레이션, CTA, 숏폼 대본, 반복 가능한 대본 템플릿을 만듭니다.",
+      reason: "Connects naturally to Prompt Board, Shot Planner, and YouTube Calendar.",
+      reasonKo: "프롬프트 보드, 샷 플래너, 유튜브 캘린더와 자연스럽게 연결됩니다.",
+    },
+    {
+      id: "creator-dashboard-upgrade",
+      name: "Creator Dashboard Upgrade",
+      nameKo: "크리에이터 대시보드 강화",
+      workflow: "Operations",
+      workflowKo: "운영",
+      value: "Cross-module project summary, weekly focus, backup reminders, and local health checks.",
+      valueKo: "모듈별 프로젝트 요약, 주간 집중 작업, 백업 알림, 로컬 상태 점검을 보여줍니다.",
+      reason: "Makes the OS feel more unified after enough modules exist.",
+      reasonKo: "모듈이 충분히 쌓인 뒤 전체 OS를 하나의 제품처럼 느끼게 만드는 강화 작업입니다.",
+    },
+  ];
+
   const githubChecklist = [
     { en: "Confirm each module opens from its local index.html.", ko: "각 모듈이 로컬 index.html에서 정상적으로 열리는지 확인합니다." },
     { en: "Review README and usage docs for public wording.", ko: "README와 사용 문서의 공개용 문구를 확인합니다." },
@@ -146,6 +193,9 @@
       localReady: "Local-ready module",
       launchpadEyebrow: "Launchpad",
       modulesTitle: "Completed modules",
+      plannedEyebrow: "Coming soon",
+      plannedTitle: "Planned modules",
+      comingSoon: "Coming soon",
       emptyState: "No modules match the current filter.",
       summarySuffix: " modules ready for local use",
       finalVerified: "Ready",
@@ -173,6 +223,9 @@
       localReady: "로컬 사용 준비 완료",
       launchpadEyebrow: "런치패드",
       modulesTitle: "완료된 모듈",
+      plannedEyebrow: "예정 모듈",
+      plannedTitle: "다음에 붙일 모듈",
+      comingSoon: "준비 중",
       emptyState: "현재 필터와 일치하는 모듈이 없습니다.",
       summarySuffix: "개 모듈이 로컬 사용 준비 완료",
       finalVerified: "사용 준비 완료",
@@ -273,8 +326,21 @@
     return architectureNotes.map((item) => item[lang]);
   }
 
+  function getLocalizedPlannedModules(language) {
+    const lang = normalizeLanguage(language);
+    if (lang === "en") return plannedModules.map((module) => ({ ...module }));
+    return plannedModules.map((module) => ({
+      ...module,
+      name: module.nameKo || module.name,
+      workflow: module.workflowKo || module.workflow,
+      value: module.valueKo || module.value,
+      reason: module.reasonKo || module.reason,
+    }));
+  }
+
   return {
     modules,
+    plannedModules,
     githubChecklist,
     roadmap,
     architectureNotes,
@@ -287,5 +353,6 @@
     getLocalizedChecklist,
     getLocalizedRoadmap,
     getLocalizedArchitectureNotes,
+    getLocalizedPlannedModules,
   };
 });
