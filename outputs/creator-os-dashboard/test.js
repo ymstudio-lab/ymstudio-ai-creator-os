@@ -86,15 +86,17 @@ function testStaticUiBindings() {
     "data-language",
     "data-i18n",
     "data-summary",
-    "data-checklist",
-    "data-roadmap",
-    "data-architecture",
+    "data-project-field",
+    "data-save-project",
+    "data-workflow-steps",
+    "ROADMAP.md",
+    "PUBLISHING_CHECKLIST.md",
     "state.js",
     "app.js",
   ].forEach((token) => {
     assert.ok(index.includes(token), `index.html should include ${token}`);
   });
-  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language"].forEach((token) => {
+  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile"].forEach((token) => {
     assert.ok(app.includes(token), `app.js should include ${token}`);
   });
   assert.ok(!app.includes("innerHTML"), "app.js should avoid unsafe raw HTML rendering");

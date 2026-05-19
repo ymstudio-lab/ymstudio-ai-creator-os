@@ -1,5 +1,6 @@
 (function () {
   const LANGUAGE_KEY = "ymstudio.creatorOS.language";
+  const PROJECT_KEY = "ymstudio.creatorProject.v1";
 
   const dictionary = {
     "Creator Prompt Board": "크리에이터 프롬프트 보드",
@@ -143,9 +144,9 @@
     "creator-os-dashboard": {
       title: "처음 쓰는 순서",
       steps: [
-        "대시보드에서 필요한 모듈을 먼저 엽니다.",
-        "각 모듈의 샘플 데이터를 내 작업에 맞게 바꿉니다.",
-        "작업이 쌓이면 Export JSON으로 백업합니다.",
+        "새 영상 프로젝트에 채널명, 주제, 타깃, 목적을 먼저 입력합니다.",
+        "따라 하기 순서나 완료된 모듈에서 지금 필요한 작업을 엽니다.",
+        "작업이 쌓이면 프로젝트와 각 모듈을 JSON으로 백업합니다.",
       ],
     },
     "creator-prompt-board": {
@@ -299,6 +300,42 @@
     document.body.prepend(picker);
   }
 
+  function loadCreatorProject() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(PROJECT_KEY) || "{}");
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function ensureProjectBanner() {
+    if (document.querySelector(".ym-project-banner")) return;
+    if (currentAppKey() === "creator-os-dashboard") return;
+    const project = loadCreatorProject();
+    if (!project.videoTopic && !project.channelName) return;
+    const banner = document.createElement("aside");
+    banner.className = "ym-project-banner";
+
+    const label = document.createElement("span");
+    label.textContent = getLanguage() === "ko" ? "현재 프로젝트" : "Current project";
+    const title = document.createElement("strong");
+    title.textContent = project.videoTopic || project.channelName || "Creator Project";
+    const detail = document.createElement("p");
+    detail.textContent = [
+      project.channelName,
+      project.targetAudience,
+      project.platform,
+      project.tone,
+    ].filter(Boolean).join(" · ");
+
+    banner.append(label, title);
+    if (detail.textContent) banner.appendChild(detail);
+    const target = document.querySelector(".hero, .top-band, .brand, .app-shell") || document.body;
+    if (target === document.body) document.body.prepend(banner);
+    else target.insertAdjacentElement("afterend", banner);
+  }
+
   function applyTranslations() {
     translateTextNodes(document.body);
     translateAttributes(document.body);
@@ -364,6 +401,32 @@
         overflow-wrap: break-word;
         word-break: keep-all;
       }
+      .ym-project-banner {
+        width: min(1180px, calc(100% - 40px));
+        margin: 18px auto;
+        display: grid;
+        gap: 4px;
+        padding: 14px 18px;
+        border: 1px solid rgba(33, 110, 99, 0.2);
+        border-radius: 8px;
+        background: #e8f3ee;
+        color: #18201b;
+        box-shadow: 0 12px 32px rgba(28, 36, 30, 0.08);
+      }
+      .ym-project-banner span {
+        color: #216e63;
+        font-size: 0.78rem;
+        font-weight: 900;
+      }
+      .ym-project-banner strong {
+        font-size: 1.05rem;
+      }
+      .ym-project-banner p {
+        margin: 0;
+        color: #45504a;
+        overflow-wrap: break-word;
+        word-break: keep-all;
+      }
       @media (max-width: 760px) {
         .ym-language-picker {
           position: static;
@@ -371,6 +434,9 @@
         }
         .ym-beginner-guide {
           grid-template-columns: 1fr;
+          width: min(100% - 28px, 720px);
+        }
+        .ym-project-banner {
           width: min(100% - 28px, 720px);
         }
       }
@@ -381,6 +447,7 @@
   function init() {
     injectStyles();
     ensureLanguagePicker();
+    ensureProjectBanner();
     ensureBeginnerGuide();
     applyTranslations();
   }

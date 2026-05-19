@@ -1,0 +1,118 @@
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from urllib.parse import quote
+
+from playwright.sync_api import sync_playwright
+
+
+PROJECT = Path(__file__).resolve().parents[1]
+OUTPUTS = PROJECT / "outputs"
+REPORT_PATH = PROJECT / "reports" / "ui-interaction-report.json"
+CHROME = Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe")
+EDGE = Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+
+
+def file_url(path: Path) -> str:
+    return "file:///" + quote(str(path.resolve()).replace("\\", "/"), safe="/:")
+
+
+def main() -> int:
+    REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    executable = CHROME if CHROME.exists() else EDGE
+    if not executable.exists():
+        raise SystemExit("Chrome or Edge executable was not found.")
+
+    checks: list[dict[str, object]] = []
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(
+            executable_path=str(executable),
+            headless=True,
+            args=["--disable-gpu", "--no-first-run", "--disable-extensions"],
+        )
+        context = browser.new_context(locale="ko-KR", accept_downloads=True)
+        page = context.new_page()
+
+        dashboard = OUTPUTS / "creator-os-dashboard" / "index.html"
+        page.goto(file_url(dashboard), wait_until="networkidle")
+        page.evaluate(
+            """() => {
+              localStorage.setItem("ymstudio.creatorOS.language", "ko");
+              [
+                "ymstudio.creatorProject.v1",
+                "ymstudio.templateLibrary.v1",
+                "ymstudio.creatorPromptBoard.v1",
+                "ymstudio.thumbnailIdeaBoard.v1"
+              ].forEach((key) => localStorage.removeItem(key));
+            }"""
+        )
+        page.reload(wait_until="networkidle")
+        page.fill('[data-project-field="channelName"]', "YMSTUDIO Test")
+        page.fill('[data-project-field="videoTopic"]', "일반 영상 제작 파이프라인 테스트")
+        page.fill('[data-project-field="targetAudience"]', "초보 영상 제작자")
+        page.fill('[data-project-field="videoGoal"]', "템플릿 기반 제작 흐름 검증")
+        page.click(".inline-disclosure summary")
+        page.fill('[data-project-field="platform"]', "YouTube")
+        page.fill('[data-project-field="tone"]', "쉽고 실전형")
+        page.fill('[data-project-field="aiTools"]', "Claude, ChatGPT")
+        page.fill('[data-project-field="folderName"]', "interaction-test")
+        page.click("[data-save-project]")
+        project = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.creatorProject.v1"))""")
+        checks.append({
+            "name": "dashboard_project_saved",
+            "passed": project.get("videoTopic") == "일반 영상 제작 파이프라인 테스트",
+        })
+
+        with page.expect_download() as download_info:
+            page.click("[data-export-project]")
+        download = download_info.value
+        checks.append({
+            "name": "dashboard_project_export_download",
+            "passed": download.suggested_filename == "creator-project.json",
+        })
+
+        template = OUTPUTS / "template-library" / "index.html"
+        page.goto(file_url(template), wait_until="networkidle")
+        banner_text = page.locator(".ym-project-banner").inner_text(timeout=3000)
+        checks.append({
+            "name": "shared_project_banner_visible",
+            "passed": "일반 영상 제작 파이프라인 테스트" in banner_text,
+        })
+        page.click("#saveTemplate")
+        page.fill("#rating", "5")
+        page.click("#importTemplate")
+        local_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.templateLibrary.v1"))""")
+        prompt_board = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.creatorPromptBoard.v1") || "[]")""")
+        thumbnail_board = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.thumbnailIdeaBoard.v1") || "[]")""")
+        checks.append({
+            "name": "template_save_and_rating",
+            "passed": bool(local_state.get("saved")) and bool(local_state.get("ratings")),
+        })
+        checks.append({
+            "name": "template_import_to_supported_module",
+            "passed": len(prompt_board) + len(thumbnail_board) >= 1,
+        })
+        with page.expect_download() as template_download_info:
+            page.click("#exportJson")
+        template_download = template_download_info.value
+        checks.append({
+            "name": "template_library_export_download",
+            "passed": template_download.suggested_filename == "template-library-state.json",
+        })
+
+        browser.close()
+
+    payload = {
+        "checked_at": __import__("datetime").datetime.now().astimezone().isoformat(timespec="seconds"),
+        "mode": "playwright_chrome_interactions",
+        "passed": all(item["passed"] for item in checks),
+        "checks": checks,
+    }
+    REPORT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0 if payload["passed"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -21,6 +21,20 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | Template Library | Use built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes |
 | Creator OS Dashboard | Open all modules from one local control panel |
 
+## Creator Project Flow
+
+The dashboard includes a local Creator Project profile for a single video project:
+
+- Channel name, video topic, target audience, video goal, platform, tone, AI tools, and project folder name
+- Guided workflow from topic setup to template selection, prompt storage, shot planning, thumbnail planning, upload planning, asset notes, and cost tracking
+- Project JSON export/import for local backup
+- Current project banner on module pages so each tool can reference the same project context
+
+Project planning notes are kept outside the dashboard:
+
+- [Roadmap](ROADMAP.md)
+- [Publishing checklist](PUBLISHING_CHECKLIST.md)
+
 ## Quick Start
 
 Use the hosted demo:
@@ -77,7 +91,13 @@ node test.js
 Run the full screenshot check from this workspace layout:
 
 ```powershell
-python ..\..\scripts\capture_creator_os_screenshots.py
+python scripts\capture_creator_os_screenshots.py
+```
+
+Run the browser interaction check from this workspace layout:
+
+```powershell
+python scripts\test_creator_os_interactions.py
 ```
 
 Security pattern scan:
@@ -91,7 +111,10 @@ rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|docu
 - Move data between modules with shared JSON exports
 - Add one shared project profile for channel, campaign, and client metadata
 - Expand the template library based on saved/rated/copied template patterns
+- Add deeper direct imports into Shot Planner, Calendar, Asset Manager, and Cost Tracker
 - Prepare optional automation adapters after the offline-first workflow is stable
+
+See [Roadmap](ROADMAP.md) for the current planning list.
 
 ## License
 

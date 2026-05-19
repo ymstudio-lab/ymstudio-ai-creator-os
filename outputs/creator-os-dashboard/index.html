@@ -9,9 +9,9 @@
   <body>
     <header class="hero">
       <div>
-        <p class="eyebrow" data-i18n="heroEyebrow">로컬 런처 - 1차 모듈 완료</p>
+        <p class="eyebrow" data-i18n="heroEyebrow">로컬 런처 - 크리에이터 번들 확장 중</p>
         <h1 data-i18n="heroTitle">YMSTUDIO AI Creator OS 대시보드</h1>
-        <p class="hero-copy" data-i18n="heroCopy"></p>
+        <p class="hero-copy" data-i18n="heroCopy">영상 아이디어를 주제, 훅, 프롬프트, 샷 플랜, 썸네일, 업로드 일정, 자산, 리뷰 메모로 바꾸는 로컬 작업대입니다.</p>
       </div>
       <aside class="hero-status" aria-label="Completion summary">
         <span data-summary></span>
@@ -19,7 +19,65 @@
     </header>
 
     <main>
-      <section class="toolbar" aria-label="Module filters">
+      <section class="promise-strip" aria-label="What this dashboard helps with">
+        <article>
+          <strong>아이디어를 작업 순서로</strong>
+          <span>주제, 타깃, 목적을 먼저 정하고 다음 행동을 고릅니다.</span>
+        </article>
+        <article>
+          <strong>반복 작업을 템플릿으로</strong>
+          <span>훅, 대본, 샷, 썸네일을 빈 화면에서 시작하지 않습니다.</span>
+        </article>
+        <article>
+          <strong>자료를 한 프로젝트로</strong>
+          <span>모듈마다 같은 프로젝트 정보를 보고 JSON으로 백업합니다.</span>
+        </article>
+      </section>
+
+      <section class="project-workflow-grid" aria-label="Creator project workflow">
+        <article class="panel project-panel">
+          <div class="section-heading compact-heading">
+            <p class="eyebrow">Creator Project</p>
+            <h2>새 영상 프로젝트 시작</h2>
+            <p class="section-note">이 정보가 다른 모듈의 현재 프로젝트 배너로 이어집니다.</p>
+          </div>
+          <div class="project-form project-form-primary" data-project-form>
+            <label><span>채널명</span><input data-project-field="channelName" type="text" placeholder="예: YMSTUDIO"></label>
+            <label><span>영상 주제</span><input data-project-field="videoTopic" type="text" placeholder="예: AI 영상 제작 워크플로우"></label>
+            <label><span>타깃 시청자</span><input data-project-field="targetAudience" type="text" placeholder="예: 영상 제작 초보자"></label>
+            <label><span>영상 목적</span><input data-project-field="videoGoal" type="text" placeholder="예: 템플릿 기반 제작 흐름 소개"></label>
+          </div>
+          <details class="inline-disclosure">
+            <summary>추가 프로젝트 정보</summary>
+            <div class="project-form">
+              <label><span>업로드 플랫폼</span><input data-project-field="platform" type="text" placeholder="예: YouTube, Shorts, Instagram"></label>
+              <label><span>톤앤매너</span><input data-project-field="tone" type="text" placeholder="예: 쉽게, 실전형, 차분하게"></label>
+              <label><span>사용할 AI 도구</span><input data-project-field="aiTools" type="text" placeholder="예: Claude, ChatGPT, ComfyUI"></label>
+              <label><span>프로젝트 폴더명</span><input data-project-field="folderName" type="text" placeholder="예: 20260519-creator-workflow"></label>
+            </div>
+          </details>
+          <div class="project-actions">
+            <button class="primary-action" type="button" data-save-project>프로젝트 저장</button>
+            <button class="secondary-action" type="button" data-sample-project>샘플 채우기</button>
+            <button class="secondary-action" type="button" data-export-project>JSON 내보내기</button>
+            <button class="secondary-action" type="button" data-import-project>JSON 가져오기</button>
+            <input data-import-project-file type="file" accept="application/json,.json" hidden>
+          </div>
+          <p class="project-status" data-project-status>아직 저장된 프로젝트가 없습니다.</p>
+        </article>
+
+        <details class="panel workflow-panel">
+          <summary>
+            <span>
+              <small>Guided workflow</small>
+              <strong>따라 하기 순서 보기</strong>
+            </span>
+          </summary>
+          <ol class="workflow-steps" data-workflow-steps></ol>
+        </details>
+      </section>
+
+      <section class="toolbar" aria-label="Launchpad module filters">
         <label>
           <span data-i18n="languageLabel">언어</span>
           <select data-language>
@@ -39,49 +97,23 @@
 
       <section aria-labelledby="modules-title" class="section">
         <div class="section-heading">
-          <p class="eyebrow" data-i18n="launchpadEyebrow">런치패드</p>
-          <h2 id="modules-title" data-i18n="modulesTitle">완료된 모듈</h2>
+          <h2 id="modules-title" data-i18n="launchpadEyebrow">런치패드</h2>
         </div>
         <p data-empty-state class="empty-state" hidden></p>
         <div class="module-grid" data-module-grid></div>
       </section>
 
-      <section aria-labelledby="planned-title" class="section">
+      <section aria-labelledby="planned-title" class="section planned-section">
         <div class="section-heading">
-          <p class="eyebrow" data-i18n="plannedEyebrow">Coming soon</p>
-          <h2 id="planned-title" data-i18n="plannedTitle">Planned modules</h2>
+          <h2 id="planned-title" data-i18n="plannedEyebrow">예정 모듈</h2>
         </div>
         <div class="planned-grid" data-planned-grid></div>
       </section>
 
-      <section class="summary-grid">
-        <article class="panel">
-          <p class="eyebrow" data-i18n="monetizationEyebrow">비즈니스 활용</p>
-          <h2 data-i18n="monetizationTitle">번들 전략</h2>
-          <p data-i18n="monetizationCopy1"></p>
-          <p data-i18n="monetizationCopy2"></p>
-        </article>
-
-        <article class="panel">
-          <p class="eyebrow" data-i18n="publishingEyebrow">공개 준비</p>
-          <h2 data-i18n="githubTitle">GitHub 체크리스트</h2>
-          <ul class="checklist" data-checklist></ul>
-        </article>
-      </section>
-
-      <section class="summary-grid">
-        <article class="panel">
-          <p class="eyebrow" data-i18n="architectureEyebrow">구조</p>
-          <h2 data-i18n="architectureTitle">로컬 사용 메모</h2>
-          <ul data-architecture></ul>
-        </article>
-
-        <article class="panel">
-          <p class="eyebrow" data-i18n="roadmapEyebrow">로드맵</p>
-          <h2 data-i18n="roadmapTitle">다음 단계</h2>
-          <ol class="roadmap" data-roadmap></ol>
-        </article>
-      </section>
+      <nav class="doc-links" aria-label="Project documents">
+        <a href="../../ROADMAP.md">Roadmap</a>
+        <a href="../../PUBLISHING_CHECKLIST.md">GitHub Checklist</a>
+      </nav>
     </main>
 
     <script src="state.js"></script>
