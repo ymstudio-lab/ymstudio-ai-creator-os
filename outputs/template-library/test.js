@@ -12,8 +12,12 @@ function memoryStorage() {
 }
 
 function testDefinitions() {
-  assert.ok(State.templates.length >= 10);
+  assert.ok(State.templates.length >= 30);
   assert.ok(State.categories.includes("Thumbnail"));
+  ["쇼츠", "롱폼", "튜토리얼", "리뷰", "비교", "썸네일", "후킹"].forEach((category) => {
+    assert.ok(State.categories.includes(category));
+    assert.ok(State.templates.some((item) => item.category === category));
+  });
   assert.ok(State.categories.includes("SEO"));
   assert.ok(State.categories.includes("Repurposing"));
   assert.ok(State.audiences.includes("AI Video Creator"));
@@ -23,11 +27,13 @@ function testDefinitions() {
   assert.ok(State.targetModules.includes("Script Generator"));
   assert.ok(State.templates.some((item) => item.audience === "Educator"));
   assert.ok(State.templates.some((item) => item.audience === "Small Business"));
+  assert.ok(State.templates.every((item) => item.resultKo || item.payload?.resultNotes || item.usage));
 }
 
 function testFiltering() {
   const localState = { ratings: {}, saved: ["thumb_before_after"] };
   assert.ok(State.filterTemplates(State.templates, { query: "thumbnail" }, localState).length >= 2);
+  assert.ok(State.filterTemplates(State.templates, { category: "썸네일" }, localState).some((item) => item.category === "Thumbnail"));
   assert.ok(State.filterTemplates(State.templates, { category: "ComfyUI" }, localState).every((item) => item.category === "ComfyUI"));
   assert.ok(State.filterTemplates(State.templates, { savedOnly: true }, localState).every((item) => item.id === "thumb_before_after"));
   assert.ok(State.filterTemplates(State.templates, { minPopularity: 5 }, localState).every((item) => item.popularity >= 5));
@@ -110,6 +116,15 @@ function testBeginnerPicksUiBindings() {
   assert.ok(app.includes("scrollIntoView"));
 }
 
+function testResultUiBindings() {
+  const index = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+  const app = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
+  assert.ok(index.includes("detailResult"));
+  assert.ok(index.includes("이 템플릿으로 남는 결과"));
+  assert.ok(app.includes("detailResult"));
+  assert.ok(app.includes("resultKo"));
+}
+
 [
   testDefinitions,
   testFiltering,
@@ -121,6 +136,7 @@ function testBeginnerPicksUiBindings() {
   testImportHandlesCorruptTargetData,
   testExportImportState,
   testBeginnerPicksUiBindings,
+  testResultUiBindings,
 ].forEach((test) => test());
 
-console.log("Passed 10 Template Library tests.");
+console.log("Passed 11 Template Library tests.");

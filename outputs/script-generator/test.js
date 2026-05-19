@@ -59,6 +59,21 @@ function testBuildFromProject() {
   assert.ok(script.audience.includes("초보자"));
 }
 
+function testBuildFromBrief() {
+  const script = State.buildFromBrief({
+    topic: "AI 영상 제작 워크플로우",
+    audience: "영상 제작 초보자",
+    length: "Shorts",
+    tone: "빠르고 강하게",
+  });
+  assert.strictEqual(script.title, "AI 영상 제작 워크플로우");
+  assert.strictEqual(script.format, "Shorts");
+  assert.strictEqual(script.tone, "빠르고 강하게");
+  assert.ok(script.hook.includes("AI 영상 제작 워크플로우"));
+  assert.ok(script.scenes.length >= 4);
+  assert.ok(script.cta);
+}
+
 function testScriptToShotPlan() {
   const script = State.createScript({ title: "대본", scenes: ["첫 장면", "둘째 장면"], hook: "시작", cta: "저장" });
   const plan = State.scriptToShotPlan(script);
@@ -150,6 +165,7 @@ function testInvalidImport() {
   testUpdatePreservesIdentity,
   testFormatScript,
   testBuildFromProject,
+  testBuildFromBrief,
   testScriptToShotPlan,
   testSendToShotPlannerMergesExistingPlan,
   testSendToShotPlannerDoesNotOverwriteCorruptPlan,
@@ -161,4 +177,4 @@ function testInvalidImport() {
   testInvalidImport,
 ].forEach((test) => test());
 
-console.log("Passed 15 Script Generator tests.");
+console.log("Passed 16 Script Generator tests.");

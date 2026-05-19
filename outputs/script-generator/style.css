@@ -138,6 +138,36 @@ textarea {
   padding: 16px;
 }
 
+.brief-builder {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.74fr) minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.brief-builder h2 {
+  margin: 2px 0 6px;
+  font-size: 1.16rem;
+}
+
+.brief-builder p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.brief-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
 label {
   display: grid;
   gap: 6px;
@@ -369,6 +399,8 @@ pre {
   .board,
   .beginner-guide,
   .toolbar,
+  .brief-builder,
+  .brief-grid,
   .form-grid,
   .form-grid.two {
     grid-template-columns: 1fr;

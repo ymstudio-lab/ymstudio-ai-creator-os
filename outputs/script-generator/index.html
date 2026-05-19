@@ -30,6 +30,25 @@
         </ol>
       </section>
 
+      <section class="brief-builder" aria-label="초보자용 대본 시작">
+        <div>
+          <p class="eyebrow">Beginner Builder</p>
+          <h2>주제만 넣고 첫 대본 만들기</h2>
+          <p>템플릿을 고르기 어렵다면 주제, 시청자, 길이, 톤만 넣고 훅/본문/CTA/샷 분리 문장을 먼저 만듭니다.</p>
+        </div>
+        <div class="brief-grid">
+          <label>주제<input id="briefTopic" type="text" placeholder="예: AI 영상 제작 워크플로우"></label>
+          <label>시청자<input id="briefAudience" type="text" placeholder="예: 영상 제작 초보자"></label>
+          <label>길이<select id="briefLength">
+            <option value="Shorts">쇼츠</option>
+            <option value="YouTube Long">롱폼</option>
+            <option value="Tutorial">튜토리얼</option>
+          </select></label>
+          <label>톤<select id="briefTone"></select></label>
+        </div>
+        <button id="buildFromBrief" type="button">첫 대본 초안 만들기</button>
+      </section>
+
       <section class="toolbar" aria-label="스크립트 필터">
         <label>
           검색

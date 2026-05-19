@@ -120,6 +120,24 @@ function testStaticUiBindings() {
   assert.ok(!app.includes("queueIds"), "dashboard should not expose internal queue ids");
 }
 
+function testSampleModuleSeedBindings() {
+  const app = fs.readFileSync(path.join(dashboardDir, "app.js"), "utf8");
+  [
+    "seedSampleModules",
+    "setIfEmpty",
+    "sample_script_creator_workflow",
+    "ymstudio.templateLibrary.v1",
+    "ymstudio.scriptGenerator.v1",
+    "ymstudio.aiShotPlanner.v1",
+    "ymstudio.thumbnailIdeaBoard.v1",
+    "ymstudio.youtubeCalendar.v1",
+    "ymstudio.creatorAssetManager.v1",
+    "ymstudio.apiCostTracker.v1",
+  ].forEach((token) => {
+    assert.ok(app.includes(token), `sample seeding should include ${token}`);
+  });
+}
+
 [
   testModuleDefinitions,
   testLinksExist,
@@ -128,6 +146,7 @@ function testStaticUiBindings() {
   testPlannedModules,
   testGithubChecklistData,
   testStaticUiBindings,
+  testSampleModuleSeedBindings,
 ].forEach((test) => test());
 
-console.log("creator-os-dashboard tests passed (7)");
+console.log("creator-os-dashboard tests passed (8)");

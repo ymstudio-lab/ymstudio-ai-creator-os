@@ -55,6 +55,130 @@
     folderName: "20260519-creator-workflow",
   };
 
+  function seedSampleModules() {
+    const now = new Date().toISOString();
+    const setIfEmpty = (key, value) => {
+      if (!localStorage.getItem(key)) localStorage.setItem(key, value);
+    };
+    setIfEmpty("ymstudio.templateLibrary.v1", JSON.stringify({
+      ratings: { classic_video_hook_map: 5, script_hook_loop: 5, thumb_emotion_contrast: 5 },
+      saved: ["classic_video_hook_map", "script_hook_loop", "thumb_emotion_contrast"],
+    }));
+    setIfEmpty("ymstudio.scriptGenerator.v1", JSON.stringify([
+      {
+        id: "sample_script_creator_workflow",
+        title: "AI 영상 제작 워크플로우 소개",
+        format: "YouTube Long",
+        tone: "쉽고 차분하게",
+        status: "draft",
+        audience: "영상 제작 초보자",
+        goal: "아이디어를 대본, 샷, 썸네일, 업로드 계획으로 바꾸는 흐름 소개",
+        hook: "AI 영상 제작이 어려운 이유는 도구가 부족해서가 아니라 작업 순서가 흩어져 있기 때문입니다.",
+        outline: "문제 제기 > Creator Project 입력 > 템플릿 선택 > 대본/샷/썸네일/캘린더 연결 > JSON 백업",
+        scenes: [
+          "빈 화면에서 시작하면 무엇부터 해야 할지 막히는 상황을 보여줍니다.",
+          "Creator Project에 채널명, 주제, 타깃, 목적을 입력합니다.",
+          "템플릿 라이브러리에서 첫 훅과 대본 구조를 고릅니다.",
+          "스크립트 생성기에서 훅, 본문, CTA, 샷 분리 문장을 만듭니다.",
+          "샷 플래너, 썸네일 보드, 캘린더, 자산 메모로 이어지는 흐름을 보여줍니다.",
+        ],
+        cta: "오늘 만들 영상 주제 하나를 Creator Project에 저장하고 첫 템플릿을 골라보세요.",
+        notes: "대시보드 샘플 프로젝트에서 자동 생성된 대표 대본입니다.",
+        favorite: true,
+        createdAt: now,
+        updatedAt: now,
+      },
+    ]));
+    setIfEmpty("ymstudio.aiShotPlanner.v1", JSON.stringify({
+      version: 1,
+      project: { title: "AI 영상 제작 워크플로우 소개", goal: sampleProject.videoGoal, format: "YouTube Long", audience: sampleProject.targetAudience },
+      scenes: [
+        { id: "sample_scene_1", title: "문제 제기", summary: "도구는 많은데 순서가 없어 막히는 상황", location: "데스크 화면", order: 1 },
+        { id: "sample_scene_2", title: "프로젝트 입력", summary: "채널명, 주제, 타깃, 목적 입력", location: "Creator OS 대시보드", order: 2 },
+        { id: "sample_scene_3", title: "모듈 연결", summary: "템플릿에서 대본, 샷, 썸네일, 캘린더로 이동", location: "런치패드", order: 3 },
+      ],
+      shots: [
+        { id: "sample_shot_1", sceneId: "sample_scene_1", shotNumber: "1.1", title: "막히는 시작 화면", description: "빈 문서와 흩어진 도구를 보여줍니다.", prompt: "creator desk, empty document, scattered AI tools, calm tutorial screen", tool: "Claude", model: "sample", status: "idea", duration: "5s", assetPaths: {}, continuity: {}, notes: "인트로용" },
+        { id: "sample_shot_2", sceneId: "sample_scene_2", shotNumber: "2.1", title: "프로젝트 입력", description: "Creator Project 필드가 채워지는 화면", prompt: "dashboard form filled with Korean creator project fields", tool: "Claude", model: "sample", status: "idea", duration: "8s", assetPaths: {}, continuity: {}, notes: "화면 녹화" },
+      ],
+      updatedAt: now,
+    }));
+    setIfEmpty("ymstudio.thumbnailIdeaBoard.v1", JSON.stringify([
+      {
+        id: "sample_thumb_creator_workflow",
+        title: "AI 영상 제작 순서 썸네일",
+        format: "YouTube Long",
+        status: "idea",
+        emotion: "막힘에서 정리됨",
+        layout: "왼쪽 복잡한 도구 / 오른쪽 정리된 대시보드",
+        subject: "흩어진 AI 도구와 정리된 Creator OS 화면",
+        overlayText: "순서가 답이다",
+        palette: "짙은 초록, 밝은 배경, 민트 포인트",
+        prompt: "YouTube thumbnail, messy AI tools on left, clean creator dashboard on right, Korean text area, high contrast, mobile readable",
+        notes: "제목과 겹치지 않게 결과 느낌을 보여줍니다.",
+        score: 5,
+        favorite: true,
+        createdAt: now,
+        updatedAt: now,
+      },
+    ]));
+    setIfEmpty("ymstudio.youtubeCalendar.v1", JSON.stringify({
+      settings: { channel: "YMSTUDIO", month: now.slice(0, 7), weeklyTarget: 2 },
+      items: [
+        {
+          id: "sample_calendar_creator_workflow",
+          title: "AI 영상 제작 워크플로우 소개",
+          format: "long-form",
+          channel: "YMSTUDIO",
+          niche: "AI creator workflow",
+          uploadDate: now.slice(0, 10),
+          status: "scripted",
+          scriptOutline: "문제 제기 > 프로젝트 입력 > 템플릿 선택 > 대본/샷/썸네일/캘린더 연결",
+          titleVariants: ["AI 영상 제작, 순서만 잡으면 쉬워집니다", "초보자를 위한 AI 영상 제작 워크플로우"],
+          thumbnailPrompts: ["순서가 답이다", "도구보다 흐름"],
+          tools: ["Creator OS", "Script Generator", "Thumbnail Board"],
+          performanceNotes: "업로드 후 제목/썸네일 반응을 24시간 뒤 확인합니다.",
+        },
+      ],
+    }));
+    setIfEmpty("ymstudio.creatorAssetManager.v1", JSON.stringify({
+      assets: [
+        {
+          title: "Creator OS 대시보드 스크린샷",
+          type: "image",
+          collection: "샘플 프로젝트",
+          project: "AI 영상 제작 워크플로우 소개",
+          sourceTool: "Browser Screenshot",
+          tags: ["dashboard", "tutorial", "sample"],
+          filePath: "outputs/creator-os-dashboard/index.html",
+          promptText: "대시보드 사용 흐름 설명용 화면",
+          resultNotes: "튜토리얼 영상 B-roll로 사용",
+          licenseNote: "직접 제작한 로컬 화면",
+          status: "approved",
+          createdDate: now.slice(0, 10),
+        },
+      ],
+    }));
+    setIfEmpty("ymstudio.apiCostTracker.v1", JSON.stringify({
+      settings: { monthlyBudget: 100, monthlyCredits: 100, month: now.slice(0, 7) },
+      entries: [
+        {
+          id: "sample_cost_creator_workflow",
+          provider: "Claude",
+          category: "CLI",
+          project: "YMSTUDIO Creator OS",
+          workflow: "샘플 프로젝트 기획",
+          quantity: 1,
+          unit: "session",
+          unitCost: 0,
+          creditUsed: 0,
+          notes: "샘플 프로젝트용 비용 기록 예시",
+          createdAt: now,
+        },
+      ],
+    }));
+  }
+
   const progressSources = [
     { key: PROJECT_KEY, label: "프로젝트", href: "#", read: (data) => projectFields.filter((field) => data && data[field]).length },
     { key: "ymstudio.templateLibrary.v1", label: "템플릿", href: "../template-library/index.html", read: (data) => data && Array.isArray(data.saved) ? data.saved.length : data && data.localState && Array.isArray(data.localState.saved) ? data.localState.saved.length : 0 },
@@ -461,11 +585,21 @@
     });
     elements.saveProject.addEventListener("click", () => saveProject(projectFromFields()));
     elements.sampleProject.addEventListener("click", () => {
-      if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) saveProject(sampleProject);
+      if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) {
+        saveProject(sampleProject);
+        seedSampleModules();
+        renderProgress();
+        renderOpsDashboard();
+      }
     });
     if (elements.sampleProjectShortcut) {
       elements.sampleProjectShortcut.addEventListener("click", () => {
-        if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) saveProject(sampleProject);
+        if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) {
+          saveProject(sampleProject);
+          seedSampleModules();
+          renderProgress();
+          renderOpsDashboard();
+        }
       });
     }
     elements.exportProject.addEventListener("click", downloadProject);

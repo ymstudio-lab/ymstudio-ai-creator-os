@@ -22,6 +22,7 @@ const els = {
   detailModule: document.querySelector("#detailModule"),
   detailPopularity: document.querySelector("#detailPopularity"),
   detailReason: document.querySelector("#detailReason"),
+  detailResult: document.querySelector("#detailResult"),
   detailContent: document.querySelector("#detailContent"),
   detailUsage: document.querySelector("#detailUsage"),
   rating: document.querySelector("#rating"),
@@ -180,6 +181,7 @@ function renderDetail() {
   els.detailModule.textContent = template.targetModule;
   els.detailPopularity.textContent = stars(template.popularity);
   els.detailReason.textContent = template.reasonKo;
+  els.detailResult.textContent = template.resultKo || (template.payload && template.payload.resultNotes) || "지원 모듈로 가져가 바로 수정할 수 있는 작업 초안이 남습니다.";
   els.detailContent.textContent = template.content;
   els.detailUsage.textContent = template.usage;
   const rating = State.getTemplateRating(localState, template.id);

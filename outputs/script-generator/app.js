@@ -10,6 +10,11 @@ const els = {
   formatFilter: document.querySelector("#formatFilter"),
   statusFilter: document.querySelector("#statusFilter"),
   favoriteOnly: document.querySelector("#favoriteOnly"),
+  briefTopic: document.querySelector("#briefTopic"),
+  briefAudience: document.querySelector("#briefAudience"),
+  briefLength: document.querySelector("#briefLength"),
+  briefTone: document.querySelector("#briefTone"),
+  buildFromBrief: document.querySelector("#buildFromBrief"),
   count: document.querySelector("#count"),
   list: document.querySelector("#scriptList"),
   empty: document.querySelector("#emptyState"),
@@ -57,6 +62,7 @@ function initOptions() {
     appendOption(els.status, value);
   });
   State.tones.forEach((value) => appendOption(els.tone, value));
+  State.tones.forEach((value) => appendOption(els.briefTone, value));
 }
 
 function persist() {
@@ -214,6 +220,20 @@ function addFromProject() {
   showToast("Creator Project 기준으로 초안을 만들었습니다.");
 }
 
+function addFromBrief() {
+  const script = State.buildFromBrief({
+    topic: els.briefTopic.value,
+    audience: els.briefAudience.value,
+    length: els.briefLength.value,
+    tone: els.briefTone.value,
+  });
+  scripts.unshift(script);
+  selectedId = script.id;
+  persist();
+  renderList();
+  showToast("초보자용 입력값으로 첫 대본 초안을 만들었습니다.");
+}
+
 async function copyCurrent() {
   const script = readEditor();
   try {
@@ -292,6 +312,7 @@ function bindEvents() {
   });
   els.newScript.addEventListener("click", addNewScript);
   els.fromProject.addEventListener("click", addFromProject);
+  els.buildFromBrief.addEventListener("click", addFromBrief);
   els.saveScript.addEventListener("click", saveCurrent);
   els.sendShotPlanner.addEventListener("click", sendCurrentToShotPlanner);
   els.sendCalendar.addEventListener("click", sendCurrentToCalendar);

@@ -328,6 +328,46 @@
     });
   }
 
+  function buildFromBrief(brief) {
+    const source = brief || {};
+    const topic = String(source.topic || "").trim() || "AI 영상 제작 워크플로우";
+    const audience = String(source.audience || "").trim() || "영상 제작 초보자";
+    const format = normalizeChoice(source.length || source.format, formats, "Shorts");
+    const tone = normalizeChoice(source.tone, tones, tones[0]);
+    const isShort = format === "Shorts";
+    return createScript({
+      title: topic,
+      format,
+      tone,
+      status: "draft",
+      audience,
+      goal: `${audience}가 ${topic}을 바로 이해하고 다음 행동을 고르게 만들기`,
+      hook: isShort
+        ? `${topic}, 어렵게 느껴지는 이유는 순서가 없기 때문입니다.`
+        : `${topic}을 시작할 때 가장 먼저 정해야 할 것은 도구가 아니라 작업 순서입니다.`,
+      outline: isShort
+        ? "훅 > 문제 한 문장 > 해결 3단계 > 바로 할 행동"
+        : "문제 제기 > 왜 필요한지 > 단계별 설명 > 예시 > 정리와 CTA",
+      scenes: isShort
+        ? [
+            "처음 화면에서 문제를 한 문장으로 보여줍니다.",
+            "시청자가 막히는 지점을 짚습니다.",
+            "해결 순서를 3단계로 빠르게 보여줍니다.",
+            "오늘 바로 할 행동 하나로 마무리합니다.",
+          ]
+        : [
+            "시작 전 막히는 상황을 보여줍니다.",
+            "왜 이 순서가 필요한지 설명합니다.",
+            "핵심 단계를 하나씩 시연합니다.",
+            "완성된 결과물을 보여줍니다.",
+            "다음 작업으로 넘어갈 기준을 알려줍니다.",
+          ],
+      cta: "지금 내 주제로 같은 순서를 적고 첫 번째 모듈에 저장하세요.",
+      notes: "초보자용 4칸 입력에서 생성한 첫 대본 초안입니다. 템플릿 라이브러리에서 가져온 대본은 여기서 이어서 다듬으면 됩니다.",
+      favorite: false,
+    });
+  }
+
   function getSummary(scripts) {
     return (scripts || []).reduce(
       (summary, script) => {
@@ -401,6 +441,7 @@
     scriptToCalendarItem,
     sendToYouTubeCalendar,
     buildFromProject,
+    buildFromBrief,
     getSummary,
     loadProject,
     loadScripts,
