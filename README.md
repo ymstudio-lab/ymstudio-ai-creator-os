@@ -1,12 +1,27 @@
 # YMSTUDIO AI Creator OS
 
-Local-first AI Creator OS for prompts, scripts, shot planning, API cost tracking, YouTube scheduling, and asset management.
+Local-first creator workspace for planning AI video/content projects without a server, login, upload, or paid API call.
 
 [Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/)
 
 ![YMSTUDIO AI Creator OS dashboard](docs/assets/dashboard-desktop.png)
 
-YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content creators. It runs as static files, stores data in your browser `localStorage`, and does not require a server, login, upload, or paid API call.
+YMSTUDIO AI Creator OS is a browser-based MVP bundle for solo creators, AI video makers, and beginners who need a repeatable production flow. It turns one video idea into a project profile, template choices, scripts, prompts, ComfyUI recipes, character notes, shot plans, thumbnails, upload schedules, assets, and cost notes.
+
+## Who This Is For
+
+- Beginners who do not know which AI video task to do next
+- Solo creators who want reusable templates instead of blank pages
+- ComfyUI and AI image/video users who need recipe and failure-fix notes
+- YouTube creators who want scripts, thumbnails, calendar, assets, and review notes in one local workspace
+- People who prefer offline-first tools before connecting paid APIs or automation
+
+## What It Does
+
+1. Save one Creator Project with channel, topic, target viewer, goal, platform, tone, AI tools, and folder name.
+2. Follow the dashboard order: Template -> Script -> Prompt -> ComfyUI -> Character -> Shot Plan -> Thumbnail -> Calendar -> Assets/Costs.
+3. Use demo data first, then replace titles, prompts, dates, and notes with your own work.
+4. Export JSON from the project and modules for local backup.
 
 ## Modules
 
@@ -23,6 +38,12 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | ComfyUI Workflow Manager | Save reusable local generation recipes for models, resolution, steps, batch, prompts, and failure fixes |
 | Character Consistency Tool | Build reusable character bibles for face, hair, outfit, reference notes, prompts, and scene checks |
 | Creator OS Dashboard | Open all modules from one local control panel |
+
+## Beginner UX Status
+
+Every module includes a Korean "처음 쓰는 순서" guide, demo data, local editing, and JSON export/import. Screenshot tests check desktop/mobile layout, missing beginner guides, broken Korean text, and horizontal overflow.
+
+The dashboard and template modules are the easiest entry points. Shot planning, asset management, and cost tracking are more detailed because they model real production work, but they are still usable from the included sample data.
 
 ## Creator Project Flow
 
@@ -69,10 +90,11 @@ The root `index.html` also redirects to the dashboard.
 ## Beginner Flow
 
 1. Open the dashboard.
-2. Choose the module you need.
-3. Start with the demo data.
-4. Replace sample titles, notes, prompts, dates, and tags with your own work.
-5. Back up important data with `Export JSON`.
+2. Fill or sample-fill the Creator Project.
+3. Check "오늘의 작업 상태" to see the next task.
+4. Open the recommended module.
+5. Start with demo data and replace it with your own work.
+6. Back up important data with `Export JSON`.
 
 ## Data And Privacy
 
@@ -118,13 +140,17 @@ Security pattern scan:
 rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|document\.write|api[_-]?key|secret|password" outputs
 ```
 
+## Public Launch Notes
+
+- [v1 public launch checklist](docs/V1_PUBLIC_LAUNCH.md)
+- [UI review notes](docs/UI_REVIEW.md)
+
 ## Roadmap
 
-- Move data between modules with shared JSON exports
-- Add one shared project profile for channel, campaign, and client metadata
-- Expand the template library based on saved/rated/copied template patterns
-- Add deeper direct imports into Shot Planner, Calendar, Asset Manager, and Cost Tracker
-- Prepare optional automation adapters after the offline-first workflow is stable
+- Improve direct module-to-module imports where they save real repeated work
+- Add more high-signal templates based on user feedback
+- Prepare optional automation adapters only after offline-first usage is validated
+- Consider NAS/server sync later, after local MVP traction is proven
 
 See [Roadmap](ROADMAP.md) for the current planning list.
 

@@ -2,15 +2,20 @@
 
 YMSTUDIO AI Creator OS is currently a local-first MVP for planning video projects and opening focused creator modules.
 
+## Current
+
+- 10 active local modules are available from the dashboard.
+- The dashboard shows current project status, next focus task, backup reminders, and local/offline safety status.
+- Browser interaction and screenshot checks cover the public MVP flow.
+
 ## Next
 
-- Connect shared Creator Project JSON more deeply into each module.
-- Add direct imports into Shot Planner, YouTube Calendar, Creator Asset Manager, and API Cost Tracker.
-- Add a compact project overview inside the dashboard after enough module data exists.
-- Improve browser interaction tests for import, save, rating, search, and backup flows.
+- Package the project for v1 public feedback.
+- Collect early user feedback on which screens feel too complex.
+- Improve direct module-to-module imports only where they remove repeated work.
+- Add more high-signal templates based on saved/rated/copied/imported patterns.
 
 ## Later
 
 - Optional automation adapters after the offline-first workflow is stable.
-- More templates based on saved, rated, copied, and imported patterns.
 - Optional server or NAS storage only after local MVP usage is validated.
