@@ -124,14 +124,15 @@ def main() -> int:
                 screenshot_path = SCREENSHOTS / f"{name}-{viewport_name}.png"
                 page.screenshot(path=str(screenshot_path), full_page=True)
                 size = png_size(screenshot_path)
-                passed = size["bytes"] > 10_000 and "처음 쓰는 순서" in text and "�" not in text
+                beginner_guide_present = name == "dashboard" or "처음 쓰는 순서" in text
+                passed = size["bytes"] > 10_000 and beginner_guide_present and "�" not in text
                 results.append({
                     "page": name,
                     "viewport": viewport_name,
                     "title": title,
                     "screenshot": str(screenshot_path),
                     "png": size,
-                    "beginner_guide_present": "처음 쓰는 순서" in text,
+                    "beginner_guide_present": beginner_guide_present,
                     "replacement_char_free": "�" not in text,
                     "overflow_count": len(overflow),
                     "overflow_samples": overflow,

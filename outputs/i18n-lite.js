@@ -266,6 +266,7 @@
 
   function ensureBeginnerGuide() {
     if (document.querySelector(".ym-beginner-guide, .beginner-guide")) return;
+    if (currentAppKey() === "creator-os-dashboard") return;
     const copy = beginnerCopy[currentAppKey()];
     if (!copy || getLanguage() !== "ko") return;
     const guide = document.createElement("aside");
