@@ -141,7 +141,6 @@ main {
 
 .quickstart-card {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
   gap: 10px;
   align-items: start;
   min-height: 118px;
@@ -155,13 +154,17 @@ main {
 }
 
 .quickstart-main {
-  grid-template-columns: 34px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   background: var(--soft);
+}
+
+.quickstart-card > div {
+  display: grid;
+  gap: 5px;
 }
 
 .quickstart-card strong {
   display: block;
-  margin-bottom: 4px;
   font-size: 1rem;
 }
 
@@ -177,8 +180,9 @@ main {
   align-items: center;
   justify-content: center;
   align-self: start;
-  min-width: 28px;
-  min-height: 28px;
+  width: fit-content;
+  min-height: 26px;
+  padding: 3px 9px;
   border-radius: 999px;
   background: var(--accent);
   color: #fff;
@@ -830,12 +834,12 @@ h2 {
   }
 
   .quickstart-main {
-    grid-template-columns: 34px minmax(0, 1fr);
+    grid-template-columns: 1fr;
     align-items: start;
   }
 
   .quickstart-main button {
-    grid-column: 1 / -1;
+    width: 100%;
   }
 
   .module-grid {
