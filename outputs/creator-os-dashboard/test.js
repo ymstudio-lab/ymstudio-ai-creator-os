@@ -6,11 +6,12 @@ const state = require("./state.js");
 const dashboardDir = __dirname;
 
 function testModuleDefinitions() {
-  assert.strictEqual(state.modules.length, 9, "expected nine creator modules");
+  assert.strictEqual(state.modules.length, 10, "expected ten creator modules");
   const ids = state.modules.map((module) => module.id).sort();
   assert.deepStrictEqual(ids, [
     "ai-shot-planner",
     "api-cost-tracker",
+    "character-consistency-tool",
     "comfyui-workflow-manager",
     "creator-asset-manager",
     "creator-prompt-board",
@@ -31,7 +32,7 @@ function testLinksExist() {
 }
 
 function testWorkflowFiltering() {
-  assert.strictEqual(state.filterModules("", "All").length, 9);
+  assert.strictEqual(state.filterModules("", "All").length, 10);
   assert.deepStrictEqual(
     state.filterModules("", "All").map((module) => module.id),
     [
@@ -39,6 +40,7 @@ function testWorkflowFiltering() {
       "script-generator",
       "creator-prompt-board",
       "comfyui-workflow-manager",
+      "character-consistency-tool",
       "ai-shot-planner",
       "thumbnail-idea-board",
       "youtube-calendar",
@@ -62,20 +64,19 @@ function testWorkflowFiltering() {
 
 function testStatusSummary() {
   const summary = state.getStatusSummary();
-  assert.strictEqual(summary.total, 9);
-  assert.strictEqual(summary.finalVerified, 9);
+  assert.strictEqual(summary.total, 10);
+  assert.strictEqual(summary.finalVerified, 10);
 }
 
 function testPlannedModules() {
-  assert.strictEqual(state.plannedModules.length, 2);
+  assert.strictEqual(state.plannedModules.length, 1);
   assert.deepStrictEqual(
     state.plannedModules.map((module) => module.id),
     [
-      "character-consistency-tool",
       "creator-dashboard-upgrade",
     ]
   );
-  assert.strictEqual(state.getLocalizedPlannedModules("ko")[0].name, "캐릭터 일관성 도구");
+  assert.strictEqual(state.getLocalizedPlannedModules("ko")[0].name, "크리에이터 대시보드 강화");
   assert.strictEqual(state.getCopy("ko").comingSoon, "준비 중");
 }
 

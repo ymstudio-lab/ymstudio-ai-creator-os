@@ -26,6 +26,7 @@ PAGES = [
     ("template-library", OUTPUTS / "template-library" / "index.html"),
     ("script-generator", OUTPUTS / "script-generator" / "index.html"),
     ("comfyui-workflow-manager", OUTPUTS / "comfyui-workflow-manager" / "index.html"),
+    ("character-consistency-tool", OUTPUTS / "character-consistency-tool" / "index.html"),
 ]
 
 VIEWPORTS = [
@@ -89,7 +90,8 @@ def main() -> int:
                           "ymstudio.thumbnailIdeaBoard.v1",
                           "ymstudio.templateLibrary.v1",
                           "ymstudio.scriptGenerator.v1",
-                          "ymstudio.comfyWorkflowManager.v1"
+                          "ymstudio.comfyWorkflowManager.v1",
+                          "ymstudio.characterConsistencyTool.v1"
                         ].forEach((key) => localStorage.removeItem(key));
                     }"""
                 )

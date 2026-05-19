@@ -10,6 +10,7 @@
     "Creator Asset Manager": "크리에이터 자산 매니저",
     "Thumbnail Idea Board": "썸네일 아이디어 보드",
     "ComfyUI Workflow Manager": "ComfyUI 워크플로우 매니저",
+    "Character Consistency Tool": "캐릭터 일관성 도구",
     "Search": "검색",
     "Tool": "도구",
     "Category": "카테고리",
@@ -204,6 +205,14 @@
         "대시보드의 내 작업 환경 체크에서 저사양, 중간, 고사양 방향을 먼저 고릅니다.",
         "프로젝트로 레시피 만들기를 눌러 현재 영상에 맞는 ComfyUI 설정 초안을 만듭니다.",
         "해상도, step, batch, 실패 수정 메모를 저장하고 Export JSON으로 백업합니다.",
+      ],
+    },
+    "character-consistency-tool": {
+      title: "처음 쓰는 순서",
+      steps: [
+        "프로젝트로 캐릭터 만들기를 눌러 현재 영상에 맞는 캐릭터 바이블 초안을 만듭니다.",
+        "얼굴, 헤어, 의상, 실루엣처럼 장면마다 바뀌면 안 되는 요소를 짧게 고정합니다.",
+        "복사용 프롬프트와 실패 수정법을 저장하고 Export JSON으로 백업합니다.",
       ],
     },
   };

@@ -46,6 +46,7 @@ def main() -> int:
                 "ymstudio.thumbnailIdeaBoard.v1",
                 "ymstudio.scriptGenerator.v1",
                 "ymstudio.comfyWorkflowManager.v1",
+                "ymstudio.characterConsistencyTool.v1",
                 "ymstudio.aiShotPlanner.v1",
                 "ymstudio.youtubeCalendar.v1",
                 "ymstudio.creatorAssetManager.v1"
@@ -161,6 +162,22 @@ def main() -> int:
         checks.append({
             "name": "comfy_workflow_export_download",
             "passed": comfy_download.suggested_filename == "comfyui-workflow-manager-state.json",
+        })
+
+        character_tool = OUTPUTS / "character-consistency-tool" / "index.html"
+        page.goto(file_url(character_tool), wait_until="networkidle")
+        page.click("#fromProject")
+        character_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.characterConsistencyTool.v1") || "[]")""")
+        checks.append({
+            "name": "character_consistency_from_project",
+            "passed": len(character_state) >= 1 and bool(character_state[0].get("positive")) and bool(character_state[0].get("sceneRules")),
+        })
+        with page.expect_download() as character_download_info:
+            page.click("#exportJson")
+        character_download = character_download_info.value
+        checks.append({
+            "name": "character_consistency_export_download",
+            "passed": character_download.suggested_filename == "character-consistency-tool-state.json",
         })
 
         thumbnail = OUTPUTS / "thumbnail-idea-board" / "index.html"

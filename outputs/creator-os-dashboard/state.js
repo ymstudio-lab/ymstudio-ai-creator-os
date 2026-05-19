@@ -132,20 +132,23 @@
       businessUse: "Useful for ComfyUI recipe packs, local setup guides, and creator workflow consulting.",
       businessUseKo: "ComfyUI 레시피 묶음, 로컬 셋업 가이드, 제작 워크플로우 컨설팅으로 확장하기 좋습니다.",
     },
-  ];
-
-  const plannedModules = [
     {
       id: "character-consistency-tool",
       name: "Character Consistency Tool",
       nameKo: "캐릭터 일관성 도구",
       workflow: "Production",
       workflowKo: "제작",
-      value: "Character bible, reference notes, visual rules, seed/model notes, and scene consistency checks.",
-      valueKo: "캐릭터 설정, 참고 이미지 메모, 시각 규칙, seed/model 메모, 장면별 일관성 체크를 정리합니다.",
-      reason: "Good next module for AI video creators who need the same character across scenes.",
-      reasonKo: "여러 장면에서 같은 캐릭터를 유지해야 하는 AI 영상 제작자에게 가장 직접적인 다음 모듈입니다.",
+      status: "ready",
+      link: "../character-consistency-tool/index.html",
+      outputFolder: "../character-consistency-tool",
+      value: "Character bible for face, hair, outfit, silhouette, reference notes, prompts, and scene consistency checks.",
+      valueKo: "얼굴, 헤어, 의상, 실루엣, 기준 이미지, 프롬프트, 장면별 일관성 체크를 캐릭터 바이블로 정리합니다.",
+      businessUse: "Useful for character bible packs, AI video continuity templates, and client production guides.",
+      businessUseKo: "캐릭터 바이블 묶음, AI 영상 일관성 템플릿, 클라이언트용 제작 가이드로 확장하기 좋습니다.",
     },
+  ];
+
+  const plannedModules = [
     {
       id: "creator-dashboard-upgrade",
       name: "Creator Dashboard Upgrade",
@@ -164,6 +167,7 @@
     "script-generator",
     "creator-prompt-board",
     "comfyui-workflow-manager",
+    "character-consistency-tool",
     "ai-shot-planner",
     "thumbnail-idea-board",
     "youtube-calendar",

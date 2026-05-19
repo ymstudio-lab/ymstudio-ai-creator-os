@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YMSTUDIO Character Consistency Tool</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">YMSTUDIO Creator OS</p>
+        <h1>캐릭터 일관성 도구</h1>
+        <p>여러 장면에서 같은 캐릭터를 유지하기 위해 얼굴, 헤어, 의상, 실루엣, 기준 이미지, seed/model 메모, 실패 수정법을 한 장의 바이블로 정리합니다.</p>
+      </div>
+      <div class="summary">
+        <strong data-total>0</strong>
+        <span>characters</span>
+        <small data-summary>locked 0 · favorite 0</small>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="beginner-guide" aria-label="처음 쓰는 순서">
+        <strong>처음 쓰는 순서</strong>
+        <ol>
+          <li>프로젝트로 캐릭터 만들기를 눌러 현재 영상에 맞는 캐릭터 바이블 초안을 만듭니다.</li>
+          <li>얼굴, 헤어, 의상, 실루엣처럼 장면마다 바뀌면 안 되는 요소를 짧게 고정합니다.</li>
+          <li>복사용 프롬프트와 실패 수정법을 저장하고 Export JSON으로 백업합니다.</li>
+        </ol>
+      </section>
+
+      <section class="toolbar" aria-label="Character filters">
+        <label>
+          검색
+          <input id="search" type="search" placeholder="예: 진행자, 헤어, 의상, seed">
+        </label>
+        <label>
+          역할
+          <select id="roleFilter"></select>
+        </label>
+        <label>
+          상태
+          <select id="statusFilter"></select>
+        </label>
+        <label class="check">
+          <input id="favoriteOnly" type="checkbox">
+          즐겨찾기만
+        </label>
+      </section>
+
+      <section class="board">
+        <aside class="list-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Characters</p>
+              <h2>캐릭터 목록</h2>
+            </div>
+            <span id="count">0</span>
+          </div>
+          <div class="actions">
+            <button id="newCharacter" type="button">새 캐릭터</button>
+            <button id="fromProject" type="button">프로젝트로 캐릭터 만들기</button>
+          </div>
+          <div id="characterList" class="character-list"></div>
+          <p id="emptyState" class="empty" hidden>현재 필터와 일치하는 캐릭터가 없습니다.</p>
+        </aside>
+
+        <section class="editor-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Editor</p>
+              <h2>캐릭터 바이블 편집</h2>
+            </div>
+            <div class="actions">
+              <button id="saveCharacter" type="button">저장</button>
+              <button id="copyCharacter" type="button">복사</button>
+              <button id="deleteCharacter" class="danger" type="button">삭제</button>
+            </div>
+          </div>
+
+          <div class="form-grid one">
+            <label>캐릭터 이름<input id="name" type="text"></label>
+          </div>
+          <div class="form-grid two">
+            <label>역할<select id="role"></select></label>
+            <label>상태<select id="status"></select></label>
+          </div>
+
+          <div class="form-grid two">
+            <label>얼굴 고정 규칙<textarea id="face" rows="3"></textarea></label>
+            <label>헤어 고정 규칙<textarea id="hair" rows="3"></textarea></label>
+          </div>
+          <div class="form-grid two">
+            <label>의상 고정 규칙<textarea id="outfit" rows="3"></textarea></label>
+            <label>실루엣/자세<textarea id="silhouette" rows="3"></textarea></label>
+          </div>
+          <label>표정 범위<textarea id="expression" rows="3"></textarea></label>
+
+          <details class="advanced-panel" open>
+            <summary>기준 이미지, 모델, 프롬프트, 실패 수정</summary>
+            <div class="form-grid two">
+              <label>기준 이미지 메모<textarea id="referenceNotes" rows="3"></textarea></label>
+              <label>Seed / Model / LoRA 메모<textarea id="modelNotes" rows="3"></textarea></label>
+            </div>
+            <label>Positive Prompt<textarea id="positive" rows="4"></textarea></label>
+            <label>Negative Prompt<textarea id="negative" rows="3"></textarea></label>
+            <label>장면별 일관성 체크<textarea id="sceneRules" rows="3"></textarea></label>
+            <label>실패 시 수정법<textarea id="failureFixes" rows="3"></textarea></label>
+            <label class="check favorite">
+              <input id="favorite" type="checkbox">
+              중요한 캐릭터로 표시
+            </label>
+          </details>
+
+          <article class="preview">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Preview</p>
+                <h2>복사용 캐릭터 바이블</h2>
+              </div>
+            </div>
+            <pre id="preview"></pre>
+          </article>
+
+          <div class="export-actions">
+            <button id="exportJson" type="button">Export JSON</button>
+            <label class="file-button">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json,.json" hidden>
+            </label>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../i18n-lite.js"></script>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
