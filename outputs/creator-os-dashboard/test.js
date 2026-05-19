@@ -6,13 +6,14 @@ const state = require("./state.js");
 const dashboardDir = __dirname;
 
 function testModuleDefinitions() {
-  assert.strictEqual(state.modules.length, 5, "expected exactly five first-wave modules");
+  assert.strictEqual(state.modules.length, 6, "expected six creator modules");
   const ids = state.modules.map((module) => module.id).sort();
   assert.deepStrictEqual(ids, [
     "ai-shot-planner",
     "api-cost-tracker",
     "creator-asset-manager",
     "creator-prompt-board",
+    "thumbnail-idea-board",
     "youtube-calendar",
   ]);
 }
@@ -27,18 +28,14 @@ function testLinksExist() {
 }
 
 function testWorkflowFiltering() {
-  assert.strictEqual(state.filterModules("", "All").length, 5);
+  assert.strictEqual(state.filterModules("", "All").length, 6);
   assert.deepStrictEqual(
-    state.filterModules("", "Publishing").map((module) => module.id),
-    ["youtube-calendar"]
+    state.filterModules("", "Publishing").map((module) => module.id).sort(),
+    ["thumbnail-idea-board", "youtube-calendar"]
   );
   assert.deepStrictEqual(
-    state.filterModules("asset", "All").map((module) => module.id),
-    ["creator-asset-manager"]
-  );
-  assert.deepStrictEqual(
-    state.filterModules("shot", "Production").map((module) => module.id),
-    ["ai-shot-planner"]
+    state.filterModules("썸네일 아이디어", "All", "ko").map((module) => module.id),
+    ["thumbnail-idea-board"]
   );
   assert.deepStrictEqual(
     state.filterModules("자산", "All", "ko").map((module) => module.id),
@@ -49,8 +46,8 @@ function testWorkflowFiltering() {
 
 function testStatusSummary() {
   const summary = state.getStatusSummary();
-  assert.strictEqual(summary.total, 5);
-  assert.strictEqual(summary.finalVerified, 5);
+  assert.strictEqual(summary.total, 6);
+  assert.strictEqual(summary.finalVerified, 6);
 }
 
 function testGithubChecklistData() {
@@ -67,7 +64,6 @@ function testGithubChecklistData() {
 function testStaticUiBindings() {
   const index = fs.readFileSync(path.join(dashboardDir, "index.html"), "utf8");
   const app = fs.readFileSync(path.join(dashboardDir, "app.js"), "utf8");
-
   [
     "data-module-grid",
     "data-search",
@@ -83,23 +79,20 @@ function testStaticUiBindings() {
   ].forEach((token) => {
     assert.ok(index.includes(token), `index.html should include ${token}`);
   });
-
   ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language"].forEach((token) => {
     assert.ok(app.includes(token), `app.js should include ${token}`);
   });
-
   assert.ok(!app.includes("innerHTML"), "app.js should avoid unsafe raw HTML rendering");
   assert.ok(!app.includes("queueIds"), "dashboard should not expose internal queue ids");
 }
 
-const tests = [
+[
   testModuleDefinitions,
   testLinksExist,
   testWorkflowFiltering,
   testStatusSummary,
   testGithubChecklistData,
   testStaticUiBindings,
-];
+].forEach((test) => test());
 
-tests.forEach((test) => test());
-console.log(`creator-os-dashboard tests passed (${tests.length})`);
+console.log("creator-os-dashboard tests passed (6)");

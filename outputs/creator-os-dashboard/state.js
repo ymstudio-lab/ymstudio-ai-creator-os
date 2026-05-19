@@ -76,29 +76,28 @@
       businessUse: "Useful for asset packs, license tracking, and reusable production archives.",
       businessUseKo: "자산 묶음, 라이선스 추적, 재사용 가능한 제작 아카이브로 확장하기 좋습니다.",
     },
+    {
+      id: "thumbnail-idea-board",
+      name: "Thumbnail Idea Board",
+      nameKo: "썸네일 아이디어 보드",
+      workflow: "Publishing",
+      workflowKo: "발행",
+      status: "ready",
+      link: "../thumbnail-idea-board/index.html",
+      outputFolder: "../thumbnail-idea-board",
+      value: "Thumbnail hooks, Korean overlay text, layout notes, palettes, scores, and image prompts.",
+      valueKo: "썸네일 훅, 한글 문구, 레이아웃, 컬러, 점수, 이미지 생성 프롬프트를 정리합니다.",
+      businessUse: "Useful for thumbnail testing packs, creator content systems, and repeatable design briefs.",
+      businessUseKo: "썸네일 테스트 묶음, 크리에이터 콘텐츠 시스템, 반복 가능한 디자인 브리프로 확장하기 좋습니다.",
+    },
   ];
 
   const githubChecklist = [
-    {
-      en: "Confirm each module opens from its local index.html.",
-      ko: "각 모듈이 로컬 index.html에서 정상적으로 열리는지 확인합니다.",
-    },
-    {
-      en: "Review README and usage docs for public wording.",
-      ko: "README와 사용 문서의 공개용 문구를 확인합니다.",
-    },
-    {
-      en: "Remove private local paths from screenshots or demo exports.",
-      ko: "스크린샷이나 데모 export에 개인 로컬 경로가 보이지 않게 정리합니다.",
-    },
-    {
-      en: "Keep privacy and security notes visible before sharing.",
-      ko: "공유 전 개인정보와 보안 안내가 잘 보이는지 확인합니다.",
-    },
-    {
-      en: "Prepare screenshots or a short demo video for the dashboard and each module.",
-      ko: "대시보드와 각 모듈의 스크린샷 또는 짧은 데모 영상을 준비합니다.",
-    },
+    { en: "Confirm each module opens from its local index.html.", ko: "각 모듈이 로컬 index.html에서 정상적으로 열리는지 확인합니다." },
+    { en: "Review README and usage docs for public wording.", ko: "README와 사용 문서의 공개용 문구를 확인합니다." },
+    { en: "Remove private local paths from screenshots or demo exports.", ko: "스크린샷이나 데모 export에 개인 로컬 경로가 보이지 않게 정리합니다." },
+    { en: "Keep privacy and security notes visible before sharing.", ko: "공유 전 개인정보와 보안 안내가 잘 보이는지 확인합니다." },
+    { en: "Prepare screenshots or a short demo video for the dashboard and each module.", ko: "대시보드와 각 모듈의 스크린샷 또는 짧은 데모 영상을 준비합니다." },
   ];
 
   const roadmap = [
@@ -107,15 +106,15 @@
       phaseKo: "2-1단계",
       title: "Cross-module exports",
       titleKo: "모듈끼리 자료 주고받기",
-      detail: "Move prompts, shot plans, calendar entries, and assets between tools with shared JSON formats.",
-      detailKo: "프롬프트, 샷 플랜, 업로드 일정, 자산 정보를 한 번 저장해 두고 다른 도구에서도 불러올 수 있게 합니다.",
+      detail: "Move prompts, shot plans, calendar entries, thumbnails, and assets between tools with shared JSON formats.",
+      detailKo: "프롬프트, 샷 플랜, 업로드 일정, 썸네일 아이디어, 자산 정보를 저장해 두고 다른 도구에서도 불러올 수 있게 합니다.",
     },
     {
       phase: "Phase 2",
       phaseKo: "2-2단계",
       title: "Unified project profile",
       titleKo: "프로젝트 정보 한곳에 모으기",
-      detail: "Add a local project manifest so every module can reference the same channel, campaign, and client data.",
+      detail: "Add one local project profile so every module can reference the same channel, campaign, and client data.",
       detailKo: "채널명, 캠페인명, 클라이언트 정보처럼 여러 도구에서 반복해서 쓰는 정보를 한곳에 저장합니다.",
     },
     {
@@ -123,38 +122,26 @@
       phaseKo: "3단계",
       title: "Optional automation adapters",
       titleKo: "자동화 연결 준비",
-      detail: "Document offline-first import/export hooks before any external service integrations are considered.",
+      detail: "Stabilize local import/export flows before external service integrations are added.",
       detailKo: "외부 서비스와 연결하기 전에, 먼저 로컬에서 자료를 가져오고 내보내는 흐름을 안정적으로 정리합니다.",
     },
   ];
 
   const architectureNotes = [
-    {
-      en: "Runs as static local files from the outputs folder.",
-      ko: "outputs 폴더 안의 정적 로컬 파일로 실행합니다.",
-    },
-    {
-      en: "No deployment, authentication, server process, upload, or paid API call is required.",
-      ko: "배포, 로그인, 서버 프로세스, 업로드, 유료 API 호출이 필요 없습니다.",
-    },
-    {
-      en: "Dashboard state is declared in state.js; user search input is handled as text only.",
-      ko: "대시보드 상태는 state.js에 선언되어 있고, 검색 입력은 텍스트로만 처리합니다.",
-    },
-    {
-      en: "Module links point to sibling folders inside outputs.",
-      ko: "모듈 링크는 outputs 안의 각 하위 폴더를 가리킵니다.",
-    },
+    { en: "Runs as static local files from the outputs folder.", ko: "outputs 폴더 안의 정적 로컬 파일로 실행합니다." },
+    { en: "No deployment, authentication, server process, upload, or paid API call is required.", ko: "배포, 로그인, 서버 프로세스, 업로드, 유료 API 호출이 필요 없습니다." },
+    { en: "Dashboard state is declared in state.js; user search input is handled as text only.", ko: "대시보드 상태는 state.js에 선언되어 있고, 검색 입력은 텍스트로만 처리합니다." },
+    { en: "Module links point to sibling folders inside outputs.", ko: "모듈 링크는 outputs 안의 각 하위 폴더를 가리킵니다." },
   ];
 
   const copy = {
     en: {
-      heroEyebrow: "Local launcher - first wave complete",
+      heroEyebrow: "Local launcher - active creator bundle",
       heroTitle: "YMSTUDIO AI Creator OS Dashboard",
-      heroCopy: "A static local control panel for five creator tools, their status, publishing readiness, business-use ideas, and next phase roadmap.",
+      heroCopy: "A static local control panel for creator tools, their status, publishing readiness, business-use ideas, and next phase roadmap.",
       languageLabel: "Language",
       searchLabel: "Search modules",
-      searchPlaceholder: "Try production, assets, cost",
+      searchPlaceholder: "Try thumbnail, production, assets, cost",
       workflowLabel: "Workflow area",
       localReady: "Local-ready module",
       launchpadEyebrow: "Launchpad",
@@ -165,7 +152,7 @@
       openModule: "Open module",
       monetizationEyebrow: "Business use",
       monetizationTitle: "Bundle strategy",
-      monetizationCopy1: "The first wave can be positioned as a local-first creator operations bundle: prompt systems, shot planning, cost control, publishing calendars, and asset governance.",
+      monetizationCopy1: "The bundle can be positioned as a local-first creator operations kit: prompts, shot planning, cost control, publishing calendars, thumbnail ideas, and asset governance.",
       monetizationCopy2: "Good next offers include creator templates, agency workflow packs, education products, and setup services for AI video production teams.",
       publishingEyebrow: "Publishing",
       githubTitle: "GitHub checklist",
@@ -176,12 +163,12 @@
       allWorkflows: "All",
     },
     ko: {
-      heroEyebrow: "로컬 런처 - 1차 모듈 완료",
+      heroEyebrow: "로컬 런처 - 크리에이터 번들 확장 중",
       heroTitle: "YMSTUDIO AI Creator OS 대시보드",
-      heroCopy: "완성된 5개 크리에이터 도구, 공개 준비 상태, 비즈니스 활용 아이디어, 다음 로드맵을 한눈에 보는 로컬 컨트롤 패널입니다.",
+      heroCopy: "완성된 크리에이터 도구, 공개 준비 상태, 비즈니스 활용 아이디어, 다음 로드맵을 한눈에 보는 로컬 컨트롤 패널입니다.",
       languageLabel: "언어",
       searchLabel: "모듈 검색",
-      searchPlaceholder: "예: 제작, 자산, 비용",
+      searchPlaceholder: "예: 썸네일, 제작, 자산, 비용",
       workflowLabel: "워크플로우 영역",
       localReady: "로컬 사용 준비 완료",
       launchpadEyebrow: "런치패드",
@@ -192,7 +179,7 @@
       openModule: "모듈 열기",
       monetizationEyebrow: "비즈니스 활용",
       monetizationTitle: "번들 전략",
-      monetizationCopy1: "1차 모듈 묶음은 프롬프트 시스템, 샷 기획, 비용 관리, 발행 캘린더, 자산 관리를 포함한 로컬 우선 크리에이터 운영 번들로 사용할 수 있습니다.",
+      monetizationCopy1: "이 모듈 묶음은 프롬프트 시스템, 샷 기획, 비용 관리, 발행 캘린더, 썸네일 아이디어, 자산 관리를 포함한 로컬 우선 크리에이터 운영 번들로 사용할 수 있습니다.",
       monetizationCopy2: "다음 단계의 상품 아이디어는 크리에이터 템플릿, 에이전시 워크플로우 팩, 교육 상품, AI 영상 제작팀용 셋업 서비스입니다.",
       publishingEyebrow: "공개 준비",
       githubTitle: "GitHub 체크리스트",
@@ -231,10 +218,7 @@
     return [{ value: "All", label: text.allWorkflows }].concat(
       [...new Set(modules.map((module) => module.workflow))].map((workflow) => {
         const matched = modules.find((module) => module.workflow === workflow);
-        return {
-          value: workflow,
-          label: normalizeLanguage(language) === "ko" ? matched.workflowKo || workflow : workflow,
-        };
+        return { value: workflow, label: normalizeLanguage(language) === "ko" ? matched.workflowKo || workflow : workflow };
       })
     );
   }
@@ -242,7 +226,6 @@
   function filterModules(query, workflow, language) {
     const normalizedQuery = String(query || "").trim().toLowerCase();
     const selectedWorkflow = workflow || "All";
-
     return modules.filter((module) => {
       const matchesWorkflow = selectedWorkflow === "All" || module.workflow === selectedWorkflow;
       const searchableText = [

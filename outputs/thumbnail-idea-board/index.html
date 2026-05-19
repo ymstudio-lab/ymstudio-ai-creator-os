@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YMSTUDIO Thumbnail Idea Board</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">YMSTUDIO Creator OS</p>
+        <h1>Thumbnail Idea Board</h1>
+        <p>영상 주제, 감정, 문구, 레이아웃, 이미지 프롬프트를 한곳에서 정리하는 썸네일 기획 보드입니다.</p>
+      </div>
+      <div class="summary" aria-label="요약">
+        <strong data-total>0</strong>
+        <span>ideas</span>
+        <small data-summary>ready 0 · tested 0</small>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="toolbar" aria-label="필터">
+        <label>
+          검색
+          <input id="search" type="search" placeholder="예: 비용, 전후 비교, 캐릭터" />
+        </label>
+        <label>
+          형식
+          <select id="formatFilter"></select>
+        </label>
+        <label>
+          상태
+          <select id="statusFilter"></select>
+        </label>
+        <label class="check">
+          <input id="favoriteFilter" type="checkbox" />
+          즐겨찾기만
+        </label>
+        <label>
+          최소 점수
+          <select id="scoreFilter">
+            <option value="0">전체</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="board">
+        <aside class="list-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Idea Board</p>
+              <h2>썸네일 후보</h2>
+            </div>
+            <span id="count">0 ideas</span>
+          </div>
+          <div id="ideaList" class="idea-list"></div>
+          <p id="emptyState" class="empty" hidden>현재 필터와 일치하는 아이디어가 없습니다.</p>
+        </aside>
+
+        <section class="editor-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Editor</p>
+              <h2>아이디어 편집</h2>
+            </div>
+            <div class="actions">
+              <button id="newIdea" type="button">새 아이디어</button>
+              <button id="copyPrompt" type="button">프롬프트 복사</button>
+              <button id="deleteIdea" class="danger" type="button">삭제</button>
+            </div>
+          </div>
+
+          <form id="ideaForm" class="form">
+            <label>
+              제목
+              <input id="title" required />
+            </label>
+            <div class="grid-2">
+              <label>
+                형식
+                <select id="format"></select>
+              </label>
+              <label>
+                상태
+                <select id="status"></select>
+              </label>
+            </div>
+            <div class="grid-2">
+              <label>
+                감정 훅
+                <select id="emotion"></select>
+              </label>
+              <label>
+                레이아웃
+                <select id="layout"></select>
+              </label>
+            </div>
+            <label>
+              화면 주제
+              <textarea id="subject" rows="3" placeholder="예: 비용 경고 대시보드와 놀란 크리에이터"></textarea>
+            </label>
+            <div class="grid-2">
+              <label>
+                썸네일 문구
+                <input id="overlayText" placeholder="예: 돈 새는 곳 5개" />
+              </label>
+              <label>
+                컬러 팔레트
+                <input id="palette" placeholder="예: 딥그린, 화이트, 오렌지" />
+              </label>
+            </div>
+            <label>
+              이미지 생성 프롬프트
+              <textarea id="prompt" rows="6"></textarea>
+            </label>
+            <label>
+              메모
+              <textarea id="notes" rows="4"></textarea>
+            </label>
+            <div class="grid-2">
+              <label>
+                점수
+                <input id="score" type="range" min="0" max="5" step="1" />
+                <span id="scoreValue">0/5</span>
+              </label>
+              <label class="check">
+                <input id="favorite" type="checkbox" />
+                즐겨찾기
+              </label>
+            </div>
+          </form>
+
+          <div class="export-actions">
+            <button id="exportJson" type="button">Export JSON</button>
+            <label class="file-button">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json" hidden />
+            </label>
+            <button id="resetDemo" type="button">Reset demo</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../i18n-lite.js"></script>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

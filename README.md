@@ -17,6 +17,7 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | API Cost Tracker | Manually track AI tool usage, credits, budgets, and warnings |
 | YouTube Calendar | Manage content ideas, status, upload dates, and weekly plans |
 | Creator Asset Manager | Organize generated images, videos, prompts, licenses, and file paths |
+| Thumbnail Idea Board | Plan thumbnail hooks, Korean overlay text, layouts, palettes, and image prompts |
 | Creator OS Dashboard | Open all modules from one local control panel |
 
 ## Quick Start
