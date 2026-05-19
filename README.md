@@ -8,6 +8,30 @@ Local-first creator workspace for planning AI video/content projects without a s
 
 YMSTUDIO AI Creator OS is a browser-based MVP bundle for solo creators, AI video makers, and beginners who need a repeatable production flow. It turns one video idea into a project profile, template choices, scripts, prompts, ComfyUI recipes, character notes, shot plans, thumbnails, upload schedules, assets, and cost notes.
 
+The first goal is simple: open the dashboard, press **Sample Project**, and see a complete starter project appear across the modules.
+
+## 3-Minute Demo Flow
+
+1. Open the [live dashboard](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/outputs/creator-os-dashboard/index.html).
+2. Press `샘플 프로젝트로 바로 시작`.
+3. Open `Template Library` and choose a hook, script, or thumbnail template.
+4. Open `Script Generator`, create or edit a draft, then send it to the Shot Planner or YouTube Calendar.
+5. Export JSON when you want a local backup.
+
+The sample project creates starter data for templates, one script, shot plan, thumbnail idea, calendar item, asset note, and cost note. Existing module data is not overwritten; sample data is only added to empty module storage.
+
+## What You Get
+
+- 30 built-in creator templates for Shorts, longform, tutorials, reviews, comparisons, thumbnails, hooks, ComfyUI, assets, and publishing.
+- Beginner script builder with four inputs: topic, audience, length, and tone.
+- Module-to-module handoff for scripts to shot plans, scripts to calendar, thumbnails to calendar, and shots to asset notes.
+- Korean-first UI copy and demo data for the main beginner flow.
+- Offline/local-first storage using browser `localStorage`.
+
+![Template Library](docs/assets/template-library-desktop.png)
+
+![Script Generator](docs/assets/script-generator-desktop.png)
+
 ## Who This Is For
 
 - Beginners who do not know which AI video task to do next
@@ -41,7 +65,7 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for solo creators, AI video
 
 ## Beginner UX Status
 
-Every module includes a Korean "처음 쓰는 순서" guide, demo data, local editing, and JSON export/import. Screenshot tests check desktop/mobile layout, missing beginner guides, broken Korean text, and horizontal overflow.
+Every module includes a Korean beginner guide, demo data, local editing, and JSON export/import. Screenshot tests check desktop/mobile layout, missing beginner guides, broken Korean text, and horizontal overflow.
 
 The dashboard and template modules are the easiest entry points. Shot planning, asset management, and cost tracking are more detailed because they model real production work, but they are still usable from the included sample data.
 
@@ -90,11 +114,10 @@ The root `index.html` also redirects to the dashboard.
 ## Beginner Flow
 
 1. Open the dashboard.
-2. Fill or sample-fill the Creator Project.
-3. Check "오늘의 작업 상태" to see the next task.
-4. Open the recommended module.
-5. Start with demo data and replace it with your own work.
-6. Back up important data with `Export JSON`.
+2. Press `샘플 프로젝트로 바로 시작` or fill the Creator Project manually.
+3. Open the Launchpad modules in order: Template Library -> Script Generator -> Prompt Board -> Shot Planner -> Thumbnail Board -> Calendar.
+4. Replace the sample topic, audience, hook, scenes, thumbnail text, and upload notes with your own project.
+5. Back up important data with `Export JSON`.
 
 ## Data And Privacy
 
@@ -132,6 +155,12 @@ Run the browser interaction check from this workspace layout:
 
 ```powershell
 python scripts\test_creator_os_interactions.py
+```
+
+Run the beginner sample-project end-to-end check:
+
+```powershell
+python scripts\test_creator_os_sample_flow.py
 ```
 
 Security pattern scan:
