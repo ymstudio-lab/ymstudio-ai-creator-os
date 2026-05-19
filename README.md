@@ -2,7 +2,7 @@
 
 Local-first creator workspace for planning AI video/content projects without a server, login, upload, or paid API call.
 
-[Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/)
+[Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/) | [Use Cases](docs/USE_CASES.md)
 
 ![YMSTUDIO AI Creator OS dashboard](docs/assets/dashboard-desktop.png)
 
@@ -39,6 +39,20 @@ The sample project creates starter data for templates, one script, shot plan, th
 - ComfyUI and AI image/video users who need recipe and failure-fix notes
 - YouTube creators who want scripts, thumbnails, calendar, assets, and review notes in one local workspace
 - People who prefer offline-first tools before connecting paid APIs or automation
+
+## Use Cases
+
+Start with the use case closest to your situation:
+
+| Use case | Best starting modules | Result |
+| --- | --- | --- |
+| AI video beginner | Dashboard -> Template Library -> Script Generator | Starter project, script draft, shot plan, thumbnail idea, upload memo |
+| YouTube Shorts creator | Template Library -> Script Generator -> Thumbnail Board -> Calendar | 30-second script, hook, thumbnail text, upload plan |
+| ComfyUI/local AI user | Character Tool -> ComfyUI Workflow Manager -> Shot Planner -> Asset Manager | Character bible, workflow recipe, prompt notes, asset records |
+| Tutorial/course creator | Template Library -> Script Generator -> Shot Planner -> Calendar | Lesson script, screen-recording checklist, upload schedule |
+| Small business/product video | Template Library -> Script Generator -> Thumbnail Board -> Cost Tracker | Offer script, CTA, thumbnail direction, cost note |
+
+See the full guide: [Use Cases](docs/USE_CASES.md).
 
 ## What It Does
 
@@ -91,6 +105,7 @@ Project planning notes are kept outside the dashboard:
 
 - [Roadmap](ROADMAP.md)
 - [Publishing checklist](PUBLISHING_CHECKLIST.md)
+- [Use cases](docs/USE_CASES.md)
 
 ## Quick Start
 
