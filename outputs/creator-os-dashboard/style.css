@@ -346,7 +346,7 @@ button:focus {
 
 .hardware-specs dd {
   margin: 0;
-  color: var(--text);
+  color: var(--ink);
   overflow-wrap: anywhere;
 }
 
@@ -373,13 +373,69 @@ button:focus {
 .setup-recommendation p,
 .setup-recommendation ul {
   margin: 0;
-  color: var(--text);
+  color: var(--ink);
 }
 
 .setup-recommendation ul {
   display: grid;
   gap: 6px;
   padding-left: 18px;
+}
+
+.ops-section {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.ops-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ops-card {
+  display: grid;
+  gap: 8px;
+  min-height: 176px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--panel);
+}
+
+.ops-label {
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.ops-card strong {
+  font-size: 1.12rem;
+}
+
+.ops-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.ops-link {
+  align-self: end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 9px;
+  background: var(--soft);
+  color: var(--accent-strong);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 900;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .section {
@@ -678,6 +734,10 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .ops-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .planned-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -709,6 +769,10 @@ h2 {
   }
 
   .progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ops-grid {
     grid-template-columns: 1fr;
   }
 

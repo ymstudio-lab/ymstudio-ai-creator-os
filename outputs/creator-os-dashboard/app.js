@@ -18,6 +18,8 @@
     projectStatus: document.querySelector("[data-project-status]"),
     workflowSteps: document.querySelector("[data-workflow-steps]"),
     progressGrid: document.querySelector("[data-progress-grid]"),
+    opsGrid: document.querySelector("[data-ops-grid]"),
+    plannedSection: document.querySelector("[data-planned-section]"),
     detectHardware: document.querySelector("[data-detect-hardware]"),
     recommendSetup: document.querySelector("[data-recommend-setup]"),
     performanceTier: document.querySelector("[data-performance-tier]"),
@@ -63,6 +65,8 @@
     { key: "ymstudio.youtubeCalendar.v1", label: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },
     { key: "ymstudio.creatorAssetManager.v1", label: "자산", href: "../creator-asset-manager/index.html", read: (data) => data && Array.isArray(data.assets) ? data.assets.length : 0 },
   ];
+
+  const requiredProjectFields = ["channelName", "videoTopic", "targetAudience", "videoGoal"];
 
   const setupRecommendations = {
     cloud: {
@@ -150,6 +154,7 @@
     localStorage.setItem(PROJECT_KEY, JSON.stringify(payload));
     renderProject();
     if (elements.progressGrid) renderProgress();
+    if (elements.opsGrid) renderOpsDashboard();
     return payload;
   }
 
@@ -198,18 +203,75 @@
   }
 
   function renderProgress() {
-    const cards = progressSources.map((source) => {
-      const count = source.read(readStorageJson(source.key));
+    const cards = getProgressItems().map((source) => {
       const card = document.createElement("a");
       card.href = source.href;
-      card.className = "progress-card" + (count > 0 ? " is-started" : "");
+      card.className = "progress-card" + (source.count > 0 ? " is-started" : "");
       card.append(
         createTextElement("strong", "", source.label),
-        createTextElement("span", "", count > 0 ? `${count}개 저장됨` : "아직 없음")
+        createTextElement("span", "", source.count > 0 ? `${source.count}개 저장됨` : "아직 없음")
       );
       return card;
     });
     elements.progressGrid.replaceChildren(...cards);
+  }
+
+  function getProgressItems() {
+    return progressSources.map((source) => ({
+      ...source,
+      count: source.read(readStorageJson(source.key)),
+    }));
+  }
+
+  function makeOpsCard(title, status, detail, action) {
+    const card = document.createElement("article");
+    card.className = "ops-card";
+    card.append(createTextElement("span", "ops-label", title), createTextElement("strong", "", status), createTextElement("p", "", detail));
+    if (action) {
+      if (action.exportProject) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "ops-link";
+        button.setAttribute("data-ops-export-project", "");
+        button.textContent = action.label;
+        card.appendChild(button);
+      } else {
+        const link = document.createElement("a");
+        link.className = "ops-link";
+        link.href = action.href;
+        link.textContent = action.label;
+        card.appendChild(link);
+      }
+    }
+    return card;
+  }
+
+  function renderOpsDashboard() {
+    const project = loadProject();
+    const missingProjectFields = requiredProjectFields.filter((field) => !project[field]);
+    const progressItems = getProgressItems();
+    const moduleItems = progressItems.filter((item) => item.key !== PROJECT_KEY);
+    const startedModules = moduleItems.filter((item) => item.count > 0);
+    const nextItem = moduleItems.find((item) => item.count === 0) || moduleItems[moduleItems.length - 1];
+    const projectTitle = project.videoTopic || project.channelName || "프로젝트 없음";
+    const projectDetail = missingProjectFields.length
+      ? `필수 항목 ${missingProjectFields.length}개가 비어 있습니다. 채널명, 주제, 타깃, 목적부터 채우세요.`
+      : `${projectTitle} 기준으로 ${startedModules.length}/${moduleItems.length}개 모듈에 작업 데이터가 있습니다.`;
+    const backupDetail = startedModules.length
+      ? `${startedModules.map((item) => item.label).join(", ")} 데이터가 있습니다. 중요한 작업은 각 모듈의 Export JSON으로 백업하세요.`
+      : "아직 백업할 모듈 데이터가 없습니다. 프로젝트를 저장한 뒤 템플릿이나 대본부터 만들어보세요.";
+    const healthDetail = [
+      "정적 파일 실행",
+      "로컬 저장소 사용",
+      "로그인 없음",
+      "외부 API 호출 없음",
+    ].join(" · ");
+    elements.opsGrid.replaceChildren(
+      makeOpsCard("프로젝트", projectTitle, projectDetail, { href: "#", label: "프로젝트 확인" }),
+      makeOpsCard("다음 집중 작업", nextItem.label, nextItem.count > 0 ? "기본 흐름이 모두 시작되었습니다. 캘린더와 리뷰 메모를 보강하세요." : `${nextItem.label} 모듈이 아직 비어 있습니다.`, { href: nextItem.href, label: `${nextItem.label} 열기` }),
+      makeOpsCard("백업 알림", startedModules.length ? `${startedModules.length}개 모듈 저장됨` : "백업 대기", backupDetail, { exportProject: true, label: "프로젝트 JSON 내보내기" }),
+      makeOpsCard("로컬 상태", "안전 모드", healthDetail, { href: "../../PUBLISHING_CHECKLIST.md", label: "공개 체크리스트" })
+    );
   }
 
   function getWebGlRenderer() {
@@ -340,7 +402,11 @@
   }
 
   function renderPlannedModules() {
-    const cards = state.getLocalizedPlannedModules(getLanguage()).map((module) => {
+    const plannedModules = state.getLocalizedPlannedModules(getLanguage());
+    if (elements.plannedSection) {
+      elements.plannedSection.hidden = plannedModules.length === 0;
+    }
+    const cards = plannedModules.map((module) => {
       const card = document.createElement("article");
       card.className = "planned-card";
 
@@ -378,6 +444,7 @@
     renderProject();
     renderWorkflowSteps();
     renderProgress();
+    renderOpsDashboard();
     applyFilters();
   }
 
@@ -399,6 +466,9 @@
       if (confirmProjectOverwrite("기존 프로젝트를 가져온 JSON으로 바꿀까요?")) elements.importProjectFile.click();
     });
     elements.importProjectFile.addEventListener("change", () => importProjectFile(elements.importProjectFile.files[0]));
+    elements.opsGrid.addEventListener("click", (event) => {
+      if (event.target.closest("[data-ops-export-project]")) downloadProject();
+    });
     elements.detectHardware.addEventListener("click", detectHardware);
     elements.recommendSetup.addEventListener("click", renderSetupRecommendation);
     elements.performanceTier.addEventListener("change", renderSetupRecommendation);

@@ -148,19 +148,7 @@
     },
   ];
 
-  const plannedModules = [
-    {
-      id: "creator-dashboard-upgrade",
-      name: "Creator Dashboard Upgrade",
-      nameKo: "크리에이터 대시보드 강화",
-      workflow: "Operations",
-      workflowKo: "운영",
-      value: "Cross-module project summary, weekly focus, backup reminders, and local health checks.",
-      valueKo: "모듈별 프로젝트 요약, 주간 집중 작업, 백업 알림, 로컬 상태 점검을 보여줍니다.",
-      reason: "Makes the OS feel more unified after enough modules exist.",
-      reasonKo: "모듈이 충분히 쌓인 뒤 전체 OS를 하나의 제품처럼 느끼게 만드는 강화 작업입니다.",
-    },
-  ];
+  const plannedModules = [];
 
   const launchpadOrder = [
     "template-library",

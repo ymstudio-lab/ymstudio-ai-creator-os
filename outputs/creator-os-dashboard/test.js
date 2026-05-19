@@ -69,14 +69,8 @@ function testStatusSummary() {
 }
 
 function testPlannedModules() {
-  assert.strictEqual(state.plannedModules.length, 1);
-  assert.deepStrictEqual(
-    state.plannedModules.map((module) => module.id),
-    [
-      "creator-dashboard-upgrade",
-    ]
-  );
-  assert.strictEqual(state.getLocalizedPlannedModules("ko")[0].name, "크리에이터 대시보드 강화");
+  assert.strictEqual(state.plannedModules.length, 0);
+  assert.deepStrictEqual(state.getLocalizedPlannedModules("ko"), []);
   assert.strictEqual(state.getCopy("ko").comingSoon, "준비 중");
 }
 
@@ -106,6 +100,8 @@ function testStaticUiBindings() {
     "data-save-project",
     "data-workflow-steps",
     "data-progress-grid",
+    "data-ops-grid",
+    "data-planned-section",
     "data-detect-hardware",
     "data-recommend-setup",
     "data-performance-tier",
@@ -117,7 +113,7 @@ function testStaticUiBindings() {
   ].forEach((token) => {
     assert.ok(index.includes(token), `index.html should include ${token}`);
   });
-  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile", "renderProgress", "detectHardware", "renderSetupRecommendation", "navigator.hardwareConcurrency", "navigator.deviceMemory"].forEach((token) => {
+  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile", "renderProgress", "renderOpsDashboard", "makeOpsCard", "data-ops-export-project", "detectHardware", "renderSetupRecommendation", "navigator.hardwareConcurrency", "navigator.deviceMemory"].forEach((token) => {
     assert.ok(app.includes(token), `app.js should include ${token}`);
   });
   assert.ok(!app.includes("innerHTML"), "app.js should avoid unsafe raw HTML rendering");
