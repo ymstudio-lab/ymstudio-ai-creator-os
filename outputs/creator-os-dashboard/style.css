@@ -350,6 +350,65 @@ button:focus {
   padding-top: 18px;
 }
 
+.dashboard-fold {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0;
+  background: var(--panel);
+  box-shadow: 0 10px 24px rgba(28, 36, 30, 0.06);
+}
+
+.dashboard-fold.hardware-section,
+.dashboard-fold.ops-section,
+.dashboard-fold.progress-section {
+  border-top: 1px solid var(--line);
+  padding-top: 0;
+}
+
+.dashboard-fold summary {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 14px 16px;
+}
+
+.dashboard-fold summary span {
+  display: grid;
+  gap: 2px;
+}
+
+.dashboard-fold summary small {
+  color: var(--accent-strong);
+  font-size: 0.74rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dashboard-fold summary strong {
+  font-size: 1.08rem;
+}
+
+.dashboard-fold summary em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.86rem;
+}
+
+.dashboard-fold > :not(summary) {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.dashboard-fold > :last-child {
+  margin-bottom: 16px;
+}
+
+.dashboard-fold .section-heading {
+  margin-top: 2px;
+}
+
 .hardware-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
@@ -831,6 +890,11 @@ h2 {
   .hardware-controls {
     display: grid;
     align-items: stretch;
+  }
+
+  .dashboard-fold summary {
+    display: grid;
+    align-items: start;
   }
 
   .quickstart-main {

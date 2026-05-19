@@ -77,6 +77,7 @@ def main() -> int:
             "name": "dashboard_project_export_download",
             "passed": download.suggested_filename == "creator-project.json",
         })
+        page.click(".ops-section summary")
         with page.expect_download() as ops_download_info:
             page.click("[data-ops-export-project]")
         ops_download = ops_download_info.value
@@ -84,6 +85,7 @@ def main() -> int:
             "name": "dashboard_ops_export_download",
             "passed": ops_download.suggested_filename == "creator-project.json",
         })
+        page.click(".hardware-section summary")
         page.click("[data-detect-hardware]")
         page.select_option("[data-performance-tier]", "balanced")
         page.click("[data-recommend-setup]")
