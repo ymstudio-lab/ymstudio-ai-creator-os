@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YMSTUDIO Creator Prompt Board</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="sidebar" aria-label="Prompt library">
+        <header class="brand">
+          <div>
+            <p>YMSTUDIO AI Creator OS</p>
+            <h1>Creator Prompt Board</h1>
+          </div>
+          <button id="newPrompt" class="icon-button" type="button" title="Add prompt" aria-label="Add prompt">+</button>
+        </header>
+
+        <div class="filters" aria-label="Search and filters">
+          <label>
+            <span>Search</span>
+            <input id="search" type="search" placeholder="Tool, format, shot, note..." />
+          </label>
+          <div class="filter-grid">
+            <label>
+              <span>Tool</span>
+              <select id="toolFilter"></select>
+            </label>
+            <label>
+              <span>Category</span>
+              <select id="categoryFilter"></select>
+            </label>
+          </div>
+          <div class="compact-filters">
+            <label class="check-row">
+              <input id="favoriteFilter" type="checkbox" />
+              <span>Favorites only</span>
+            </label>
+            <label>
+              <span>Min rating</span>
+              <select id="ratingFilter">
+                <option value="0">Any</option>
+                <option value="3">3+</option>
+                <option value="4">4+</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="list-header">
+          <strong id="count">0 prompts</strong>
+          <div class="library-actions">
+            <button id="exportPrompts" class="text-button" type="button">Export JSON</button>
+            <button id="importPrompts" class="text-button" type="button">Import JSON</button>
+            <button id="resetDemo" class="text-button" type="button">Reset demo</button>
+          </div>
+        </div>
+        <input id="importFile" class="visually-hidden" type="file" accept="application/json,.json" />
+        <div id="promptList" class="prompt-list"></div>
+        <p id="emptyState" class="empty" hidden>No prompts match these filters.</p>
+      </section>
+
+      <section class="editor" aria-label="Prompt editor">
+        <form id="promptForm" autocomplete="off">
+          <div class="editor-top">
+            <div>
+              <p>Local prompt workspace</p>
+              <h2>Edit prompt</h2>
+            </div>
+            <div class="actions">
+              <button id="copyPrompt" class="primary-button" type="button">Copy prompt</button>
+              <button id="deletePrompt" class="danger-button" type="button">Delete</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Title</span>
+            <input id="title" type="text" maxlength="90" />
+          </label>
+
+          <label class="field">
+            <span>Prompt body</span>
+            <textarea id="body" rows="11"></textarea>
+          </label>
+
+          <div class="editor-grid">
+            <label class="field">
+              <span>Tool/model tags</span>
+              <select id="toolTags" multiple size="8"></select>
+            </label>
+            <label class="field">
+              <span>Category tags</span>
+              <select id="categoryTags" multiple size="8"></select>
+            </label>
+          </div>
+
+          <div class="meta-grid">
+            <label class="field">
+              <span>Rating</span>
+              <input id="rating" type="number" min="0" max="5" step="1" />
+            </label>
+            <label class="favorite-toggle">
+              <input id="favorite" type="checkbox" />
+              <span>Favorite prompt</span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Result notes</span>
+            <textarea id="resultNotes" rows="5" placeholder="What worked, what failed, which reference image or setting helped..."></textarea>
+          </label>
+        </form>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>

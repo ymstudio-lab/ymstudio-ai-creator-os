@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YMSTUDIO Creator Asset Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="top-band">
+        <div>
+          <p class="eyebrow">YMSTUDIO AI Creator OS</p>
+          <h1>Creator Asset Manager</h1>
+          <p class="subcopy">Track generated media, prompts, references, file paths, licenses, usage notes, and collections locally.</p>
+        </div>
+        <div class="metrics">
+          <article><span>Total</span><strong id="totalMetric">0</strong></article>
+          <article><span>Approved</span><strong id="approvedMetric">0</strong></article>
+          <article><span>Used</span><strong id="usedMetric">0</strong></article>
+          <article><span>Collections</span><strong id="collectionsMetric">0</strong></article>
+          <article><span>Needs Review</span><strong id="attentionMetric">0</strong></article>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <form id="assetForm" class="panel form-panel">
+          <div class="panel-header">
+            <h2>Asset</h2>
+            <button type="submit">Add</button>
+          </div>
+          <label><span>Title</span><input id="titleInput" required /></label>
+          <div class="split-row">
+            <label><span>Type</span><select id="typeInput"></select></label>
+            <label><span>Status</span><select id="statusInput"></select></label>
+          </div>
+          <div class="split-row">
+            <label><span>Collection</span><input id="collectionInput" /></label>
+            <label><span>Project</span><input id="projectInput" /></label>
+          </div>
+          <label><span>Source tool/model</span><input id="sourceToolInput" list="toolOptions" /></label>
+          <datalist id="toolOptions"></datalist>
+          <label><span>Tags</span><input id="tagsInput" placeholder="character, reference, shorts" /></label>
+          <label><span>File path or URL text</span><input id="filePathInput" /></label>
+          <label><span>Prompt text</span><textarea id="promptInput" rows="4"></textarea></label>
+          <label><span>Result notes</span><textarea id="resultNotesInput" rows="3"></textarea></label>
+          <label><span>License / usage note</span><textarea id="licenseInput" rows="3"></textarea></label>
+          <label><span>Created date</span><input id="createdDateInput" type="date" /></label>
+        </form>
+
+        <section class="panel catalog-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Asset Catalog</h2>
+              <p id="assetCount">0 assets</p>
+            </div>
+            <button id="resetDemo" type="button">Reset demo</button>
+          </div>
+          <div class="filters">
+            <input id="searchInput" placeholder="Search paths, prompts, tags..." />
+            <select id="typeFilter"></select>
+            <select id="statusFilter"></select>
+            <select id="collectionFilter"></select>
+          </div>
+          <div id="emptyState" class="empty" hidden>No assets match this view.</div>
+          <div id="assetList" class="asset-list"></div>
+        </section>
+
+        <section class="panel collection-panel">
+          <div class="panel-header">
+            <h2>Collections</h2>
+          </div>
+          <div id="collectionView" class="collection-view"></div>
+          <div class="export-actions">
+            <button id="exportMarkdown" type="button">Export Markdown</button>
+            <button id="exportCsv" type="button">Export CSV</button>
+            <button id="exportJson" type="button">Export JSON</button>
+            <button id="importJson" type="button">Import JSON</button>
+            <input id="importJsonFile" type="file" accept="application/json,.json" hidden />
+          </div>
+          <p class="roadmap-note">Future folder scanner: planned as an explicit, opt-in local review flow. This MVP never scans folders automatically.</p>
+        </section>
+      </section>
+      <div id="toast" class="toast" hidden></div>
+    </main>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>

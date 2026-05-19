@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YMSTUDIO API Cost Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="top-band" aria-label="Monthly cost dashboard">
+        <div class="brand-block">
+          <p>YMSTUDIO AI Creator OS</p>
+          <h1>API Cost Tracker</h1>
+        </div>
+        <div class="settings-grid">
+          <label>
+            <span>Month</span>
+            <input id="monthInput" type="month" />
+          </label>
+          <label>
+            <span>Monthly budget</span>
+            <input id="budgetInput" type="number" min="0" step="0.01" />
+          </label>
+          <label>
+            <span>Monthly credits</span>
+            <input id="creditsInput" type="number" min="0" step="0.01" />
+          </label>
+        </div>
+      </section>
+
+      <section class="dashboard" aria-label="Burn-rate dashboard">
+        <div class="metric warning-card" id="warningCard">
+          <span>Warning</span>
+          <strong id="warningLevel">safe</strong>
+          <small id="warningDetail">0% of budget</small>
+        </div>
+        <div class="metric">
+          <span>Month cost</span>
+          <strong id="totalCost">$0.00</strong>
+          <small id="budgetPercent">0% of budget</small>
+        </div>
+        <div class="metric">
+          <span>Credits burned</span>
+          <strong id="totalCredits">0.00</strong>
+          <small id="creditPercent">0% of credits</small>
+        </div>
+        <div class="metric">
+          <span>Daily average</span>
+          <strong id="dailyAverage">$0.00</strong>
+          <small id="projectedCost">$0.00 projected</small>
+        </div>
+      </section>
+
+      <section class="scenario-strip" aria-label="Scenario summary">
+        <div>
+          <span>Current burn</span>
+          <strong id="currentBurn">$0.00</strong>
+        </div>
+        <div>
+          <span>Projected month-end</span>
+          <strong id="projectedMonthEnd">$0.00</strong>
+        </div>
+        <div>
+          <span>Remaining safe budget</span>
+          <strong id="remainingSafeBudget">$0.00</strong>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="side-panel" aria-label="Usage entry and filters">
+          <form id="entryForm" autocomplete="off">
+            <div class="panel-header">
+              <div>
+                <p>Manual log</p>
+                <h2>Add Usage</h2>
+              </div>
+              <button class="primary-button" type="submit">Add</button>
+            </div>
+
+            <div class="preset-box">
+              <label>
+                <span>Pricing preset</span>
+                <select id="presetInput"></select>
+              </label>
+              <button id="applyPreset" type="button">Use preset</button>
+            </div>
+
+            <label>
+              <span>Date</span>
+              <input id="entryDate" type="date" required />
+            </label>
+            <label>
+              <span>Provider</span>
+              <select id="providerInput"></select>
+            </label>
+            <label>
+              <span>Category</span>
+              <select id="categoryInput"></select>
+            </label>
+            <label>
+              <span>Project</span>
+              <input id="projectInput" type="text" list="projectOptions" required />
+              <datalist id="projectOptions"></datalist>
+            </label>
+            <label>
+              <span>Workflow</span>
+              <input id="workflowInput" type="text" required />
+            </label>
+            <div class="split-row">
+              <label>
+                <span>Quantity</span>
+                <input id="quantityInput" type="number" min="0" step="0.01" />
+              </label>
+              <label>
+                <span>Unit</span>
+                <input id="unitInput" type="text" />
+              </label>
+            </div>
+            <div class="split-row">
+              <label>
+                <span>Unit cost</span>
+                <input id="unitCostInput" type="number" min="0" step="0.0001" />
+              </label>
+              <label>
+                <span>Credits used</span>
+                <input id="creditInput" type="number" min="0" step="0.01" />
+              </label>
+            </div>
+            <label>
+              <span>Notes</span>
+              <textarea id="notesInput" rows="3"></textarea>
+            </label>
+          </form>
+
+          <div class="filters" aria-label="Search and filters">
+            <label>
+              <span>Search</span>
+              <input id="searchInput" type="search" placeholder="Provider, workflow, project..." />
+            </label>
+            <label>
+              <span>Provider</span>
+              <select id="providerFilter"></select>
+            </label>
+            <label>
+              <span>Category</span>
+              <select id="categoryFilter"></select>
+            </label>
+            <label>
+              <span>Project</span>
+              <select id="projectFilter"></select>
+            </label>
+          </div>
+
+          <div class="export-actions">
+            <button id="exportMarkdown" type="button">Export Markdown</button>
+            <button id="exportCsv" type="button">Export CSV</button>
+            <button id="exportJson" type="button">Export JSON</button>
+            <button id="importJson" type="button">Import JSON</button>
+            <input id="importJsonFile" type="file" accept="application/json,.json" hidden />
+            <button id="resetDemo" type="button">Reset demo</button>
+          </div>
+        </aside>
+
+        <section class="main-panel" aria-label="Usage entries">
+          <div class="panel-header">
+            <div>
+              <p id="entryCount">0 entries</p>
+              <h2>Usage Ledger</h2>
+            </div>
+          </div>
+          <div class="report-grid" aria-label="Monthly report summary">
+            <section>
+              <h3>Provider Breakdown</h3>
+              <div id="providerBreakdown" class="breakdown"></div>
+            </section>
+            <section>
+              <h3>Category Breakdown</h3>
+              <div id="categoryBreakdown" class="breakdown"></div>
+            </section>
+            <section>
+              <h3>Top Workflows</h3>
+              <div id="topWorkflows" class="compact-list"></div>
+            </section>
+            <section>
+              <h3>Recommendations</h3>
+              <div id="recommendations" class="compact-list"></div>
+            </section>
+          </div>
+          <div id="entryList" class="entry-list"></div>
+          <p id="emptyState" class="empty" hidden>No usage entries match the current filters.</p>
+        </section>
+      </section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>

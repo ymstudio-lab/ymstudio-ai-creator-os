@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YMSTUDIO AI Shot Planner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="top-band" aria-label="Project summary">
+        <div class="brand-block">
+          <p>YMSTUDIO AI Creator OS</p>
+          <h1>AI Shot Planner</h1>
+        </div>
+        <div class="summary-grid">
+          <label>
+            <span>Episode</span>
+            <input id="projectTitle" type="text" />
+          </label>
+          <label>
+            <span>Goal</span>
+            <input id="projectGoal" type="text" />
+          </label>
+          <label>
+            <span>Format</span>
+            <input id="projectFormat" type="text" />
+          </label>
+          <label>
+            <span>Audience</span>
+            <input id="projectAudience" type="text" />
+          </label>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="left-panel" aria-label="Scenes and filters">
+          <div class="panel-header">
+            <div>
+              <p>Production board</p>
+              <h2>Scenes</h2>
+            </div>
+            <button id="addScene" class="icon-button" type="button" title="Add scene" aria-label="Add scene">+</button>
+          </div>
+          <div id="sceneList" class="scene-list"></div>
+
+          <form id="sceneForm" class="scene-editor" autocomplete="off">
+            <div class="group-title">Scene detail</div>
+            <label>
+              <span>Title</span>
+              <input id="sceneTitle" type="text" />
+            </label>
+            <label>
+              <span>Summary</span>
+              <textarea id="sceneSummary" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Location</span>
+              <input id="sceneLocation" type="text" />
+            </label>
+          </form>
+
+          <div class="filters" aria-label="Shot filters">
+            <label>
+              <span>Search</span>
+              <input id="search" type="search" placeholder="Prompt, scene, asset, note..." />
+            </label>
+            <label>
+              <span>Status</span>
+              <select id="statusFilter"></select>
+            </label>
+            <label>
+              <span>Scene</span>
+              <select id="sceneFilter"></select>
+            </label>
+            <label>
+              <span>Tool</span>
+              <select id="toolFilter"></select>
+            </label>
+          </div>
+
+          <div class="export-actions">
+            <button id="exportMarkdown" type="button">Export Markdown</button>
+            <button id="exportCsv" type="button">Export CSV</button>
+            <button id="exportJson" type="button">Export JSON</button>
+            <div class="import-row">
+              <select id="importMode" aria-label="Import mode">
+                <option value="merge">Merge import</option>
+                <option value="replace">Replace plan</option>
+              </select>
+              <button id="importJson" type="button">Import JSON</button>
+              <input id="importFile" type="file" accept="application/json,.json" hidden />
+            </div>
+            <button id="resetDemo" type="button">Reset demo</button>
+          </div>
+        </aside>
+
+        <section class="center-panel" aria-label="Shot list">
+          <div class="panel-header">
+            <div>
+              <p id="shotCount">0 shots</p>
+              <h2>Shot List</h2>
+            </div>
+            <button id="addShot" class="primary-button" type="button">Add shot</button>
+          </div>
+          <div id="shotList" class="shot-list"></div>
+          <p id="emptyState" class="empty" hidden>No shots match the current filters.</p>
+        </section>
+
+        <section class="right-panel" aria-label="Shot editor">
+          <form id="shotForm" autocomplete="off">
+            <div class="panel-header">
+              <div>
+                <p>Selected shot</p>
+                <h2>Edit Details</h2>
+              </div>
+              <button id="deleteShot" class="danger-button" type="button">Delete</button>
+            </div>
+            <div id="deleteSafety" class="safety-note" hidden>
+              <span>Shot deleted.</span>
+              <button id="undoDelete" type="button">Undo</button>
+            </div>
+
+            <div class="form-grid compact">
+              <label>
+                <span>Shot</span>
+                <input id="shotNumber" type="text" />
+              </label>
+              <label>
+                <span>Status</span>
+                <select id="shotStatus"></select>
+              </label>
+            </div>
+
+            <label>
+              <span>Title</span>
+              <input id="shotTitle" type="text" />
+            </label>
+            <label>
+              <span>Scene</span>
+              <select id="shotScene"></select>
+            </label>
+            <label>
+              <span>Description</span>
+              <textarea id="shotDescription" rows="3"></textarea>
+            </label>
+            <label>
+              <span>Prompt</span>
+              <textarea id="shotPrompt" rows="7"></textarea>
+            </label>
+
+            <div class="form-grid compact">
+              <label>
+                <span>Tool</span>
+                <select id="shotTool"></select>
+              </label>
+              <label>
+                <span>Model</span>
+                <input id="shotModel" type="text" />
+              </label>
+              <label>
+                <span>Duration</span>
+                <input id="shotDuration" type="text" />
+              </label>
+            </div>
+
+            <div class="group-title">Asset paths</div>
+            <label>
+              <span>Image</span>
+              <input id="assetImage" type="text" />
+            </label>
+            <label>
+              <span>Video</span>
+              <input id="assetVideo" type="text" />
+            </label>
+            <label>
+              <span>Reference</span>
+              <input id="assetReference" type="text" />
+            </label>
+
+            <div class="group-title">Continuity notes</div>
+            <label>
+              <span>Character</span>
+              <textarea id="continuityCharacter" rows="2"></textarea>
+            </label>
+            <label>
+              <span>Outfit</span>
+              <textarea id="continuityOutfit" rows="2"></textarea>
+            </label>
+            <label>
+              <span>Location</span>
+              <textarea id="continuityLocation" rows="2"></textarea>
+            </label>
+            <label>
+              <span>Mood</span>
+              <textarea id="continuityMood" rows="2"></textarea>
+            </label>
+            <label>
+              <span>Camera/style</span>
+              <textarea id="continuityCameraStyle" rows="2"></textarea>
+            </label>
+            <label>
+              <span>Production notes</span>
+              <textarea id="shotNotes" rows="3"></textarea>
+            </label>
+          </form>
+        </section>
+      </section>
+
+      <section class="continuity-strip" aria-label="Continuity summary">
+        <div>
+          <p>Continuity Bible</p>
+          <strong id="continuityHeadline">Ready</strong>
+        </div>
+        <div id="continuitySummary" class="continuity-copy"></div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>

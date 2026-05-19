@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YMSTUDIO AI Creator OS Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow" data-i18n="heroEyebrow">로컬 런처 - 1차 모듈 완료</p>
+        <h1 data-i18n="heroTitle">YMSTUDIO AI Creator OS 대시보드</h1>
+        <p class="hero-copy" data-i18n="heroCopy"></p>
+      </div>
+      <aside class="hero-status" aria-label="Completion summary">
+        <span data-summary></span>
+      </aside>
+    </header>
+
+    <main>
+      <section class="toolbar" aria-label="Module filters">
+        <label>
+          <span data-i18n="languageLabel">언어</span>
+          <select data-language>
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+        <label>
+          <span data-i18n="searchLabel">모듈 검색</span>
+          <input data-search type="search">
+        </label>
+        <label>
+          <span data-i18n="workflowLabel">워크플로우 영역</span>
+          <select data-workflow></select>
+        </label>
+      </section>
+
+      <section aria-labelledby="modules-title" class="section">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="launchpadEyebrow">런치패드</p>
+          <h2 id="modules-title" data-i18n="modulesTitle">완료된 모듈</h2>
+        </div>
+        <p data-empty-state class="empty-state" hidden></p>
+        <div class="module-grid" data-module-grid></div>
+      </section>
+
+      <section class="summary-grid">
+        <article class="panel">
+          <p class="eyebrow" data-i18n="monetizationEyebrow">비즈니스 활용</p>
+          <h2 data-i18n="monetizationTitle">번들 전략</h2>
+          <p data-i18n="monetizationCopy1"></p>
+          <p data-i18n="monetizationCopy2"></p>
+        </article>
+
+        <article class="panel">
+          <p class="eyebrow" data-i18n="publishingEyebrow">공개 준비</p>
+          <h2 data-i18n="githubTitle">GitHub 체크리스트</h2>
+          <ul class="checklist" data-checklist></ul>
+        </article>
+      </section>
+
+      <section class="summary-grid">
+        <article class="panel">
+          <p class="eyebrow" data-i18n="architectureEyebrow">구조</p>
+          <h2 data-i18n="architectureTitle">로컬 사용 메모</h2>
+          <ul data-architecture></ul>
+        </article>
+
+        <article class="panel">
+          <p class="eyebrow" data-i18n="roadmapEyebrow">로드맵</p>
+          <h2 data-i18n="roadmapTitle">다음 단계</h2>
+          <ol class="roadmap" data-roadmap></ol>
+        </article>
+      </section>
+    </main>
+
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>

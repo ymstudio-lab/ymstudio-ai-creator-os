@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YMSTUDIO YouTube Calendar</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="top-band">
+        <div>
+          <p class="eyebrow">YMSTUDIO AI Creator OS</p>
+          <h1>YouTube Calendar</h1>
+          <p class="subcopy">Plan AI Shorts, scripts, thumbnails, production status, and upload dates in one local board.</p>
+        </div>
+        <div class="settings-grid">
+          <label><span>Channel</span><input id="channelInput" type="text" /></label>
+          <label><span>Month</span><input id="monthInput" type="month" /></label>
+          <label><span>Weekly target</span><input id="weeklyTargetInput" type="number" min="1" step="1" /></label>
+        </div>
+      </section>
+
+      <section class="metric-row">
+        <article><span>Total</span><strong id="totalMetric">0</strong></article>
+        <article><span>Scheduled</span><strong id="scheduledMetric">0</strong></article>
+        <article><span>Published</span><strong id="publishedMetric">0</strong></article>
+        <article><span>In production</span><strong id="productionMetric">0</strong></article>
+      </section>
+
+      <section class="summary-row">
+        <article class="panel compact-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Weekly Plan</h2>
+              <p>Compact density against the weekly target</p>
+            </div>
+          </div>
+          <div id="weeklySummary" class="summary-grid"></div>
+        </article>
+        <article class="panel compact-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Pipeline Summary</h2>
+              <p>Counts by format, status, and upload week</p>
+            </div>
+          </div>
+          <div id="pipelineSummary" class="pipeline-summary"></div>
+        </article>
+      </section>
+
+      <section class="workspace">
+        <form id="contentForm" class="panel form-panel">
+          <div class="panel-header">
+            <h2>Content Item</h2>
+            <button type="submit">Add</button>
+          </div>
+          <label><span>Working title</span><input id="titleInput" required /></label>
+          <div class="split-row">
+            <label><span>Format</span><select id="formatInput"></select></label>
+            <label><span>Status</span><select id="statusInput"></select></label>
+          </div>
+          <div class="split-row">
+            <label><span>Channel/project</span><input id="itemChannelInput" /></label>
+            <label><span>Niche</span><input id="nicheInput" /></label>
+          </div>
+          <label><span>Upload date</span><input id="uploadDateInput" type="date" required /></label>
+          <label><span>Script outline</span><textarea id="scriptInput" rows="4"></textarea></label>
+          <label><span>Title variants</span><textarea id="titleVariantsInput" rows="3"></textarea></label>
+          <label><span>Thumbnail prompt variants</span><textarea id="thumbnailPromptsInput" rows="3"></textarea></label>
+          <label><span>AI tools</span><input id="toolsInput" list="toolOptions" /></label>
+          <datalist id="toolOptions"></datalist>
+          <label><span>Performance notes</span><textarea id="performanceInput" rows="3"></textarea></label>
+        </form>
+
+        <section class="panel list-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Idea Board</h2>
+              <p id="itemCount">0 items</p>
+            </div>
+            <button id="resetDemo" type="button">Reset demo</button>
+          </div>
+          <div class="filters">
+            <input id="searchInput" placeholder="Search title, outline, tools..." />
+            <select id="statusFilter"></select>
+            <select id="formatFilter"></select>
+            <select id="channelFilter"></select>
+          </div>
+          <div id="emptyState" class="empty" hidden>No content items match this view.</div>
+          <div id="contentList" class="content-list"></div>
+        </section>
+
+        <section class="panel calendar-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Upload Calendar</h2>
+              <p>Grouped by date or week</p>
+            </div>
+            <select id="calendarMode">
+              <option value="date">Date</option>
+              <option value="week">Week</option>
+            </select>
+          </div>
+          <div id="calendarView" class="calendar-view"></div>
+          <div class="export-actions">
+            <button id="exportMarkdown" type="button">Export Markdown</button>
+            <button id="exportCsv" type="button">Export CSV</button>
+            <button id="exportJson" type="button">Export JSON</button>
+            <button id="importJson" type="button">Import JSON</button>
+            <input id="importFile" type="file" accept="application/json,.json" hidden />
+          </div>
+        </section>
+      </section>
+      <div id="toast" class="toast" hidden></div>
+    </main>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+    <script src="../i18n-lite.js"></script>
+  </body>
+</html>
