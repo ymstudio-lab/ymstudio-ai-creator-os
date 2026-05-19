@@ -6,13 +6,14 @@ const state = require("./state.js");
 const dashboardDir = __dirname;
 
 function testModuleDefinitions() {
-  assert.strictEqual(state.modules.length, 7, "expected seven creator modules");
+  assert.strictEqual(state.modules.length, 8, "expected eight creator modules");
   const ids = state.modules.map((module) => module.id).sort();
   assert.deepStrictEqual(ids, [
     "ai-shot-planner",
     "api-cost-tracker",
     "creator-asset-manager",
     "creator-prompt-board",
+    "script-generator",
     "template-library",
     "thumbnail-idea-board",
     "youtube-calendar",
@@ -29,7 +30,7 @@ function testLinksExist() {
 }
 
 function testWorkflowFiltering() {
-  assert.strictEqual(state.filterModules("", "All").length, 7);
+  assert.strictEqual(state.filterModules("", "All").length, 8);
   assert.deepStrictEqual(
     state.filterModules("", "Publishing").map((module) => module.id).sort(),
     ["thumbnail-idea-board", "youtube-calendar"]
@@ -40,23 +41,23 @@ function testWorkflowFiltering() {
   );
   assert.ok(state.filterModules("자산", "All", "ko").some((module) => module.id === "creator-asset-manager"));
   assert.ok(state.filterModules("template library", "All").some((module) => module.id === "template-library"));
+  assert.ok(state.filterModules("script generator", "All").some((module) => module.id === "script-generator"));
   assert.strictEqual(state.getWorkflowAreas("ko")[0].label, "전체");
 }
 
 function testStatusSummary() {
   const summary = state.getStatusSummary();
-  assert.strictEqual(summary.total, 7);
-  assert.strictEqual(summary.finalVerified, 7);
+  assert.strictEqual(summary.total, 8);
+  assert.strictEqual(summary.finalVerified, 8);
 }
 
 function testPlannedModules() {
-  assert.strictEqual(state.plannedModules.length, 4);
+  assert.strictEqual(state.plannedModules.length, 3);
   assert.deepStrictEqual(
     state.plannedModules.map((module) => module.id),
     [
       "character-consistency-tool",
       "comfyui-workflow-manager",
-      "script-generator",
       "creator-dashboard-upgrade",
     ]
   );

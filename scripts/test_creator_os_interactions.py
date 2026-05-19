@@ -43,7 +43,8 @@ def main() -> int:
                 "ymstudio.creatorProject.v1",
                 "ymstudio.templateLibrary.v1",
                 "ymstudio.creatorPromptBoard.v1",
-                "ymstudio.thumbnailIdeaBoard.v1"
+                "ymstudio.thumbnailIdeaBoard.v1",
+                "ymstudio.scriptGenerator.v1"
               ].forEach((key) => localStorage.removeItem(key));
             }"""
         )
@@ -99,6 +100,22 @@ def main() -> int:
         checks.append({
             "name": "template_library_export_download",
             "passed": template_download.suggested_filename == "template-library-state.json",
+        })
+
+        script_generator = OUTPUTS / "script-generator" / "index.html"
+        page.goto(file_url(script_generator), wait_until="networkidle")
+        page.click("#fromProject")
+        script_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.scriptGenerator.v1") || "[]")""")
+        checks.append({
+            "name": "script_generator_from_project",
+            "passed": len(script_state) >= 1 and bool(script_state[0].get("hook")),
+        })
+        with page.expect_download() as script_download_info:
+            page.click("#exportJson")
+        script_download = script_download_info.value
+        checks.append({
+            "name": "script_generator_export_download",
+            "passed": script_download.suggested_filename == "script-generator-state.json",
         })
 
         browser.close()

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YMSTUDIO Script Generator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">YMSTUDIO Creator OS</p>
+        <h1>스크립트 생성기</h1>
+        <p>Creator Project의 주제, 타깃, 목적을 바탕으로 훅, 개요, 장면 내레이션, CTA를 빠르게 정리하는 로컬 대본 도구입니다.</p>
+      </div>
+      <div class="summary">
+        <strong data-total>0</strong>
+        <span>scripts</span>
+        <small data-summary>ready 0 · favorite 0</small>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="beginner-guide" aria-label="처음 쓰는 순서">
+        <strong>처음 쓰는 순서</strong>
+        <ol>
+          <li>대시보드에서 Creator Project를 먼저 저장합니다.</li>
+          <li>프로젝트로 초안 만들기를 눌러 훅과 장면을 자동으로 채웁니다.</li>
+          <li>대본을 다듬은 뒤 복사하거나 Export JSON으로 백업합니다.</li>
+        </ol>
+      </section>
+
+      <section class="toolbar" aria-label="스크립트 필터">
+        <label>
+          검색
+          <input id="search" type="search" placeholder="예: 훅, 초보자, Shorts, CTA">
+        </label>
+        <label>
+          형식
+          <select id="formatFilter"></select>
+        </label>
+        <label>
+          상태
+          <select id="statusFilter"></select>
+        </label>
+        <label class="check">
+          <input id="favoriteOnly" type="checkbox">
+          즐겨찾기만
+        </label>
+      </section>
+
+      <section class="board">
+        <aside class="list-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Scripts</p>
+              <h2>대본 목록</h2>
+            </div>
+            <span id="count">0</span>
+          </div>
+          <div class="actions">
+            <button id="newScript" type="button">새 대본</button>
+            <button id="fromProject" type="button">프로젝트로 초안 만들기</button>
+          </div>
+          <div id="scriptList" class="script-list"></div>
+          <p id="emptyState" class="empty" hidden>현재 필터와 일치하는 대본이 없습니다.</p>
+        </aside>
+
+        <section class="editor-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Editor</p>
+              <h2>대본 편집</h2>
+            </div>
+            <div class="actions">
+              <button id="saveScript" type="button">저장</button>
+              <button id="copyScript" type="button">복사</button>
+              <button id="deleteScript" class="danger" type="button">삭제</button>
+            </div>
+          </div>
+
+          <div class="form-grid one">
+            <label>제목<input id="title" type="text"></label>
+          </div>
+
+          <div class="form-grid two">
+            <label>타깃 시청자<input id="audience" type="text"></label>
+            <label>영상 목적<input id="goal" type="text"></label>
+          </div>
+
+          <label>훅<textarea id="hook" rows="3"></textarea></label>
+          <label>장면 목록<textarea id="scenes" rows="6" placeholder="한 줄에 한 장면씩 입력"></textarea></label>
+          <label>CTA<textarea id="cta" rows="3"></textarea></label>
+
+          <details class="advanced-panel">
+            <summary>추가 대본 설정</summary>
+            <div class="form-grid">
+            <label>형식<select id="format"></select></label>
+            <label>톤<select id="tone"></select></label>
+            <label>상태<select id="status"></select></label>
+            <label>메모<textarea id="notes" rows="3"></textarea></label>
+            </div>
+            <label>개요<textarea id="outline" rows="3"></textarea></label>
+
+            <label class="check favorite">
+              <input id="favorite" type="checkbox">
+              중요한 대본으로 표시
+            </label>
+          </details>
+
+          <article class="preview">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Preview</p>
+                <h2>복사용 대본</h2>
+              </div>
+            </div>
+            <pre id="preview"></pre>
+          </article>
+
+          <div class="export-actions">
+            <button id="exportJson" type="button">Export JSON</button>
+            <label class="file-button">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json,.json" hidden>
+            </label>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../i18n-lite.js"></script>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

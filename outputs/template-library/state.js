@@ -8,11 +8,12 @@
   const STORAGE_KEY = "ymstudio.templateLibrary.v1";
   const PROMPT_BOARD_KEY = "ymstudio.creatorPromptBoard.v1";
   const THUMBNAIL_BOARD_KEY = "ymstudio.thumbnailIdeaBoard.v1";
+  const SCRIPT_GENERATOR_KEY = "ymstudio.scriptGenerator.v1";
   const EXPORT_VERSION = 1;
 
   const categories = ["Thumbnail", "Prompt", "Script", "Shot Plan", "Calendar", "Asset", "Character", "ComfyUI", "Editing", "Analytics", "SEO", "Repurposing", "Voiceover", "Education"];
   const audiences = ["General Video Creator", "AI Video Creator", "YouTube Creator", "Solo Creator", "Agency", "Educator", "Small Business"];
-  const targetModules = ["Creator Prompt Board", "Thumbnail Idea Board", "AI Shot Planner", "YouTube Calendar", "Creator Asset Manager", "Copy only"];
+  const targetModules = ["Creator Prompt Board", "Thumbnail Idea Board", "Script Generator", "AI Shot Planner", "YouTube Calendar", "Creator Asset Manager", "Copy only"];
 
   const templates = [
     {
@@ -75,7 +76,7 @@
       titleKo: "쇼츠 훅 루프 대본",
       category: "Script",
       audience: "YouTube Creator",
-      targetModule: "Creator Prompt Board",
+      targetModule: "Script Generator",
       popularity: 5,
       reason: "Short-form creators still need fast hooks, loopable endings, and repeatable structures.",
       reasonKo: "숏폼 제작자는 빠른 훅, 반복 시청을 유도하는 마무리, 재사용 가능한 구조를 계속 필요로 합니다.",
@@ -619,6 +620,27 @@
     };
   }
 
+  function scriptGeneratorItem(template) {
+    const payload = template.payload || {};
+    return {
+      id: makeId("script"),
+      title: payload.title || template.titleKo || template.title,
+      format: payload.format || "Shorts",
+      tone: payload.tone || "빠르고 강하게",
+      status: payload.status || "draft",
+      audience: payload.audience || template.audience,
+      goal: payload.goal || template.reasonKo || template.reason,
+      hook: payload.hook || template.content,
+      outline: payload.outline || "훅 > 핵심 근거 > 시각 예시 > CTA",
+      scenes: Array.isArray(payload.scenes) ? payload.scenes : ["훅으로 문제를 제기합니다.", "핵심 근거를 빠르게 보여줍니다.", "시각 예시를 넣습니다.", "CTA로 마무리합니다."],
+      cta: payload.cta || "다음 작업으로 이어질 행동을 하나 제안합니다.",
+      notes: payload.notes || template.usage,
+      favorite: Boolean(payload.favorite),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
   function importToModule(storage, template) {
     if (!storage) return { ok: false, message: "localStorage is not available." };
     try {
@@ -633,6 +655,12 @@
         const next = Array.isArray(current) ? [thumbnailIdeaItem(template), ...current] : [thumbnailIdeaItem(template)];
         storage.setItem(THUMBNAIL_BOARD_KEY, JSON.stringify(next));
         return { ok: true, message: "Added to Thumbnail Idea Board." };
+      }
+      if (template.targetModule === "Script Generator") {
+        const current = JSON.parse(storage.getItem(SCRIPT_GENERATOR_KEY) || "[]");
+        const next = Array.isArray(current) ? [scriptGeneratorItem(template), ...current] : [scriptGeneratorItem(template)];
+        storage.setItem(SCRIPT_GENERATOR_KEY, JSON.stringify(next));
+        return { ok: true, message: "Added to Script Generator." };
       }
     } catch (error) {
       return { ok: false, message: "Could not import because the target module data is not valid JSON." };
@@ -666,6 +694,7 @@
     STORAGE_KEY,
     PROMPT_BOARD_KEY,
     THUMBNAIL_BOARD_KEY,
+    SCRIPT_GENERATOR_KEY,
     EXPORT_VERSION,
     categories,
     audiences,

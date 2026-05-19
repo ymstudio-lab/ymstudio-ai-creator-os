@@ -1,6 +1,6 @@
 # YMSTUDIO AI Creator OS
 
-Local-first AI Creator OS for prompts, shot planning, API cost tracking, YouTube scheduling, and asset management.
+Local-first AI Creator OS for prompts, scripts, shot planning, API cost tracking, YouTube scheduling, and asset management.
 
 [Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/)
 
@@ -19,6 +19,7 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | Creator Asset Manager | Organize generated images, videos, prompts, licenses, and file paths |
 | Thumbnail Idea Board | Plan thumbnail hooks, Korean overlay text, layouts, palettes, and image prompts |
 | Template Library | Use built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes |
+| Script Generator | Turn a Creator Project into hooks, outlines, scene narration, CTAs, and reusable script drafts |
 | Creator OS Dashboard | Open all modules from one local control panel |
 
 ## Creator Project Flow

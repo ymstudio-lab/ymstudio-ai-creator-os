@@ -1,0 +1,406 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f6f1;
+  --ink: #151b18;
+  --muted: #5d655f;
+  --line: #d8ddd5;
+  --panel: #ffffff;
+  --accent: #1f7568;
+  --accent-dark: #15574e;
+  --danger: #a43d32;
+  --soft: #e8f3ee;
+  --warm: #f7e7d6;
+  --shadow: 0 18px 45px rgba(24, 31, 27, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 28px;
+  align-items: end;
+  min-height: 300px;
+  padding: 54px clamp(20px, 5vw, 72px) 42px;
+  background:
+    linear-gradient(120deg, rgba(20, 69, 61, 0.9), rgba(38, 119, 105, 0.74)),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.28), transparent 30%);
+  color: #fff;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 8px 0 14px;
+  font-size: clamp(2.4rem, 6vw, 5.1rem);
+  line-height: 0.98;
+  word-break: keep-all;
+}
+
+.hero p {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.summary {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.summary strong {
+  display: block;
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.summary small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.shell {
+  width: min(1220px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 24px 0 58px;
+}
+
+.beginner-guide,
+.toolbar,
+.list-panel,
+.editor-panel,
+.preview {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.beginner-guide {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.beginner-guide strong {
+  font-size: 1.05rem;
+}
+
+.beginner-guide ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.beginner-guide li + li {
+  margin-top: 7px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 180px 160px 140px;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+  padding: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+}
+
+.favorite {
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--ink);
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.55fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.list-panel,
+.editor-panel,
+.preview {
+  padding: 18px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.actions,
+.export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button,
+.file-button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  padding: 9px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover,
+.file-button:hover {
+  background: var(--accent-dark);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.danger {
+  background: var(--danger);
+}
+
+.script-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.script-card {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+}
+
+.script-card.is-active {
+  border-color: var(--accent);
+  background: var(--soft);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-top span:last-child {
+  white-space: nowrap;
+}
+
+.card-top strong,
+.hook-line,
+p,
+li,
+h1,
+h2,
+pre {
+  overflow-wrap: break-word;
+  word-break: keep-all;
+}
+
+.meta,
+.hook-line,
+.empty {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-grid.one {
+  grid-template-columns: 1fr;
+}
+
+.form-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.editor-panel > label {
+  margin-bottom: 12px;
+}
+
+.advanced-panel {
+  margin: 4px 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbfbf8;
+}
+
+.advanced-panel summary {
+  cursor: pointer;
+  padding: 12px;
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
+.advanced-panel .form-grid,
+.advanced-panel > label {
+  padding: 0 12px 12px;
+}
+
+.preview {
+  margin-top: 16px;
+  background: #fbfbf8;
+  box-shadow: none;
+}
+
+pre {
+  min-height: 220px;
+  max-height: 440px;
+  overflow: auto;
+  margin: 0;
+  white-space: pre-wrap;
+  color: #24302a;
+}
+
+.export-actions {
+  margin-top: 16px;
+}
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  max-width: min(360px, calc(100% - 40px));
+  transform: translateY(16px);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #1f2d28;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.toast.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .board,
+  .beginner-guide,
+  .toolbar,
+  .form-grid,
+  .form-grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .summary {
+    width: min(260px, 100%);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    min-height: 250px;
+    padding: 34px 18px 28px;
+  }
+
+  .hero h1 {
+    font-size: 2.35rem;
+  }
+
+  .shell {
+    width: min(100% - 24px, 1220px);
+    padding-top: 14px;
+  }
+
+  .panel-head,
+  .card-top {
+    display: grid;
+  }
+
+  button,
+  .file-button {
+    width: 100%;
+  }
+}

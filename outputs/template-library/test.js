@@ -18,6 +18,7 @@ function testDefinitions() {
   assert.ok(State.audiences.includes("Educator"));
   assert.ok(State.audiences.includes("Small Business"));
   assert.ok(State.targetModules.includes("Creator Prompt Board"));
+  assert.ok(State.targetModules.includes("Script Generator"));
   assert.ok(State.templates.some((item) => item.audience === "Educator"));
   assert.ok(State.templates.some((item) => item.audience === "Small Business"));
 }
@@ -66,6 +67,16 @@ function testThumbnailImport() {
   assert.ok(ideas[0].prompt);
 }
 
+function testScriptGeneratorImport() {
+  const storage = memoryStorage();
+  const template = State.templates.find((item) => item.targetModule === "Script Generator");
+  const result = State.importToModule(storage, template);
+  assert.strictEqual(result.ok, true);
+  const scripts = JSON.parse(storage.getItem(State.SCRIPT_GENERATOR_KEY));
+  assert.strictEqual(scripts.length, 1);
+  assert.ok(scripts[0].hook);
+}
+
 function testImportHandlesCorruptTargetData() {
   const storage = memoryStorage();
   storage.setItem(State.PROMPT_BOARD_KEY, "{not json");
@@ -90,8 +101,9 @@ function testExportImportState() {
   testFormatTemplate,
   testPromptBoardImport,
   testThumbnailImport,
+  testScriptGeneratorImport,
   testImportHandlesCorruptTargetData,
   testExportImportState,
 ].forEach((test) => test());
 
-console.log("Passed 8 Template Library tests.");
+console.log("Passed 9 Template Library tests.");

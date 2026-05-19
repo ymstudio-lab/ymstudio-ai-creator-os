@@ -151,7 +151,7 @@ function renderDetail() {
   els.rating.value = rating;
   els.ratingValue.textContent = `${rating}/5`;
   els.saveTemplate.textContent = localState.saved.includes(template.id) ? "저장 해제" : "저장";
-  els.importTemplate.disabled = !["Creator Prompt Board", "Thumbnail Idea Board"].includes(template.targetModule);
+  els.importTemplate.disabled = !["Creator Prompt Board", "Thumbnail Idea Board", "Script Generator"].includes(template.targetModule);
 }
 
 function updateRating() {

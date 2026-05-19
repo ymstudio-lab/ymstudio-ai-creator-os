@@ -104,6 +104,20 @@
       businessUse: "Useful before a server marketplace: test which templates people save, rate, copy, and import most.",
       businessUseKo: "서버 마켓 전 단계로 사람들이 어떤 템플릿을 저장, 별점, 복사, 가져오기 하는지 먼저 검증하기 좋습니다.",
     },
+    {
+      id: "script-generator",
+      name: "Script Generator",
+      nameKo: "스크립트 생성기",
+      workflow: "Prompting",
+      workflowKo: "프롬프트",
+      status: "ready",
+      link: "../script-generator/index.html",
+      outputFolder: "../script-generator",
+      value: "Hook, outline, scene narration, CTA, short-form scripts, and reusable script drafts.",
+      valueKo: "훅, 개요, 장면 내레이션, CTA, 숏폼 대본, 반복 가능한 대본 초안을 만듭니다.",
+      businessUse: "Useful for turning a saved Creator Project into a first script draft before prompt and shot planning.",
+      businessUseKo: "저장된 Creator Project를 프롬프트와 샷 플랜 전에 바로 쓸 수 있는 첫 대본 초안으로 바꿀 때 유용합니다.",
+    },
   ];
 
   const plannedModules = [
@@ -128,17 +142,6 @@
       valueKo: "워크플로우 이름, 모델 메모, 입출력 규칙, 노드 프리셋, 반복 생성 레시피를 정리합니다.",
       reason: "Useful for creators who reuse local image/video generation pipelines.",
       reasonKo: "로컬 이미지/영상 생성 파이프라인을 반복해서 쓰는 제작자에게 유용합니다.",
-    },
-    {
-      id: "script-generator",
-      name: "Script Generator",
-      nameKo: "스크립트 생성기",
-      workflow: "Prompting",
-      workflowKo: "프롬프트",
-      value: "Hook, outline, scene narration, CTA, short-form scripts, and reusable script templates.",
-      valueKo: "훅, 개요, 장면 내레이션, CTA, 숏폼 대본, 반복 가능한 대본 템플릿을 만듭니다.",
-      reason: "Connects naturally to Prompt Board, Shot Planner, and YouTube Calendar.",
-      reasonKo: "프롬프트 보드, 샷 플래너, 유튜브 캘린더와 자연스럽게 연결됩니다.",
     },
     {
       id: "creator-dashboard-upgrade",

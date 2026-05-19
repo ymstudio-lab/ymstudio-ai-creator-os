@@ -24,6 +24,7 @@ PAGES = [
     ("asset-manager", OUTPUTS / "creator-asset-manager" / "index.html"),
     ("thumbnail-board", OUTPUTS / "thumbnail-idea-board" / "index.html"),
     ("template-library", OUTPUTS / "template-library" / "index.html"),
+    ("script-generator", OUTPUTS / "script-generator" / "index.html"),
 ]
 
 VIEWPORTS = [
@@ -85,7 +86,8 @@ def main() -> int:
                           "ymstudio.youtubeCalendar.v1",
                           "ymstudio.creatorAssetManager.v1",
                           "ymstudio.thumbnailIdeaBoard.v1",
-                          "ymstudio.templateLibrary.v1"
+                          "ymstudio.templateLibrary.v1",
+                          "ymstudio.scriptGenerator.v1"
                         ].forEach((key) => localStorage.removeItem(key));
                     }"""
                 )
