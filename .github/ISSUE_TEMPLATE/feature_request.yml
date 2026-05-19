@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest an improvement or new module idea.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest practical improvements for local-first creator workflows.
+  - type: input
+    id: module
+    attributes:
+      label: Area
+      description: Which module or workflow is this for?
+      placeholder: Dashboard, prompts, shot planning, costs, YouTube calendar, assets, new module
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What workflow problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should the app do?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional. Mention any simpler workaround or related tool.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Nice to have
+        - Important
+        - Blocking my workflow
+    validations:
+      required: true

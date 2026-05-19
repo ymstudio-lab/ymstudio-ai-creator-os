@@ -1,0 +1,52 @@
+name: Bug report
+description: Report something that is broken or confusing.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. Do not include API keys, passwords, private files, or customer personal data.
+  - type: input
+    id: module
+    attributes:
+      label: Module
+      description: Which module has the problem?
+      placeholder: Creator Prompt Board, AI Shot Planner, API Cost Tracker, YouTube Calendar, Creator Asset Manager, Dashboard
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the issue in a few sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: List the exact actions that caused the issue.
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. See ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      placeholder: Chrome, Edge, Firefox, Safari
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Screenshots are helpful if they do not reveal private information.

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Live Demo
+    url: https://ymstudio-lab.github.io/ymstudio-ai-creator-os/
+    about: Try the current public demo before opening an issue.
