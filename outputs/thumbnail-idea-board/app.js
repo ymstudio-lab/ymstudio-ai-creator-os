@@ -30,6 +30,7 @@ const els = {
   scoreValue: document.querySelector("#scoreValue"),
   favorite: document.querySelector("#favorite"),
   newIdea: document.querySelector("#newIdea"),
+  sendCalendar: document.querySelector("#sendCalendar"),
   copyPrompt: document.querySelector("#copyPrompt"),
   deleteIdea: document.querySelector("#deleteIdea"),
   exportJson: document.querySelector("#exportJson"),
@@ -154,6 +155,7 @@ function renderEditor() {
   const disabled = !idea;
   els.form.classList.toggle("is-disabled", disabled);
   els.copyPrompt.disabled = disabled;
+  els.sendCalendar.disabled = disabled;
   els.deleteIdea.disabled = disabled;
 
   if (!idea) {
@@ -241,6 +243,13 @@ async function copyPrompt() {
   }
 }
 
+function sendCalendar() {
+  const idea = getSelectedIdea();
+  if (!idea) return;
+  const result = State.sendToYouTubeCalendar(window.localStorage, idea);
+  showToast(result.message);
+}
+
 function deleteIdea() {
   const idea = getSelectedIdea();
   if (!idea) return;
@@ -316,6 +325,7 @@ function bindEvents() {
   els.form.addEventListener("input", applyFormChanges);
   els.form.addEventListener("change", applyFormChanges);
   els.newIdea.addEventListener("click", addIdea);
+  els.sendCalendar.addEventListener("click", sendCalendar);
   els.copyPrompt.addEventListener("click", copyPrompt);
   els.deleteIdea.addEventListener("click", deleteIdea);
   els.exportJson.addEventListener("click", downloadJson);

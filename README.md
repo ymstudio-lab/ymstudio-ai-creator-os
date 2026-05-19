@@ -31,6 +31,10 @@ The dashboard includes a local Creator Project profile for a single video projec
 - Project JSON export/import for local backup
 - Current project banner on module pages so each tool can reference the same project context
 - Script Generator can send scene drafts directly into AI Shot Planner without overwriting valid existing plans
+- Script Generator can also send upload ideas into YouTube Calendar
+- Thumbnail Idea Board can send thumbnail prompts into YouTube Calendar
+- AI Shot Planner can send selected shots into Creator Asset Manager
+- Dashboard progress cards show whether project, templates, scripts, shots, thumbnails, calendar items, and assets exist locally
 
 Project planning notes are kept outside the dashboard:
 

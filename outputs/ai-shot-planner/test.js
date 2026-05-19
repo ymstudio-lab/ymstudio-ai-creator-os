@@ -2,6 +2,14 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const State = require("./state.js");
 
+function memoryStorage() {
+  const data = new Map();
+  return {
+    getItem: (key) => (data.has(key) ? data.get(key) : null),
+    setItem: (key, value) => data.set(key, String(value)),
+  };
+}
+
 function testCreateSceneAndShotObjects() {
   const scene = State.createScene({ title: "Opening hook", summary: "Creator desk chaos", order: 2 });
   const shot = State.createShot({
@@ -197,6 +205,34 @@ function testLocalStoragePayloadNormalization() {
   assert.equal(loaded.shots[0].sceneId, "scene_raw");
 }
 
+function testShotToAsset() {
+  const plan = State.createPlan({
+    project: { title: "Asset Project" },
+    scenes: [State.createScene({ id: "scene_asset", title: "Asset Scene" })],
+    shots: [State.createShot({ sceneId: "scene_asset", shotNumber: "1.1", title: "Hero", prompt: "make image", tool: "Runway", assetPaths: { video: "hero.mp4" } })],
+  });
+  const asset = State.shotToAsset(plan.shots[0], plan);
+  assert.equal(asset.title, "1.1 Hero");
+  assert.equal(asset.type, "video");
+  assert.equal(asset.project, "Asset Project");
+  assert.equal(asset.filePath, "hero.mp4");
+}
+
+function testSendShotToAssetManagerMergesAssets() {
+  const storage = memoryStorage();
+  storage.setItem(State.ASSET_MANAGER_KEY, JSON.stringify({ version: 1, assets: [] }));
+  const plan = State.createPlan({
+    project: { title: "Asset Project" },
+    scenes: [State.createScene({ id: "scene_asset", title: "Asset Scene" })],
+    shots: [State.createShot({ sceneId: "scene_asset", title: "Hero", prompt: "make image" })],
+  });
+  const result = State.sendShotToAssetManager(storage, plan.shots[0], plan);
+  const state = JSON.parse(storage.getItem(State.ASSET_MANAGER_KEY));
+  assert.equal(result.ok, true);
+  assert.equal(state.assets.length, 1);
+  assert.equal(state.assets[0].project, "Asset Project");
+}
+
 function testStaticUiSmokeTargets() {
   const html = fs.readFileSync("index.html", "utf8");
   const app = fs.readFileSync("app.js", "utf8");
@@ -240,6 +276,8 @@ const tests = [
   testJsonExportImportReplaceAndMerge,
   testEmptyPlanDoesNotRestoreDemoShots,
   testLocalStoragePayloadNormalization,
+  testShotToAsset,
+  testSendShotToAssetManagerMergesAssets,
   testStaticUiSmokeTargets,
 ];
 

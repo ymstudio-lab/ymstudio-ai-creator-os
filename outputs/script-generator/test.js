@@ -93,6 +93,37 @@ function testSendToShotPlannerDoesNotOverwriteCorruptPlan() {
   assert.strictEqual(storage.getItem(State.SHOT_PLANNER_KEY), "{not json");
 }
 
+function testScriptToCalendarItem() {
+  const script = State.createScript({ title: "캘린더 대본", format: "Shorts", status: "ready", audience: "초보자", hook: "훅", cta: "구독" });
+  const item = State.scriptToCalendarItem(script, { channelName: "YMSTUDIO" });
+  assert.strictEqual(item.title, "캘린더 대본");
+  assert.strictEqual(item.format, "Shorts");
+  assert.strictEqual(item.channel, "YMSTUDIO");
+  assert.strictEqual(item.status, "scripted");
+  assert.ok(item.scriptOutline.includes("훅"));
+}
+
+function testSendToYouTubeCalendarMergesItems() {
+  const storage = memoryStorage();
+  storage.setItem(State.YOUTUBE_CALENDAR_KEY, JSON.stringify({
+    settings: { channel: "YMSTUDIO", month: "2026-05", weeklyTarget: 3 },
+    items: [{ id: "old", title: "기존", format: "Shorts", uploadDate: "2026-05-19", status: "idea" }],
+  }));
+  const result = State.sendToYouTubeCalendar(storage, State.createScript({ title: "새 업로드", scenes: ["장면"] }));
+  const state = JSON.parse(storage.getItem(State.YOUTUBE_CALENDAR_KEY));
+  assert.strictEqual(result.ok, true);
+  assert.strictEqual(state.items.length, 2);
+  assert.strictEqual(state.items[1].title, "새 업로드");
+}
+
+function testSendToYouTubeCalendarDoesNotOverwriteCorruptState() {
+  const storage = memoryStorage();
+  storage.setItem(State.YOUTUBE_CALENDAR_KEY, "{not json");
+  const result = State.sendToYouTubeCalendar(storage, State.createScript({ title: "새 업로드" }));
+  assert.strictEqual(result.ok, false);
+  assert.strictEqual(storage.getItem(State.YOUTUBE_CALENDAR_KEY), "{not json");
+}
+
 function testSummary() {
   const summary = State.getSummary(State.demoScripts.map(State.createScript));
   assert.strictEqual(summary.total, State.demoScripts.length);
@@ -122,9 +153,12 @@ function testInvalidImport() {
   testScriptToShotPlan,
   testSendToShotPlannerMergesExistingPlan,
   testSendToShotPlannerDoesNotOverwriteCorruptPlan,
+  testScriptToCalendarItem,
+  testSendToYouTubeCalendarMergesItems,
+  testSendToYouTubeCalendarDoesNotOverwriteCorruptState,
   testSummary,
   testExportImportRoundTrip,
   testInvalidImport,
 ].forEach((test) => test());
 
-console.log("Passed 12 Script Generator tests.");
+console.log("Passed 15 Script Generator tests.");

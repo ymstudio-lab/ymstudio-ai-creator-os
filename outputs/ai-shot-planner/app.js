@@ -35,6 +35,7 @@
     shotList: $("#shotList"),
     emptyState: $("#emptyState"),
     shotForm: $("#shotForm"),
+    sendAsset: $("#sendAsset"),
     deleteShot: $("#deleteShot"),
     deleteSafety: $("#deleteSafety"),
     undoDelete: $("#undoDelete"),
@@ -259,6 +260,7 @@
       element.disabled = disabled && element !== els.undoDelete;
     });
     els.deleteShot.disabled = disabled;
+    els.sendAsset.disabled = disabled;
     els.deleteSafety.hidden = !lastDeletedShot;
     if (!shot) {
       [
@@ -455,6 +457,13 @@
       selectedShotId = plan.shots.find((item) => item.sceneId === selectedSceneId)?.id || (plan.shots[0] ? plan.shots[0].id : "");
       save("Shot deleted. Undo is available.");
       render();
+    });
+
+    els.sendAsset.addEventListener("click", () => {
+      const shot = selectedShot();
+      if (!shot) return;
+      const result = State.sendShotToAssetManager(window.localStorage, shot, plan);
+      showToast(result.message);
     });
 
     els.undoDelete.addEventListener("click", () => {

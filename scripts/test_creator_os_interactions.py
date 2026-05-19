@@ -45,7 +45,9 @@ def main() -> int:
                 "ymstudio.creatorPromptBoard.v1",
                 "ymstudio.thumbnailIdeaBoard.v1",
                 "ymstudio.scriptGenerator.v1",
-                "ymstudio.aiShotPlanner.v1"
+                "ymstudio.aiShotPlanner.v1",
+                "ymstudio.youtubeCalendar.v1",
+                "ymstudio.creatorAssetManager.v1"
               ].forEach((key) => localStorage.removeItem(key));
             }"""
         )
@@ -117,12 +119,36 @@ def main() -> int:
             "name": "script_generator_send_to_shot_planner",
             "passed": len(shot_plan.get("scenes", [])) >= 1 and len(shot_plan.get("shots", [])) >= 1,
         })
+        page.click("#sendCalendar")
+        calendar_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.youtubeCalendar.v1") || "{}")""")
+        checks.append({
+            "name": "script_generator_send_to_calendar",
+            "passed": len(calendar_state.get("items", [])) >= 1 and bool(calendar_state["items"][0].get("title")),
+        })
         with page.expect_download() as script_download_info:
             page.click("#exportJson")
         script_download = script_download_info.value
         checks.append({
             "name": "script_generator_export_download",
             "passed": script_download.suggested_filename == "script-generator-state.json",
+        })
+
+        thumbnail = OUTPUTS / "thumbnail-idea-board" / "index.html"
+        page.goto(file_url(thumbnail), wait_until="networkidle")
+        page.click("#sendCalendar")
+        calendar_after_thumbnail = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.youtubeCalendar.v1") || "{}")""")
+        checks.append({
+            "name": "thumbnail_board_send_to_calendar",
+            "passed": len(calendar_after_thumbnail.get("items", [])) >= 2 and bool(calendar_after_thumbnail["items"][-1].get("thumbnailPrompts")),
+        })
+
+        shot_planner = OUTPUTS / "ai-shot-planner" / "index.html"
+        page.goto(file_url(shot_planner), wait_until="networkidle")
+        page.click("#sendAsset")
+        asset_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.creatorAssetManager.v1") || "{}")""")
+        checks.append({
+            "name": "shot_planner_send_to_asset_manager",
+            "passed": len(asset_state.get("assets", [])) >= 1 and bool(asset_state["assets"][0].get("promptText")),
         })
 
         browser.close()

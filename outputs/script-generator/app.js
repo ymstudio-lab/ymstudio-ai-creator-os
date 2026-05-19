@@ -17,6 +17,7 @@ const els = {
   fromProject: document.querySelector("#fromProject"),
   saveScript: document.querySelector("#saveScript"),
   sendShotPlanner: document.querySelector("#sendShotPlanner"),
+  sendCalendar: document.querySelector("#sendCalendar"),
   copyScript: document.querySelector("#copyScript"),
   deleteScript: document.querySelector("#deleteScript"),
   title: document.querySelector("#title"),
@@ -150,7 +151,7 @@ function renderList() {
 function renderEditor() {
   const script = selectedScript();
   const disabled = !script;
-  [els.saveScript, els.sendShotPlanner, els.copyScript, els.deleteScript].forEach((button) => {
+  [els.saveScript, els.sendShotPlanner, els.sendCalendar, els.copyScript, els.deleteScript].forEach((button) => {
     button.disabled = disabled;
   });
   if (!script) {
@@ -229,6 +230,12 @@ function sendCurrentToShotPlanner() {
   showToast(result.message);
 }
 
+function sendCurrentToCalendar() {
+  const script = readEditor();
+  const result = State.sendToYouTubeCalendar(window.localStorage, script);
+  showToast(result.message);
+}
+
 function deleteCurrent() {
   const script = selectedScript();
   if (!script) return;
@@ -287,6 +294,7 @@ function bindEvents() {
   els.fromProject.addEventListener("click", addFromProject);
   els.saveScript.addEventListener("click", saveCurrent);
   els.sendShotPlanner.addEventListener("click", sendCurrentToShotPlanner);
+  els.sendCalendar.addEventListener("click", sendCurrentToCalendar);
   els.copyScript.addEventListener("click", copyCurrent);
   els.deleteScript.addEventListener("click", deleteCurrent);
   els.exportJson.addEventListener("click", exportJson);

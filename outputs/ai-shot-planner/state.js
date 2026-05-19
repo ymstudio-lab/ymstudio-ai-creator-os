@@ -6,6 +6,7 @@
   }
 })(typeof self !== "undefined" ? self : this, function () {
   const STORAGE_KEY = "ymstudio.aiShotPlanner.v1";
+  const ASSET_MANAGER_KEY = "ymstudio.creatorAssetManager.v1";
   const EXPORT_VERSION = 1;
 
   const statusOptions = ["idea", "prompt ready", "generating", "review", "approved", "rejected"];
@@ -629,12 +630,53 @@
     storage.setItem(STORAGE_KEY, JSON.stringify(createPlan(plan)));
   }
 
+  function shotToAsset(shot, plan) {
+    const safeShot = createShot(shot);
+    const safePlan = createPlan(plan);
+    const scene = safePlan.scenes.find((item) => item.id === safeShot.sceneId);
+    return {
+      id: makeId("asset"),
+      title: `${safeShot.shotNumber} ${safeShot.title}`.trim(),
+      type: safeShot.assetPaths.video ? "video" : safeShot.assetPaths.image ? "image" : "prompt",
+      collection: scene ? scene.title : "Shot Planner",
+      project: safePlan.project.title,
+      sourceTool: safeShot.tool || "Claude",
+      tags: ["shot-plan", safeShot.status, safeShot.tool].filter(Boolean),
+      filePath: safeShot.assetPaths.video || safeShot.assetPaths.image || safeShot.assetPaths.reference || "",
+      promptText: safeShot.prompt,
+      resultNotes: [safeShot.description, safeShot.notes].filter(Boolean).join("\n"),
+      licenseNote: "Shot Planner에서 보낸 제작 자산 후보입니다. 실제 파일 사용 전 생성 도구와 라이선스를 확인하세요.",
+      status: safeShot.status === "approved" ? "approved" : "new",
+      createdDate: new Date().toISOString().slice(0, 10),
+    };
+  }
+
+  function sendShotToAssetManager(storage, shot, plan) {
+    if (!storage) return { ok: false, message: "localStorage is not available." };
+    const asset = shotToAsset(shot, plan);
+    try {
+      const raw = storage.getItem(ASSET_MANAGER_KEY);
+      if (!raw) {
+        storage.setItem(ASSET_MANAGER_KEY, JSON.stringify({ version: 1, assets: [asset] }));
+        return { ok: true, message: "Asset Manager에 샷 자산을 만들었습니다.", assets: 1 };
+      }
+      const current = JSON.parse(raw);
+      const assets = Array.isArray(current.assets) ? current.assets : [];
+      const next = { version: current.version || 1, assets: [asset].concat(assets) };
+      storage.setItem(ASSET_MANAGER_KEY, JSON.stringify(next));
+      return { ok: true, message: "Asset Manager에 샷 자산을 추가했습니다.", assets: next.assets.length };
+    } catch (error) {
+      return { ok: false, message: "기존 Asset Manager JSON을 읽지 못했습니다. 먼저 백업하거나 초기화하세요.", assets: 0 };
+    }
+  }
+
   function resetDemoPlan() {
     return createPlan({ project: demoProject, scenes: demoScenes, shots: demoShots });
   }
 
   return {
     STORAGE_KEY,
+    ASSET_MANAGER_KEY,
     EXPORT_VERSION,
     statusOptions,
     toolOptions,
@@ -654,6 +696,8 @@
     importShotPlan,
     loadPlan,
     savePlan,
+    shotToAsset,
+    sendShotToAssetManager,
     resetDemoPlan,
     normalizeStatus,
   };

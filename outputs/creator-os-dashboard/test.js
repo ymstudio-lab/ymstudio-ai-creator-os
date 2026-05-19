@@ -103,6 +103,7 @@ function testStaticUiBindings() {
     "data-project-field",
     "data-save-project",
     "data-workflow-steps",
+    "data-progress-grid",
     "ROADMAP.md",
     "PUBLISHING_CHECKLIST.md",
     "state.js",
@@ -110,7 +111,7 @@ function testStaticUiBindings() {
   ].forEach((token) => {
     assert.ok(index.includes(token), `index.html should include ${token}`);
   });
-  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile"].forEach((token) => {
+  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile", "renderProgress"].forEach((token) => {
     assert.ok(app.includes(token), `app.js should include ${token}`);
   });
   assert.ok(!app.includes("innerHTML"), "app.js should avoid unsafe raw HTML rendering");

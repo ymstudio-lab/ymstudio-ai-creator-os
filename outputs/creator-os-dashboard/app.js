@@ -17,6 +17,7 @@
     importProjectFile: document.querySelector("[data-import-project-file]"),
     projectStatus: document.querySelector("[data-project-status]"),
     workflowSteps: document.querySelector("[data-workflow-steps]"),
+    progressGrid: document.querySelector("[data-progress-grid]"),
   };
 
   const LANGUAGE_KEY = "ymstudio.creatorOS.language";
@@ -41,6 +42,16 @@
     aiTools: "Claude, ChatGPT, ComfyUI",
     folderName: "20260519-creator-workflow",
   };
+
+  const progressSources = [
+    { key: PROJECT_KEY, label: "프로젝트", href: "#", read: (data) => projectFields.filter((field) => data && data[field]).length },
+    { key: "ymstudio.templateLibrary.v1", label: "템플릿", href: "../template-library/index.html", read: (data) => data && Array.isArray(data.saved) ? data.saved.length : data && data.localState && Array.isArray(data.localState.saved) ? data.localState.saved.length : 0 },
+    { key: "ymstudio.scriptGenerator.v1", label: "대본", href: "../script-generator/index.html", read: (data) => Array.isArray(data) ? data.length : 0 },
+    { key: "ymstudio.aiShotPlanner.v1", label: "샷 플랜", href: "../ai-shot-planner/index.html", read: (data) => data && Array.isArray(data.shots) ? data.shots.length : 0 },
+    { key: "ymstudio.thumbnailIdeaBoard.v1", label: "썸네일", href: "../thumbnail-idea-board/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.ideas) ? data.ideas.length : 0 },
+    { key: "ymstudio.youtubeCalendar.v1", label: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },
+    { key: "ymstudio.creatorAssetManager.v1", label: "자산", href: "../creator-asset-manager/index.html", read: (data) => data && Array.isArray(data.assets) ? data.assets.length : 0 },
+  ];
 
   function getLanguage() {
     return localStorage.getItem(LANGUAGE_KEY) || "ko";
@@ -86,6 +97,7 @@
     };
     localStorage.setItem(PROJECT_KEY, JSON.stringify(payload));
     renderProject();
+    if (elements.progressGrid) renderProgress();
     return payload;
   }
 
@@ -123,6 +135,29 @@
         return item;
       })
     );
+  }
+
+  function readStorageJson(key) {
+    try {
+      return JSON.parse(localStorage.getItem(key) || "null");
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function renderProgress() {
+    const cards = progressSources.map((source) => {
+      const count = source.read(readStorageJson(source.key));
+      const card = document.createElement("a");
+      card.href = source.href;
+      card.className = "progress-card" + (count > 0 ? " is-started" : "");
+      card.append(
+        createTextElement("strong", "", source.label),
+        createTextElement("span", "", count > 0 ? `${count}개 저장됨` : "아직 없음")
+      );
+      return card;
+    });
+    elements.progressGrid.replaceChildren(...cards);
   }
 
   function downloadProject() {
@@ -261,6 +296,7 @@
     renderPlannedModules();
     renderProject();
     renderWorkflowSteps();
+    renderProgress();
     applyFilters();
   }
 

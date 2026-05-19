@@ -6,6 +6,7 @@
   root.ThumbnailIdeaBoardState = state;
 })(typeof globalThis !== "undefined" ? globalThis : window, function () {
   const STORAGE_KEY = "ymstudio.thumbnailIdeaBoard.v1";
+  const YOUTUBE_CALENDAR_KEY = "ymstudio.youtubeCalendar.v1";
   const EXPORT_VERSION = 1;
 
   const formatOptions = ["YouTube Long", "YouTube Shorts", "Course", "Product", "Community"];
@@ -223,8 +224,52 @@
     throw new Error("Invalid thumbnail idea export");
   }
 
+  function ideaToCalendarItem(idea) {
+    const safeIdea = createIdea(idea);
+    return {
+      id: makeId().replace("thumb_", "yt_"),
+      title: safeIdea.title,
+      format: safeIdea.format === "YouTube Shorts" ? "Shorts" : "long-form",
+      channel: "YMSTUDIO AI",
+      niche: safeIdea.subject || "Thumbnail test",
+      uploadDate: new Date().toISOString().slice(0, 10),
+      status: safeIdea.status === "ready" ? "assets ready" : "idea",
+      scriptOutline: safeIdea.subject,
+      titleVariants: [safeIdea.title, safeIdea.overlayText].filter(Boolean),
+      thumbnailPrompts: [safeIdea.prompt].filter(Boolean),
+      tools: ["Thumbnail Idea Board"],
+      performanceNotes: [safeIdea.overlayText, safeIdea.palette, safeIdea.notes].filter(Boolean).join("\n"),
+    };
+  }
+
+  function sendToYouTubeCalendar(storage, idea) {
+    if (!storage) return { ok: false, message: "localStorage를 사용할 수 없습니다." };
+    const item = ideaToCalendarItem(idea);
+    try {
+      const raw = storage.getItem(YOUTUBE_CALENDAR_KEY);
+      if (!raw) {
+        storage.setItem(YOUTUBE_CALENDAR_KEY, JSON.stringify({
+          settings: { channel: item.channel, month: item.uploadDate.slice(0, 7), weeklyTarget: 5 },
+          items: [item],
+        }));
+        return { ok: true, message: "캘린더에 썸네일 기반 업로드 아이디어를 만들었습니다.", items: 1 };
+      }
+      const current = JSON.parse(raw);
+      const items = Array.isArray(current.items) ? current.items : [];
+      const next = {
+        settings: current.settings || { channel: item.channel, month: item.uploadDate.slice(0, 7), weeklyTarget: 5 },
+        items: items.concat(item),
+      };
+      storage.setItem(YOUTUBE_CALENDAR_KEY, JSON.stringify(next));
+      return { ok: true, message: "캘린더에 썸네일 프롬프트를 추가했습니다.", items: next.items.length };
+    } catch (error) {
+      return { ok: false, message: "기존 캘린더 JSON을 읽지 못했습니다. 캘린더에서 먼저 백업하거나 초기화하세요.", items: 0 };
+    }
+  }
+
   return {
     STORAGE_KEY,
+    YOUTUBE_CALENDAR_KEY,
     EXPORT_VERSION,
     formatOptions,
     statusOptions,
@@ -240,5 +285,7 @@
     saveIdeas,
     exportIdeas,
     parseIdeaImport,
+    ideaToCalendarItem,
+    sendToYouTubeCalendar,
   };
 });
