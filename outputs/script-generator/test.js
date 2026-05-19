@@ -1,6 +1,14 @@
 const assert = require("assert");
 const State = require("./state.js");
 
+function memoryStorage() {
+  const data = new Map();
+  return {
+    getItem: (key) => (data.has(key) ? data.get(key) : null),
+    setItem: (key, value) => data.set(key, String(value)),
+  };
+}
+
 function testCreateScriptDefaults() {
   const script = State.createScript({ title: "  Test  ", format: "bad", status: "bad" });
   assert.strictEqual(script.title, "Test");
@@ -51,6 +59,40 @@ function testBuildFromProject() {
   assert.ok(script.audience.includes("초보자"));
 }
 
+function testScriptToShotPlan() {
+  const script = State.createScript({ title: "대본", scenes: ["첫 장면", "둘째 장면"], hook: "시작", cta: "저장" });
+  const plan = State.scriptToShotPlan(script);
+  assert.strictEqual(plan.project.title, "대본");
+  assert.strictEqual(plan.scenes.length, 2);
+  assert.strictEqual(plan.shots.length, 2);
+  assert.strictEqual(plan.shots[0].sceneId, plan.scenes[0].id);
+}
+
+function testSendToShotPlannerMergesExistingPlan() {
+  const storage = memoryStorage();
+  storage.setItem(State.SHOT_PLANNER_KEY, JSON.stringify({
+    version: 1,
+    project: { title: "기존 계획" },
+    scenes: [{ id: "scene_old", title: "기존", summary: "", location: "", order: 1 }],
+    shots: [],
+  }));
+  const result = State.sendToShotPlanner(storage, State.createScript({ title: "새 대본", scenes: ["새 장면"] }));
+  const plan = JSON.parse(storage.getItem(State.SHOT_PLANNER_KEY));
+  assert.strictEqual(result.ok, true);
+  assert.strictEqual(plan.project.title, "기존 계획");
+  assert.strictEqual(plan.scenes.length, 2);
+  assert.strictEqual(plan.shots.length, 1);
+  assert.strictEqual(plan.scenes[1].order, 2);
+}
+
+function testSendToShotPlannerDoesNotOverwriteCorruptPlan() {
+  const storage = memoryStorage();
+  storage.setItem(State.SHOT_PLANNER_KEY, "{not json");
+  const result = State.sendToShotPlanner(storage, State.createScript({ title: "새 대본", scenes: ["새 장면"] }));
+  assert.strictEqual(result.ok, false);
+  assert.strictEqual(storage.getItem(State.SHOT_PLANNER_KEY), "{not json");
+}
+
 function testSummary() {
   const summary = State.getSummary(State.demoScripts.map(State.createScript));
   assert.strictEqual(summary.total, State.demoScripts.length);
@@ -77,9 +119,12 @@ function testInvalidImport() {
   testUpdatePreservesIdentity,
   testFormatScript,
   testBuildFromProject,
+  testScriptToShotPlan,
+  testSendToShotPlannerMergesExistingPlan,
+  testSendToShotPlannerDoesNotOverwriteCorruptPlan,
   testSummary,
   testExportImportRoundTrip,
   testInvalidImport,
 ].forEach((test) => test());
 
-console.log("Passed 9 Script Generator tests.");
+console.log("Passed 12 Script Generator tests.");

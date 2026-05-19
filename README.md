@@ -30,6 +30,7 @@ The dashboard includes a local Creator Project profile for a single video projec
 - Guided workflow from topic setup to template selection, prompt storage, shot planning, thumbnail planning, upload planning, asset notes, and cost tracking
 - Project JSON export/import for local backup
 - Current project banner on module pages so each tool can reference the same project context
+- Script Generator can send scene drafts directly into AI Shot Planner without overwriting valid existing plans
 
 Project planning notes are kept outside the dashboard:
 

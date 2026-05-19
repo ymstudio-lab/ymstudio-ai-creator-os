@@ -16,6 +16,7 @@ const els = {
   newScript: document.querySelector("#newScript"),
   fromProject: document.querySelector("#fromProject"),
   saveScript: document.querySelector("#saveScript"),
+  sendShotPlanner: document.querySelector("#sendShotPlanner"),
   copyScript: document.querySelector("#copyScript"),
   deleteScript: document.querySelector("#deleteScript"),
   title: document.querySelector("#title"),
@@ -149,7 +150,7 @@ function renderList() {
 function renderEditor() {
   const script = selectedScript();
   const disabled = !script;
-  [els.saveScript, els.copyScript, els.deleteScript].forEach((button) => {
+  [els.saveScript, els.sendShotPlanner, els.copyScript, els.deleteScript].forEach((button) => {
     button.disabled = disabled;
   });
   if (!script) {
@@ -222,6 +223,12 @@ async function copyCurrent() {
   }
 }
 
+function sendCurrentToShotPlanner() {
+  const script = readEditor();
+  const result = State.sendToShotPlanner(window.localStorage, script);
+  showToast(result.message);
+}
+
 function deleteCurrent() {
   const script = selectedScript();
   if (!script) return;
@@ -279,6 +286,7 @@ function bindEvents() {
   els.newScript.addEventListener("click", addNewScript);
   els.fromProject.addEventListener("click", addFromProject);
   els.saveScript.addEventListener("click", saveCurrent);
+  els.sendShotPlanner.addEventListener("click", sendCurrentToShotPlanner);
   els.copyScript.addEventListener("click", copyCurrent);
   els.deleteScript.addEventListener("click", deleteCurrent);
   els.exportJson.addEventListener("click", exportJson);

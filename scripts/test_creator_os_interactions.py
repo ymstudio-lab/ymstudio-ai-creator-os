@@ -44,7 +44,8 @@ def main() -> int:
                 "ymstudio.templateLibrary.v1",
                 "ymstudio.creatorPromptBoard.v1",
                 "ymstudio.thumbnailIdeaBoard.v1",
-                "ymstudio.scriptGenerator.v1"
+                "ymstudio.scriptGenerator.v1",
+                "ymstudio.aiShotPlanner.v1"
               ].forEach((key) => localStorage.removeItem(key));
             }"""
         )
@@ -109,6 +110,12 @@ def main() -> int:
         checks.append({
             "name": "script_generator_from_project",
             "passed": len(script_state) >= 1 and bool(script_state[0].get("hook")),
+        })
+        page.click("#sendShotPlanner")
+        shot_plan = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.aiShotPlanner.v1") || "{}")""")
+        checks.append({
+            "name": "script_generator_send_to_shot_planner",
+            "passed": len(shot_plan.get("scenes", [])) >= 1 and len(shot_plan.get("shots", [])) >= 1,
         })
         with page.expect_download() as script_download_info:
             page.click("#exportJson")

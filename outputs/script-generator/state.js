@@ -7,6 +7,7 @@
 })(typeof globalThis !== "undefined" ? globalThis : window, function () {
   const STORAGE_KEY = "ymstudio.scriptGenerator.v1";
   const PROJECT_KEY = "ymstudio.creatorProject.v1";
+  const SHOT_PLANNER_KEY = "ymstudio.aiShotPlanner.v1";
   const EXPORT_VERSION = 1;
 
   const formats = ["YouTube Long", "Shorts", "Tutorial", "Product Demo", "Course Lesson"];
@@ -65,6 +66,10 @@
 
   function makeId() {
     return "script_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
+  }
+
+  function makeLinkedId(prefix) {
+    return prefix + "_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 8);
   }
 
   function normalizeChoice(value, options, fallback) {
@@ -171,6 +176,79 @@
     return lines.join("\n");
   }
 
+  function scriptToShotPlan(script) {
+    const safeScript = createScript(script);
+    const scenes = (safeScript.scenes.length ? safeScript.scenes : [safeScript.hook || safeScript.title]).map((sceneText, index) => {
+      const sceneId = makeLinkedId("scene");
+      return {
+        id: sceneId,
+        title: sceneText.slice(0, 60) || `장면 ${index + 1}`,
+        summary: sceneText,
+        location: "",
+        order: index + 1,
+      };
+    });
+    const shots = scenes.map((scene, index) => ({
+      id: makeLinkedId("shot"),
+      sceneId: scene.id,
+      shotNumber: `${index + 1}.1`,
+      title: scene.title,
+      description: scene.summary,
+      prompt: [safeScript.hook, scene.summary, safeScript.cta].filter(Boolean).join("\n"),
+      tool: "Claude",
+      model: "Script Generator draft",
+      status: "idea",
+      duration: "",
+      assetPaths: { image: "", video: "", reference: "" },
+      continuity: { character: "", outfit: "", location: "", mood: safeScript.tone, cameraStyle: "" },
+      notes: safeScript.notes || "Script Generator에서 보낸 장면 초안입니다.",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }));
+    return {
+      version: 1,
+      project: {
+        title: safeScript.title,
+        goal: safeScript.goal,
+        format: safeScript.format,
+        audience: safeScript.audience,
+        continuity: { character: "", outfit: "", location: "", mood: safeScript.tone, cameraStyle: "" },
+      },
+      scenes,
+      shots,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  function sendToShotPlanner(storage, script) {
+    if (!storage) return { ok: false, message: "localStorage를 사용할 수 없습니다." };
+    const incoming = scriptToShotPlan(script);
+    try {
+      const raw = storage.getItem(SHOT_PLANNER_KEY);
+      if (!raw) {
+        storage.setItem(SHOT_PLANNER_KEY, JSON.stringify(incoming));
+        return { ok: true, message: "샷 플래너에 새 계획을 만들었습니다.", scenes: incoming.scenes.length, shots: incoming.shots.length };
+      }
+      const current = JSON.parse(raw);
+      const currentScenes = Array.isArray(current.scenes) ? current.scenes : [];
+      const currentShots = Array.isArray(current.shots) ? current.shots : [];
+      const maxOrder = currentScenes.reduce((highest, scene) => Math.max(highest, Number(scene.order) || 0), 0);
+      const scenes = incoming.scenes.map((scene, index) => ({ ...scene, order: maxOrder + index + 1 }));
+      const next = {
+        ...current,
+        version: current.version || 1,
+        project: current.project || incoming.project,
+        scenes: currentScenes.concat(scenes),
+        shots: currentShots.concat(incoming.shots),
+        updatedAt: new Date().toISOString(),
+      };
+      storage.setItem(SHOT_PLANNER_KEY, JSON.stringify(next));
+      return { ok: true, message: "샷 플래너에 장면을 추가했습니다.", scenes: scenes.length, shots: incoming.shots.length };
+    } catch (error) {
+      return { ok: false, message: "기존 샷 플랜 JSON을 읽지 못했습니다. 샷 플래너에서 먼저 백업하거나 초기화하세요.", scenes: 0, shots: 0 };
+    }
+  }
+
   function buildFromProject(project) {
     const source = project || {};
     const topic = String(source.videoTopic || "").trim() || "새 영상 주제";
@@ -255,6 +333,7 @@
   return {
     STORAGE_KEY,
     PROJECT_KEY,
+    SHOT_PLANNER_KEY,
     EXPORT_VERSION,
     formats,
     tones,
@@ -264,6 +343,8 @@
     updateScript,
     filterScripts,
     formatScript,
+    scriptToShotPlan,
+    sendToShotPlanner,
     buildFromProject,
     getSummary,
     loadProject,

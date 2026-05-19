@@ -156,6 +156,17 @@
     },
   ];
 
+  const launchpadOrder = [
+    "template-library",
+    "script-generator",
+    "creator-prompt-board",
+    "ai-shot-planner",
+    "thumbnail-idea-board",
+    "youtube-calendar",
+    "creator-asset-manager",
+    "api-cost-tracker",
+  ];
+
   const githubChecklist = [
     { en: "Confirm each module opens from its local index.html.", ko: "각 모듈이 로컬 index.html에서 정상적으로 열리는지 확인합니다." },
     { en: "Review README and usage docs for public wording.", ko: "README와 사용 문서의 공개용 문구를 확인합니다." },
@@ -309,7 +320,7 @@
         module.businessUseKo,
       ].join(" ").toLowerCase();
       return matchesWorkflow && (!normalizedQuery || searchableText.includes(normalizedQuery));
-    }).map((module) => localizeModule(module, language));
+    }).sort((a, b) => launchpadOrder.indexOf(a.id) - launchpadOrder.indexOf(b.id)).map((module) => localizeModule(module, language));
   }
 
   function getStatusSummary(items) {

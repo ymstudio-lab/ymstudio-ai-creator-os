@@ -32,6 +32,19 @@ function testLinksExist() {
 function testWorkflowFiltering() {
   assert.strictEqual(state.filterModules("", "All").length, 8);
   assert.deepStrictEqual(
+    state.filterModules("", "All").map((module) => module.id),
+    [
+      "template-library",
+      "script-generator",
+      "creator-prompt-board",
+      "ai-shot-planner",
+      "thumbnail-idea-board",
+      "youtube-calendar",
+      "creator-asset-manager",
+      "api-cost-tracker",
+    ]
+  );
+  assert.deepStrictEqual(
     state.filterModules("", "Publishing").map((module) => module.id).sort(),
     ["thumbnail-idea-board", "youtube-calendar"]
   );
