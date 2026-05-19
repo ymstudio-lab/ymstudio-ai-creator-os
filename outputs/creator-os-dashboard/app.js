@@ -34,10 +34,11 @@
     { title: "1단계: 주제 입력", detail: "Creator Project에 채널, 주제, 타깃, 목적을 먼저 저장합니다.", href: "#", label: "현재 화면" },
     { title: "2단계: 훅 고르기", detail: "Template Library에서 일반 영상/AI 영상에 맞는 훅 템플릿을 고릅니다.", href: "../template-library/index.html", label: "템플릿 열기" },
     { title: "3단계: 프롬프트 저장", detail: "쓸 만한 프롬프트와 대본 구조를 Prompt Board에 저장합니다.", href: "../creator-prompt-board/index.html", label: "프롬프트 열기" },
-    { title: "4단계: 샷 나누기", detail: "Shot Planner에서 장면, 컷, 생성 프롬프트, 촬영 메모를 나눕니다.", href: "../ai-shot-planner/index.html", label: "샷 플랜 열기" },
-    { title: "5단계: 썸네일 후보 만들기", detail: "Thumbnail Idea Board에서 제목과 썸네일 방향을 비교합니다.", href: "../thumbnail-idea-board/index.html", label: "썸네일 열기" },
-    { title: "6단계: 업로드 계획", detail: "YouTube Calendar에 일정과 업로드 후 리뷰 메모를 남깁니다.", href: "../youtube-calendar/index.html", label: "캘린더 열기" },
-    { title: "7단계: 자산/비용 정리", detail: "Asset Manager와 Cost Tracker에 파일, 라이선스, 사용 비용을 기록합니다.", href: "../creator-asset-manager/index.html", label: "자산 열기" },
+    { title: "4단계: ComfyUI 레시피 선택", detail: "내 PC 성능에 맞는 모델, 해상도, steps, batch, 실패 수정법을 저장합니다.", href: "../comfyui-workflow-manager/index.html", label: "ComfyUI 열기" },
+    { title: "5단계: 샷 나누기", detail: "Shot Planner에서 장면, 컷, 생성 프롬프트, 촬영 메모를 나눕니다.", href: "../ai-shot-planner/index.html", label: "샷 플랜 열기" },
+    { title: "6단계: 썸네일 후보 만들기", detail: "Thumbnail Idea Board에서 제목과 썸네일 방향을 비교합니다.", href: "../thumbnail-idea-board/index.html", label: "썸네일 열기" },
+    { title: "7단계: 업로드 계획", detail: "YouTube Calendar에 일정과 업로드 후 리뷰 메모를 남깁니다.", href: "../youtube-calendar/index.html", label: "캘린더 열기" },
+    { title: "8단계: 자산/비용 정리", detail: "Asset Manager와 Cost Tracker에 파일, 라이선스, 사용 비용을 기록합니다.", href: "../creator-asset-manager/index.html", label: "자산 열기" },
   ];
   const sampleProject = {
     channelName: "YMSTUDIO",
@@ -54,6 +55,7 @@
     { key: PROJECT_KEY, label: "프로젝트", href: "#", read: (data) => projectFields.filter((field) => data && data[field]).length },
     { key: "ymstudio.templateLibrary.v1", label: "템플릿", href: "../template-library/index.html", read: (data) => data && Array.isArray(data.saved) ? data.saved.length : data && data.localState && Array.isArray(data.localState.saved) ? data.localState.saved.length : 0 },
     { key: "ymstudio.scriptGenerator.v1", label: "대본", href: "../script-generator/index.html", read: (data) => Array.isArray(data) ? data.length : 0 },
+    { key: "ymstudio.comfyWorkflowManager.v1", label: "ComfyUI", href: "../comfyui-workflow-manager/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.workflows) ? data.workflows.length : 0 },
     { key: "ymstudio.aiShotPlanner.v1", label: "샷 플랜", href: "../ai-shot-planner/index.html", read: (data) => data && Array.isArray(data.shots) ? data.shots.length : 0 },
     { key: "ymstudio.thumbnailIdeaBoard.v1", label: "썸네일", href: "../thumbnail-idea-board/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.ideas) ? data.ideas.length : 0 },
     { key: "ymstudio.youtubeCalendar.v1", label: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },

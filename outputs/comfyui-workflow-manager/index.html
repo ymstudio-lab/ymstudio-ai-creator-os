@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YMSTUDIO ComfyUI Workflow Manager</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">YMSTUDIO Creator OS</p>
+        <h1>ComfyUI 워크플로우 매니저</h1>
+        <p>프롬프트, 모델, 해상도, step, batch, 실패 수정 메모를 레시피 카드로 저장해서 내 PC 성능에 맞게 반복 생성 흐름을 관리합니다.</p>
+      </div>
+      <div class="summary">
+        <strong data-total>0</strong>
+        <span>recipes</span>
+        <small data-summary>stable 0 · favorite 0</small>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="beginner-guide" aria-label="처음 쓰는 순서">
+        <strong>처음 쓰는 순서</strong>
+        <ol>
+          <li>대시보드의 내 작업 환경 체크에서 저사양, 중간, 고사양 방향을 먼저 고릅니다.</li>
+          <li>프로젝트로 레시피 만들기를 눌러 현재 영상에 맞는 ComfyUI 설정 초안을 만듭니다.</li>
+          <li>해상도, step, batch, 실패 수정 메모를 저장하고 Export JSON으로 백업합니다.</li>
+        </ol>
+      </section>
+
+      <section class="toolbar" aria-label="ComfyUI workflow filters">
+        <label>
+          검색
+          <input id="search" type="search" placeholder="예: 썸네일, 저사양, Flux, 업스케일">
+        </label>
+        <label>
+          유형
+          <select id="typeFilter"></select>
+        </label>
+        <label>
+          권장 환경
+          <select id="tierFilter"></select>
+        </label>
+        <label class="check">
+          <input id="favoriteOnly" type="checkbox">
+          즐겨찾기만
+        </label>
+      </section>
+
+      <section class="board">
+        <aside class="list-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Recipes</p>
+              <h2>워크플로우 목록</h2>
+            </div>
+            <span id="count">0</span>
+          </div>
+          <div class="actions">
+            <button id="newWorkflow" type="button">새 레시피</button>
+            <button id="fromProject" type="button">프로젝트로 레시피 만들기</button>
+          </div>
+          <div id="workflowList" class="workflow-list"></div>
+          <p id="emptyState" class="empty" hidden>현재 필터와 일치하는 레시피가 없습니다.</p>
+        </aside>
+
+        <section class="editor-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Editor</p>
+              <h2>레시피 편집</h2>
+            </div>
+            <div class="actions">
+              <button id="saveWorkflow" type="button">저장</button>
+              <button id="copyWorkflow" type="button">복사</button>
+              <button id="deleteWorkflow" class="danger" type="button">삭제</button>
+            </div>
+          </div>
+
+          <div class="form-grid one">
+            <label>워크플로우 이름<input id="name" type="text"></label>
+          </div>
+          <div class="form-grid four">
+            <label>유형<select id="type"></select></label>
+            <label>권장 환경<select id="tier"></select></label>
+            <label>상태<select id="status"></select></label>
+            <label>모델/도구<input id="model" type="text" placeholder="예: SDXL, Flux, RunComfy"></label>
+          </div>
+          <div class="form-grid three">
+            <label>해상도<input id="size" type="text" placeholder="예: 768x768"></label>
+            <label>Steps<input id="steps" type="number" min="0"></label>
+            <label>Batch<input id="batch" type="number" min="0"></label>
+          </div>
+
+          <label>Positive Prompt<textarea id="positive" rows="4"></textarea></label>
+          <label>Negative Prompt<textarea id="negative" rows="3"></textarea></label>
+
+          <details class="advanced-panel" open>
+            <summary>입출력, 속도, 실패 수정 메모</summary>
+            <div class="form-grid two">
+              <label>입력 규칙<textarea id="inputs" rows="3"></textarea></label>
+              <label>출력 메모<textarea id="outputs" rows="3"></textarea></label>
+            </div>
+            <div class="form-grid two">
+              <label>컨텍스트 설정<textarea id="context" rows="3"></textarea></label>
+              <label>속도/성능 메모<textarea id="speed" rows="3"></textarea></label>
+            </div>
+            <label>노드 프리셋 메모<textarea id="nodeNotes" rows="3"></textarea></label>
+            <label>실패 시 수정법<textarea id="failureFixes" rows="3"></textarea></label>
+            <label class="check favorite">
+              <input id="favorite" type="checkbox">
+              중요한 레시피로 표시
+            </label>
+          </details>
+
+          <article class="preview">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Preview</p>
+                <h2>복사용 레시피</h2>
+              </div>
+            </div>
+            <pre id="preview"></pre>
+          </article>
+
+          <div class="export-actions">
+            <button id="exportJson" type="button">Export JSON</button>
+            <label class="file-button">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json,.json" hidden>
+            </label>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../i18n-lite.js"></script>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

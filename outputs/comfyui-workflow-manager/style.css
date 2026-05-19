@@ -1,0 +1,398 @@
+:root {
+  color-scheme: light;
+  --bg: #f7f6f1;
+  --ink: #151b18;
+  --muted: #5d655f;
+  --line: #d8ddd5;
+  --panel: #ffffff;
+  --accent: #1f7568;
+  --accent-dark: #15574e;
+  --danger: #a43d32;
+  --soft: #e8f3ee;
+  --shadow: 0 18px 45px rgba(24, 31, 27, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 28px;
+  align-items: end;
+  min-height: 300px;
+  padding: 54px clamp(20px, 5vw, 72px) 42px;
+  background:
+    linear-gradient(120deg, rgba(20, 69, 61, 0.9), rgba(38, 119, 105, 0.74)),
+    radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.28), transparent 30%);
+  color: #fff;
+}
+
+.hero h1 {
+  max-width: 900px;
+  margin: 8px 0 14px;
+  font-size: clamp(2.4rem, 6vw, 5.1rem);
+  line-height: 0.98;
+  word-break: keep-all;
+}
+
+.hero p {
+  max-width: 780px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.summary {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.summary strong {
+  display: block;
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.summary small {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.shell {
+  width: min(1220px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 24px 0 58px;
+}
+
+.beginner-guide,
+.toolbar,
+.list-panel,
+.editor-panel,
+.preview {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.beginner-guide {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.beginner-guide strong {
+  font-size: 1.05rem;
+}
+
+.beginner-guide ol {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.beginner-guide li + li {
+  margin-top: 7px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 180px 190px 140px;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 18px;
+  padding: 16px;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+}
+
+.favorite {
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: #fff;
+  color: var(--ink);
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1.6fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.list-panel,
+.editor-panel,
+.preview {
+  padding: 18px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.actions,
+.export-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button,
+.file-button {
+  min-height: 40px;
+  border: 0;
+  border-radius: 6px;
+  padding: 9px 12px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover,
+.file-button:hover {
+  background: var(--accent-dark);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.danger {
+  background: var(--danger);
+}
+
+.workflow-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.workflow-card {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  min-height: auto;
+  border: 1px solid var(--line);
+  padding: 12px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+}
+
+.workflow-card.is-active {
+  border-color: var(--accent);
+  background: var(--soft);
+}
+
+.card-top,
+.meta,
+.hook-line {
+  display: block;
+}
+
+.card-top {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.card-top span {
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.meta,
+.hook-line {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-grid.one {
+  grid-template-columns: 1fr;
+}
+
+.form-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.form-grid.four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.advanced-panel {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fbfbf8;
+}
+
+.advanced-panel summary {
+  cursor: pointer;
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+
+.advanced-panel summary + * {
+  margin-top: 12px;
+}
+
+.preview {
+  margin-top: 16px;
+}
+
+pre {
+  overflow: auto;
+  max-height: 420px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+.export-actions {
+  margin-top: 14px;
+}
+
+.empty {
+  color: var(--muted);
+}
+
+.toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  max-width: min(360px, calc(100% - 36px));
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: var(--ink);
+  color: #fff;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1040px) {
+  .toolbar,
+  .board,
+  .form-grid.four {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid.two,
+  .form-grid.three {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero,
+  .beginner-guide {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: 360px;
+  }
+
+  .shell {
+    width: min(100% - 28px, 1220px);
+  }
+
+  .panel-head {
+    display: grid;
+  }
+}

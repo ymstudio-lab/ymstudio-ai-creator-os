@@ -20,6 +20,7 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | Thumbnail Idea Board | Plan thumbnail hooks, Korean overlay text, layouts, palettes, and image prompts |
 | Template Library | Use built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes |
 | Script Generator | Turn a Creator Project into hooks, outlines, scene narration, CTAs, and reusable script drafts |
+| ComfyUI Workflow Manager | Save reusable local generation recipes for models, resolution, steps, batch, prompts, and failure fixes |
 | Creator OS Dashboard | Open all modules from one local control panel |
 
 ## Creator Project Flow
@@ -32,6 +33,7 @@ The dashboard includes a local Creator Project profile for a single video projec
 - Current project banner on module pages so each tool can reference the same project context
 - Script Generator can send scene drafts directly into AI Shot Planner without overwriting valid existing plans
 - Script Generator can also send upload ideas into YouTube Calendar
+- ComfyUI Workflow Manager can turn the saved Creator Project into a local generation recipe
 - Thumbnail Idea Board can send thumbnail prompts into YouTube Calendar
 - AI Shot Planner can send selected shots into Creator Asset Manager
 - Dashboard progress cards show whether project, templates, scripts, shots, thumbnails, calendar items, and assets exist locally

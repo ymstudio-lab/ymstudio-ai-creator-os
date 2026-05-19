@@ -9,6 +9,7 @@
     "YouTube Calendar": "유튜브 캘린더",
     "Creator Asset Manager": "크리에이터 자산 매니저",
     "Thumbnail Idea Board": "썸네일 아이디어 보드",
+    "ComfyUI Workflow Manager": "ComfyUI 워크플로우 매니저",
     "Search": "검색",
     "Tool": "도구",
     "Category": "카테고리",
@@ -197,12 +198,12 @@
         "이미지 생성 프롬프트를 복사하거나 JSON으로 백업합니다.",
       ],
     },
-    "template-library": {
-      title: "泥섏쓬 ?곕뒗 ?쒖꽌",
+    "comfyui-workflow-manager": {
+      title: "처음 쓰는 순서",
       steps: [
-        "필터로 필요한 영상 제작 템플릿을 찾습니다.",
-        "자주 쓸 템플릿은 저장하거나 별점을 남깁니다.",
-        "복사하거나 지원되는 모듈로 가져와서 실제 작업에 맞게 수정합니다.",
+        "대시보드의 내 작업 환경 체크에서 저사양, 중간, 고사양 방향을 먼저 고릅니다.",
+        "프로젝트로 레시피 만들기를 눌러 현재 영상에 맞는 ComfyUI 설정 초안을 만듭니다.",
+        "해상도, step, batch, 실패 수정 메모를 저장하고 Export JSON으로 백업합니다.",
       ],
     },
   };
@@ -255,7 +256,7 @@
   }
 
   function ensureBeginnerGuide() {
-    if (document.querySelector(".ym-beginner-guide")) return;
+    if (document.querySelector(".ym-beginner-guide, .beginner-guide")) return;
     const copy = beginnerCopy[currentAppKey()];
     if (!copy || getLanguage() !== "ko") return;
     const guide = document.createElement("aside");

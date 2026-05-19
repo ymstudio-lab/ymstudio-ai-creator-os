@@ -45,6 +45,7 @@ def main() -> int:
                 "ymstudio.creatorPromptBoard.v1",
                 "ymstudio.thumbnailIdeaBoard.v1",
                 "ymstudio.scriptGenerator.v1",
+                "ymstudio.comfyWorkflowManager.v1",
                 "ymstudio.aiShotPlanner.v1",
                 "ymstudio.youtubeCalendar.v1",
                 "ymstudio.creatorAssetManager.v1"
@@ -144,6 +145,22 @@ def main() -> int:
         checks.append({
             "name": "script_generator_export_download",
             "passed": script_download.suggested_filename == "script-generator-state.json",
+        })
+
+        comfy_manager = OUTPUTS / "comfyui-workflow-manager" / "index.html"
+        page.goto(file_url(comfy_manager), wait_until="networkidle")
+        page.click("#fromProject")
+        comfy_state = page.evaluate("""() => JSON.parse(localStorage.getItem("ymstudio.comfyWorkflowManager.v1") || "[]")""")
+        checks.append({
+            "name": "comfy_workflow_from_project",
+            "passed": len(comfy_state) >= 1 and bool(comfy_state[0].get("positive")) and bool(comfy_state[0].get("failureFixes")),
+        })
+        with page.expect_download() as comfy_download_info:
+            page.click("#exportJson")
+        comfy_download = comfy_download_info.value
+        checks.append({
+            "name": "comfy_workflow_export_download",
+            "passed": comfy_download.suggested_filename == "comfyui-workflow-manager-state.json",
         })
 
         thumbnail = OUTPUTS / "thumbnail-idea-board" / "index.html"

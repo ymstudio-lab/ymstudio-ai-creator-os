@@ -118,6 +118,20 @@
       businessUse: "Useful for turning a saved Creator Project into a first script draft before prompt and shot planning.",
       businessUseKo: "저장된 Creator Project를 프롬프트와 샷 플랜 전에 바로 쓸 수 있는 첫 대본 초안으로 바꿀 때 유용합니다.",
     },
+    {
+      id: "comfyui-workflow-manager",
+      name: "ComfyUI Workflow Manager",
+      nameKo: "ComfyUI 워크플로우 매니저",
+      workflow: "Automation",
+      workflowKo: "자동화",
+      status: "ready",
+      link: "../comfyui-workflow-manager/index.html",
+      outputFolder: "../comfyui-workflow-manager",
+      value: "Reusable local generation recipes for model notes, resolution, steps, batch, prompts, and failure fixes.",
+      valueKo: "모델 메모, 해상도, steps, batch, 프롬프트, 실패 수정법을 반복 생성 레시피로 저장합니다.",
+      businessUse: "Useful for ComfyUI recipe packs, local setup guides, and creator workflow consulting.",
+      businessUseKo: "ComfyUI 레시피 묶음, 로컬 셋업 가이드, 제작 워크플로우 컨설팅으로 확장하기 좋습니다.",
+    },
   ];
 
   const plannedModules = [
@@ -131,17 +145,6 @@
       valueKo: "캐릭터 설정, 참고 이미지 메모, 시각 규칙, seed/model 메모, 장면별 일관성 체크를 정리합니다.",
       reason: "Good next module for AI video creators who need the same character across scenes.",
       reasonKo: "여러 장면에서 같은 캐릭터를 유지해야 하는 AI 영상 제작자에게 가장 직접적인 다음 모듈입니다.",
-    },
-    {
-      id: "comfyui-workflow-manager",
-      name: "ComfyUI Workflow Manager",
-      nameKo: "ComfyUI 워크플로우 매니저",
-      workflow: "Automation",
-      workflowKo: "자동화",
-      value: "Workflow names, model notes, input/output rules, node presets, and reusable generation recipes.",
-      valueKo: "워크플로우 이름, 모델 메모, 입출력 규칙, 노드 프리셋, 반복 생성 레시피를 정리합니다.",
-      reason: "Useful for creators who reuse local image/video generation pipelines.",
-      reasonKo: "로컬 이미지/영상 생성 파이프라인을 반복해서 쓰는 제작자에게 유용합니다.",
     },
     {
       id: "creator-dashboard-upgrade",
@@ -160,6 +163,7 @@
     "template-library",
     "script-generator",
     "creator-prompt-board",
+    "comfyui-workflow-manager",
     "ai-shot-planner",
     "thumbnail-idea-board",
     "youtube-calendar",

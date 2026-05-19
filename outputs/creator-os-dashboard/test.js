@@ -6,11 +6,12 @@ const state = require("./state.js");
 const dashboardDir = __dirname;
 
 function testModuleDefinitions() {
-  assert.strictEqual(state.modules.length, 8, "expected eight creator modules");
+  assert.strictEqual(state.modules.length, 9, "expected nine creator modules");
   const ids = state.modules.map((module) => module.id).sort();
   assert.deepStrictEqual(ids, [
     "ai-shot-planner",
     "api-cost-tracker",
+    "comfyui-workflow-manager",
     "creator-asset-manager",
     "creator-prompt-board",
     "script-generator",
@@ -30,13 +31,14 @@ function testLinksExist() {
 }
 
 function testWorkflowFiltering() {
-  assert.strictEqual(state.filterModules("", "All").length, 8);
+  assert.strictEqual(state.filterModules("", "All").length, 9);
   assert.deepStrictEqual(
     state.filterModules("", "All").map((module) => module.id),
     [
       "template-library",
       "script-generator",
       "creator-prompt-board",
+      "comfyui-workflow-manager",
       "ai-shot-planner",
       "thumbnail-idea-board",
       "youtube-calendar",
@@ -60,17 +62,16 @@ function testWorkflowFiltering() {
 
 function testStatusSummary() {
   const summary = state.getStatusSummary();
-  assert.strictEqual(summary.total, 8);
-  assert.strictEqual(summary.finalVerified, 8);
+  assert.strictEqual(summary.total, 9);
+  assert.strictEqual(summary.finalVerified, 9);
 }
 
 function testPlannedModules() {
-  assert.strictEqual(state.plannedModules.length, 3);
+  assert.strictEqual(state.plannedModules.length, 2);
   assert.deepStrictEqual(
     state.plannedModules.map((module) => module.id),
     [
       "character-consistency-tool",
-      "comfyui-workflow-manager",
       "creator-dashboard-upgrade",
     ]
   );
