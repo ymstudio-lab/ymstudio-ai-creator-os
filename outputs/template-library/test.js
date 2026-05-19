@@ -1,4 +1,6 @@
 const assert = require("assert");
+const fs = require("fs");
+const path = require("path");
 const State = require("./state.js");
 
 function memoryStorage() {
@@ -94,6 +96,20 @@ function testExportImportState() {
   assert.deepStrictEqual(imported.saved, ["a"]);
 }
 
+function testBeginnerPicksUiBindings() {
+  const index = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+  const app = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
+  assert.ok(index.includes("data-beginner-picks"));
+  assert.ok(index.includes("처음이면 이 3개부터"));
+  assert.ok(app.includes("beginnerPickIds"));
+  assert.ok(app.includes("classic_video_hook_map"));
+  assert.ok(app.includes("script_hook_loop"));
+  assert.ok(app.includes("thumb_emotion_contrast"));
+  assert.ok(app.includes("beginnerPickReasons"));
+  assert.ok(app.includes("영상 주제의 첫 훅과 시청 이유"));
+  assert.ok(app.includes("scrollIntoView"));
+}
+
 [
   testDefinitions,
   testFiltering,
@@ -104,6 +120,7 @@ function testExportImportState() {
   testScriptGeneratorImport,
   testImportHandlesCorruptTargetData,
   testExportImportState,
+  testBeginnerPicksUiBindings,
 ].forEach((test) => test());
 
-console.log("Passed 9 Template Library tests.");
+console.log("Passed 10 Template Library tests.");

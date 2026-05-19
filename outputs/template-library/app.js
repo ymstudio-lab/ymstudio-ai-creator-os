@@ -12,6 +12,7 @@ const els = {
   moduleFilter: document.querySelector("#moduleFilter"),
   popularityFilter: document.querySelector("#popularityFilter"),
   savedOnly: document.querySelector("#savedOnly"),
+  beginnerPicks: document.querySelector("[data-beginner-picks]"),
   count: document.querySelector("#count"),
   list: document.querySelector("#templateList"),
   empty: document.querySelector("#emptyState"),
@@ -31,6 +32,13 @@ const els = {
   exportJson: document.querySelector("#exportJson"),
   importFile: document.querySelector("#importFile"),
   toast: document.querySelector("#toast"),
+};
+
+const beginnerPickIds = ["classic_video_hook_map", "script_hook_loop", "thumb_emotion_contrast"];
+const beginnerPickReasons = {
+  classic_video_hook_map: "영상 주제의 첫 훅과 시청 이유를 정합니다.",
+  script_hook_loop: "훅을 고른 뒤 바로 첫 대본 구조를 만듭니다.",
+  thumb_emotion_contrast: "제목과 함께 볼 첫 썸네일 방향을 정합니다.",
 };
 
 function clear(node) {
@@ -88,6 +96,33 @@ function renderSummary() {
   const rated = Object.values(localState.ratings).filter((value) => Number(value) > 0).length;
   els.total.textContent = State.templates.length;
   els.summary.textContent = `saved ${saved} · rated ${rated}`;
+}
+
+function renderBeginnerPicks() {
+  if (!els.beginnerPicks) return;
+  clear(els.beginnerPicks);
+  beginnerPickIds.forEach((id, index) => {
+    const template = State.templates.find((item) => item.id === id);
+    if (!template) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "beginner-pick";
+    button.dataset.beginnerPick = template.id;
+
+    const step = document.createElement("span");
+    step.className = "pick-step";
+    step.textContent = `${index + 1}단계`;
+
+    const title = document.createElement("strong");
+    title.textContent = template.titleKo;
+
+    const reason = document.createElement("span");
+    reason.className = "pick-reason";
+    reason.textContent = beginnerPickReasons[template.id] || template.reasonKo;
+
+    button.append(step, title, reason);
+    els.beginnerPicks.appendChild(button);
+  });
 }
 
 function renderList() {
@@ -232,6 +267,21 @@ function bindEvents() {
     selectedId = card.dataset.id;
     renderList();
   });
+  if (els.beginnerPicks) {
+    els.beginnerPicks.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-beginner-pick]");
+      if (!card) return;
+      selectedId = card.dataset.beginnerPick;
+      els.search.value = "";
+      els.categoryFilter.value = "";
+      els.audienceFilter.value = "";
+      els.moduleFilter.value = "";
+      els.popularityFilter.value = "0";
+      els.savedOnly.checked = false;
+      renderList();
+      document.querySelector(".detail")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
   els.rating.addEventListener("input", updateRating);
   els.saveTemplate.addEventListener("click", toggleSaved);
   els.copyTemplate.addEventListener("click", copyTemplate);
@@ -242,4 +292,5 @@ function bindEvents() {
 
 initOptions();
 bindEvents();
+renderBeginnerPicks();
 renderList();

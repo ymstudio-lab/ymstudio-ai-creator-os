@@ -93,6 +93,7 @@ select {
 }
 
 .insight,
+.beginner-picks,
 .toolbar,
 .panel {
   border: 1px solid var(--line);
@@ -119,6 +120,66 @@ select {
 .insight p {
   margin: 0;
   color: var(--muted);
+}
+
+.beginner-picks {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 18px;
+  padding: 18px;
+  background: var(--soft);
+}
+
+.beginner-heading h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+}
+
+.beginner-heading p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.beginner-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.beginner-pick {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  min-height: 132px;
+  border: 1px solid rgba(33, 110, 99, 0.24);
+  border-radius: 8px;
+  padding: 13px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+}
+
+.beginner-pick:hover,
+.beginner-pick:focus {
+  border-color: var(--accent);
+  background: #fbfbf8;
+}
+
+.pick-step {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 3px 9px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.pick-reason {
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .toolbar {
@@ -334,7 +395,12 @@ pre {
 
 @media (max-width: 1100px) {
   .layout,
-  .insight {
+  .insight,
+  .beginner-picks {
+    grid-template-columns: 1fr;
+  }
+
+  .beginner-grid {
     grid-template-columns: 1fr;
   }
 
