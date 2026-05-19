@@ -4,6 +4,8 @@ Local-first AI Creator OS for prompts, shot planning, API cost tracking, YouTube
 
 [Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/)
 
+![YMSTUDIO AI Creator OS dashboard](docs/assets/dashboard-desktop.png)
+
 YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content creators. It runs as static files, stores data in your browser `localStorage`, and does not require a server, login, upload, or paid API call.
 
 ## Modules
