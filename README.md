@@ -208,6 +208,7 @@ rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|docu
 - [UI review notes](docs/UI_REVIEW.md)
 - [Promotion kit](docs/PROMOTION_KIT.md)
 - [Promotion log](docs/PROMOTION_LOG.md)
+- [First ComfyUI Shorts package](docs/shorts/COMFYUI_WORKFLOW_SHORT.md)
 
 ## Roadmap
 

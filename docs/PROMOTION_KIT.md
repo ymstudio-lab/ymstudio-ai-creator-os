@@ -8,6 +8,7 @@ Use this document to test early public reactions. The goal is not hard selling. 
 - Live demo: https://ymstudio-lab.github.io/ymstudio-ai-creator-os/outputs/creator-os-dashboard/index.html
 - Use cases: https://github.com/ymstudio-lab/ymstudio-ai-creator-os/blob/main/docs/USE_CASES.md
 - Release: https://github.com/ymstudio-lab/ymstudio-ai-creator-os/releases/tag/v1.0.2
+- First Shorts package: docs/shorts/COMFYUI_WORKFLOW_SHORT.md
 
 ## Short Positioning
 
