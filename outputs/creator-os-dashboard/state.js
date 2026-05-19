@@ -362,6 +362,10 @@
     }));
   }
 
+  function getLaunchpadOrder() {
+    return launchpadOrder.slice();
+  }
+
   return {
     modules,
     plannedModules,
@@ -378,5 +382,6 @@
     getLocalizedRoadmap,
     getLocalizedArchitectureNotes,
     getLocalizedPlannedModules,
+    getLaunchpadOrder,
   };
 });

@@ -106,8 +106,8 @@ function testStaticUiBindings() {
     "data-recommend-setup",
     "data-performance-tier",
     "data-setup-recommendation",
-    "ROADMAP.md",
-    "PUBLISHING_CHECKLIST.md",
+    "https://github.com/ymstudio-lab/ymstudio-ai-creator-os/blob/main/ROADMAP.md",
+    "https://github.com/ymstudio-lab/ymstudio-ai-creator-os/blob/main/PUBLISHING_CHECKLIST.md",
     "state.js",
     "app.js",
   ].forEach((token) => {

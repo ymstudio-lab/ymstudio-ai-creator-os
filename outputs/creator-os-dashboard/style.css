@@ -132,6 +132,60 @@ main {
   font-size: 0.82rem;
 }
 
+.quickstart-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+  margin: 0 0 18px;
+}
+
+.quickstart-card {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  min-height: 118px;
+  border: 1px solid rgba(33, 110, 99, 0.24);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--panel);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(28, 36, 30, 0.07);
+}
+
+.quickstart-main {
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  background: var(--soft);
+}
+
+.quickstart-card strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+
+.quickstart-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.step-badge,
+.order-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
 label {
   display: grid;
   gap: 6px;
@@ -585,6 +639,7 @@ h2 {
 }
 
 .workflow-pill,
+.order-pill,
 .status-pill {
   display: inline-flex;
   align-items: center;
@@ -598,6 +653,12 @@ h2 {
 .workflow-pill {
   background: var(--soft);
   color: var(--accent-strong);
+}
+
+.order-pill {
+  min-width: auto;
+  background: #e9e2d8;
+  color: #6c4325;
 }
 
 .status-pill {
@@ -722,6 +783,10 @@ h2 {
     grid-template-columns: 1fr;
   }
 
+  .quickstart-strip {
+    grid-template-columns: 1fr;
+  }
+
   .module-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -762,6 +827,15 @@ h2 {
   .hardware-controls {
     display: grid;
     align-items: stretch;
+  }
+
+  .quickstart-main {
+    grid-template-columns: 34px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .quickstart-main button {
+    grid-column: 1 / -1;
   }
 
   .module-grid {

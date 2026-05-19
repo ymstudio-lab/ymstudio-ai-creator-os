@@ -12,6 +12,7 @@
     projectFields: document.querySelectorAll("[data-project-field]"),
     saveProject: document.querySelector("[data-save-project]"),
     sampleProject: document.querySelector("[data-sample-project]"),
+    sampleProjectShortcut: document.querySelector("[data-sample-project-shortcut]"),
     exportProject: document.querySelector("[data-export-project]"),
     importProject: document.querySelector("[data-import-project]"),
     importProjectFile: document.querySelector("[data-import-project-file]"),
@@ -374,12 +375,13 @@
       const card = document.createElement("article");
       card.className = "module-card";
       card.setAttribute("data-module-card", module.id);
+      const order = state.getLaunchpadOrder().indexOf(module.id) + 1;
 
       const topLine = document.createElement("div");
       topLine.className = "module-topline";
       topLine.append(
-        createTextElement("span", "workflow-pill", module.workflow),
-        createTextElement("span", "status-pill", state.getCopy(getLanguage()).finalVerified)
+        createTextElement("span", "order-pill", order ? `${order}순서` : "추천"),
+        createTextElement("span", "workflow-pill", module.workflow)
       );
 
       const title = createTextElement("h3", "", module.displayName);
@@ -461,6 +463,11 @@
     elements.sampleProject.addEventListener("click", () => {
       if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) saveProject(sampleProject);
     });
+    if (elements.sampleProjectShortcut) {
+      elements.sampleProjectShortcut.addEventListener("click", () => {
+        if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) saveProject(sampleProject);
+      });
+    }
     elements.exportProject.addEventListener("click", downloadProject);
     elements.importProject.addEventListener("click", () => {
       if (confirmProjectOverwrite("기존 프로젝트를 가져온 JSON으로 바꿀까요?")) elements.importProjectFile.click();
