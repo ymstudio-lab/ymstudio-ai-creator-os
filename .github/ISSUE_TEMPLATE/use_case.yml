@@ -1,0 +1,53 @@
+name: Use case suggestion
+description: Suggest a creator workflow or audience this OS should support.
+title: "[Use case]: "
+labels: ["use case", "feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share a real workflow that should be easier for creators. Do not include private client data, API keys, passwords, or unpublished confidential material.
+  - type: input
+    id: audience
+    attributes:
+      label: Who is this for?
+      description: Describe the creator, team, or business type.
+      placeholder: YouTube Shorts creator, ComfyUI user, tutorial creator, small business owner
+    validations:
+      required: true
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow
+      description: What are they trying to make from start to finish?
+      placeholder: They start with..., then need..., and the final output is...
+    validations:
+      required: true
+  - type: textarea
+    id: current_pain
+    attributes:
+      label: Current pain point
+      description: What is slow, confusing, repetitive, or easy to lose?
+    validations:
+      required: true
+  - type: textarea
+    id: desired_result
+    attributes:
+      label: Desired result
+      description: What should YMSTUDIO AI Creator OS help them produce?
+      placeholder: Script draft, shot plan, thumbnail directions, calendar item, asset checklist, ComfyUI recipe
+    validations:
+      required: true
+  - type: dropdown
+    id: fit
+    attributes:
+      label: Best fit
+      options:
+        - AI video beginner
+        - YouTube Shorts creator
+        - ComfyUI/local AI user
+        - Tutorial/course creator
+        - Small business/product video
+        - Other
+    validations:
+      required: true

@@ -54,6 +54,23 @@ Start with the use case closest to your situation:
 
 See the full guide: [Use Cases](docs/USE_CASES.md).
 
+## Feedback Wanted
+
+This MVP is ready for workflow feedback. The most useful reports are:
+
+- Which use case fits you best?
+- Which module helped first?
+- Which template is missing?
+- Where did the beginner flow feel confusing?
+- What should be exported or connected next?
+
+Open an issue:
+
+- [Bug report](https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues/new?template=bug_report.yml)
+- [Feature request](https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues/new?template=feature_request.yml)
+- [Use case suggestion](https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues/new?template=use_case.yml)
+- [Template suggestion](https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues/new?template=template_suggestion.yml)
+
 ## What It Does
 
 1. Save one Creator Project with channel, topic, target viewer, goal, platform, tone, AI tools, and folder name.
@@ -187,6 +204,7 @@ rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|docu
 ## Public Launch Notes
 
 - [v1 public launch checklist](docs/V1_PUBLIC_LAUNCH.md)
+- [v1.0.2 release notes](docs/releases/v1.0.2.md)
 - [UI review notes](docs/UI_REVIEW.md)
 
 ## Roadmap

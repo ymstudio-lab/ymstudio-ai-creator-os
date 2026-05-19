@@ -3,3 +3,6 @@ contact_links:
   - name: Live Demo
     url: https://ymstudio-lab.github.io/ymstudio-ai-creator-os/
     about: Try the current public demo before opening an issue.
+  - name: Use Cases
+    url: https://github.com/ymstudio-lab/ymstudio-ai-creator-os/blob/main/docs/USE_CASES.md
+    about: Check the current supported workflows and suggest a new one if yours is missing.
