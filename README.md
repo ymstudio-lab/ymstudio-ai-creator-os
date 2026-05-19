@@ -35,6 +35,7 @@ The dashboard includes a local Creator Project profile for a single video projec
 - Thumbnail Idea Board can send thumbnail prompts into YouTube Calendar
 - AI Shot Planner can send selected shots into Creator Asset Manager
 - Dashboard progress cards show whether project, templates, scripts, shots, thumbnails, calendar items, and assets exist locally
+- Dashboard setup card shows browser-visible CPU/RAM/GPU hints and recommends low-spec, balanced, local-first, or cloud-first LLM/ComfyUI workflows
 
 Project planning notes are kept outside the dashboard:
 

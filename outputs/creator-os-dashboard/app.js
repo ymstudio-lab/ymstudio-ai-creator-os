@@ -18,6 +18,13 @@
     projectStatus: document.querySelector("[data-project-status]"),
     workflowSteps: document.querySelector("[data-workflow-steps]"),
     progressGrid: document.querySelector("[data-progress-grid]"),
+    detectHardware: document.querySelector("[data-detect-hardware]"),
+    recommendSetup: document.querySelector("[data-recommend-setup]"),
+    performanceTier: document.querySelector("[data-performance-tier]"),
+    setupRecommendation: document.querySelector("[data-setup-recommendation]"),
+    specCpu: document.querySelector("[data-spec-cpu]"),
+    specMemory: document.querySelector("[data-spec-memory]"),
+    specGpu: document.querySelector("[data-spec-gpu]"),
   };
 
   const LANGUAGE_KEY = "ymstudio.creatorOS.language";
@@ -52,6 +59,47 @@
     { key: "ymstudio.youtubeCalendar.v1", label: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },
     { key: "ymstudio.creatorAssetManager.v1", label: "자산", href: "../creator-asset-manager/index.html", read: (data) => data && Array.isArray(data.assets) ? data.assets.length : 0 },
   ];
+
+  const setupRecommendations = {
+    cloud: {
+      title: "저사양/노트북 추천: 유료 웹/API 우선",
+      lines: [
+        "LLM: ChatGPT, Claude, Gemini, Kimi 같은 웹/API 모델로 대본과 프롬프트를 만들고 로컬은 저장/정리용으로 씁니다.",
+        "로컬 모델: 필요하면 Gemma/Qwen/Llama 계열 2B-4B급만 짧은 메모 정리에 사용합니다.",
+        "컨텍스트: 8K-32K부터 시작하고 긴 자료는 장면/섹션 단위로 나눕니다.",
+        "속도 기대치: CPU 전용 환경에서는 2B급도 매우 느릴 수 있으니 품질 작업은 클라우드, 반복 정리는 로컬이 유리합니다.",
+        "ComfyUI: 768px 이하, 낮은 step, batch 1, 클라우드 GPU 또는 RunComfy류 서비스 보조를 권장합니다.",
+      ],
+    },
+    balanced: {
+      title: "중간 사양 추천: 로컬 소형 + 유료 보조",
+      lines: [
+        "LLM: 로컬 4B-8B급은 초안/분류/태그에 쓰고, 최종 대본과 복잡한 판단은 유료 웹/API로 넘깁니다.",
+        "컨텍스트: 16K-64K 범위에서 시작하고 프로젝트 JSON만 짧게 붙입니다.",
+        "속도 기대치: 초안은 로컬로 빠르게 반복하고, 느려지면 컨텍스트와 출력 길이를 줄입니다.",
+        "ComfyUI: 1024px 전후, batch 1, 이미지 먼저 검증 후 영상 워크플로우로 넘어갑니다.",
+      ],
+    },
+    local: {
+      title: "고사양 GPU 추천: 로컬 LLM/ComfyUI 우선",
+      lines: [
+        "LLM: 8B-14B급 이상 로컬 모델을 프롬프트 변형, 캐릭터 규칙, 자산 메모 자동화에 적극 사용합니다.",
+        "유료 모델: 최종 기획 검토, 긴 리서치, 복잡한 전략 판단에만 보조로 씁니다.",
+        "컨텍스트: 32K-128K까지 늘려도 되지만, 프로젝트별 JSON만 넣는 습관을 유지합니다.",
+        "속도 기대치: 토큰 속도는 GPU/양자화/컨텍스트 길이에 따라 크게 달라지므로 긴 출력보다 짧은 반복이 안정적입니다.",
+        "ComfyUI: 고해상도와 영상 워크플로우를 시도하되 VRAM 부족 시 해상도, step, batch를 먼저 낮춥니다.",
+      ],
+    },
+    manual: {
+      title: "모르겠을 때 안전 추천",
+      lines: [
+        "처음에는 유료 웹/API로 대본과 프롬프트를 만들고, Creator OS에는 결과와 JSON만 저장합니다.",
+        "로컬 LLM은 2B-4B급부터 테스트하고, 느리면 모델 크기보다 컨텍스트와 출력 길이를 먼저 줄입니다.",
+        "ComfyUI는 이미지 1장 생성 워크플로우부터 시작하고 영상/고해상도는 나중에 붙입니다.",
+        "프로젝트마다 프롬프트, 샷, 썸네일, 자산을 나눠 저장하면 저사양 PC도 작업 흐름은 유지됩니다.",
+      ],
+    },
+  };
 
   function getLanguage() {
     return localStorage.getItem(LANGUAGE_KEY) || "ko";
@@ -158,6 +206,35 @@
       return card;
     });
     elements.progressGrid.replaceChildren(...cards);
+  }
+
+  function getWebGlRenderer() {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) return "WebGL 정보 없음";
+    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    if (!debugInfo) return "GPU 이름 비공개";
+    return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || "GPU 이름 비공개";
+  }
+
+  function detectHardware() {
+    const threads = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} 논리 스레드` : "브라우저에서 확인 불가";
+    const memory = navigator.deviceMemory ? `약 ${navigator.deviceMemory}GB 이상으로 추정` : "브라우저에서 확인 불가";
+    elements.specCpu.textContent = threads;
+    elements.specMemory.textContent = memory;
+    elements.specGpu.textContent = getWebGlRenderer();
+  }
+
+  function renderSetupRecommendation() {
+    const selected = setupRecommendations[elements.performanceTier.value] || setupRecommendations.manual;
+    const title = createTextElement("strong", "", selected.title);
+    const list = document.createElement("ul");
+    selected.lines.forEach((line) => {
+      const item = document.createElement("li");
+      item.textContent = line;
+      list.appendChild(item);
+    });
+    elements.setupRecommendation.replaceChildren(title, list);
   }
 
   function downloadProject() {
@@ -318,6 +395,9 @@
       if (confirmProjectOverwrite("기존 프로젝트를 가져온 JSON으로 바꿀까요?")) elements.importProjectFile.click();
     });
     elements.importProjectFile.addEventListener("change", () => importProjectFile(elements.importProjectFile.files[0]));
+    elements.detectHardware.addEventListener("click", detectHardware);
+    elements.recommendSetup.addEventListener("click", renderSetupRecommendation);
+    elements.performanceTier.addEventListener("change", renderSetupRecommendation);
   }
 
   if (document.readyState === "loading") {

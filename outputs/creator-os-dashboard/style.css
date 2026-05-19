@@ -287,6 +287,101 @@ button:focus {
   text-decoration: none;
 }
 
+.hardware-section {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.hardware-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+  gap: 14px;
+}
+
+.hardware-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--panel);
+}
+
+.hardware-card-heading,
+.hardware-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hardware-controls {
+  align-items: end;
+  margin-top: 10px;
+}
+
+.hardware-controls label {
+  flex: 1 1 220px;
+}
+
+.hardware-specs {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.hardware-specs div {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  border: 1px solid rgba(41, 92, 82, 0.14);
+  border-radius: 7px;
+  padding: 8px 10px;
+  background: #fbfbf8;
+}
+
+.hardware-specs dt {
+  color: var(--accent-strong);
+  font-weight: 900;
+}
+
+.hardware-specs dd {
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.hardware-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.setup-recommendation {
+  margin-top: 12px;
+  border: 1px solid rgba(33, 110, 99, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--soft);
+}
+
+.setup-recommendation strong {
+  display: block;
+  color: var(--accent-strong);
+  margin-bottom: 6px;
+}
+
+.setup-recommendation p,
+.setup-recommendation ul {
+  margin: 0;
+  color: var(--text);
+}
+
+.setup-recommendation ul {
+  display: grid;
+  gap: 6px;
+  padding-left: 18px;
+}
+
 .section {
   margin: 0 0 22px;
 }
@@ -579,6 +674,10 @@ h2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .hardware-grid {
+    grid-template-columns: 1fr;
+  }
+
   .planned-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -593,8 +692,16 @@ h2 {
 
   .toolbar,
   .summary-grid,
-  .project-form {
+  .project-form,
+  .hardware-card-heading,
+  .hardware-controls {
     grid-template-columns: 1fr;
+  }
+
+  .hardware-card-heading,
+  .hardware-controls {
+    display: grid;
+    align-items: stretch;
   }
 
   .module-grid {

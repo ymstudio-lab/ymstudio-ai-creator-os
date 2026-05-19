@@ -104,6 +104,10 @@ function testStaticUiBindings() {
     "data-save-project",
     "data-workflow-steps",
     "data-progress-grid",
+    "data-detect-hardware",
+    "data-recommend-setup",
+    "data-performance-tier",
+    "data-setup-recommendation",
     "ROADMAP.md",
     "PUBLISHING_CHECKLIST.md",
     "state.js",
@@ -111,7 +115,7 @@ function testStaticUiBindings() {
   ].forEach((token) => {
     assert.ok(index.includes(token), `index.html should include ${token}`);
   });
-  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile", "renderProgress"].forEach((token) => {
+  ["textContent", "createElement", "addEventListener", "filterModules", "ymstudio.creatorOS.language", "ymstudio.creatorProject.v1", "downloadProject", "importProjectFile", "renderProgress", "detectHardware", "renderSetupRecommendation", "navigator.hardwareConcurrency", "navigator.deviceMemory"].forEach((token) => {
     assert.ok(app.includes(token), `app.js should include ${token}`);
   });
   assert.ok(!app.includes("innerHTML"), "app.js should avoid unsafe raw HTML rendering");

@@ -75,6 +75,19 @@ def main() -> int:
             "name": "dashboard_project_export_download",
             "passed": download.suggested_filename == "creator-project.json",
         })
+        page.click("[data-detect-hardware]")
+        page.select_option("[data-performance-tier]", "balanced")
+        page.click("[data-recommend-setup]")
+        setup_text = page.locator("[data-setup-recommendation]").inner_text(timeout=3000)
+        cpu_text = page.locator("[data-spec-cpu]").inner_text(timeout=3000)
+        checks.append({
+            "name": "dashboard_setup_recommendation",
+            "passed": "중간 사양 추천" in setup_text and "컨텍스트" in setup_text,
+        })
+        checks.append({
+            "name": "dashboard_hardware_detection",
+            "passed": cpu_text != "확인 전",
+        })
 
         template = OUTPUTS / "template-library" / "index.html"
         page.goto(file_url(template), wait_until="networkidle")

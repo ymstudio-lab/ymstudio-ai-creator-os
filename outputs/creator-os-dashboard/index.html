@@ -77,6 +77,47 @@
         </details>
       </section>
 
+      <section class="section hardware-section" aria-labelledby="hardware-title">
+        <div class="section-heading">
+          <p class="eyebrow">Creator Setup</p>
+          <h2 id="hardware-title">내 작업 환경 체크</h2>
+          <p class="section-note">PC 성능이 낮아도 시작할 수 있게 로컬 LLM, 유료 웹/API, ComfyUI 권장 흐름을 나눠서 안내합니다.</p>
+        </div>
+        <div class="hardware-grid">
+          <article class="hardware-card">
+            <div class="hardware-card-heading">
+              <strong>브라우저가 확인한 정보</strong>
+              <button class="secondary-action" type="button" data-detect-hardware>내 환경 확인</button>
+            </div>
+            <dl class="hardware-specs" data-hardware-specs>
+              <div><dt>CPU</dt><dd data-spec-cpu>확인 전</dd></div>
+              <div><dt>RAM</dt><dd data-spec-memory>확인 전</dd></div>
+              <div><dt>GPU</dt><dd data-spec-gpu>확인 전</dd></div>
+            </dl>
+            <p class="hardware-note">브라우저 보안상 실제 VRAM, 전체 RAM, 정확한 모델명은 일부만 표시될 수 있습니다.</p>
+          </article>
+          <article class="hardware-card">
+            <strong>내 성능에 맞는 추천</strong>
+            <div class="hardware-controls">
+              <label>
+                <span>작업 환경</span>
+                <select data-performance-tier>
+                  <option value="cloud">저사양 또는 노트북: 유료 웹/API 우선</option>
+                  <option value="balanced">중간 사양: 로컬 소형 + 유료 보조</option>
+                  <option value="local">고사양 GPU: 로컬 LLM/ComfyUI 우선</option>
+                  <option value="manual">모르겠음: 안전 설정 추천</option>
+                </select>
+              </label>
+              <button class="primary-action" type="button" data-recommend-setup>추천 보기</button>
+            </div>
+            <div class="setup-recommendation" data-setup-recommendation>
+              <strong>추천 대기 중</strong>
+              <p>내 환경 확인 또는 추천 보기를 누르면 모델, 컨텍스트, 토큰 속도, ComfyUI 시작 설정을 보여줍니다.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="toolbar" aria-label="Launchpad module filters">
         <label>
           <span data-i18n="languageLabel">언어</span>
