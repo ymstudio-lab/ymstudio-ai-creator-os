@@ -2,7 +2,7 @@
 
 Local-first creator workspace for planning AI video/content projects without a server, login, upload, or paid API call.
 
-[Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/) | [Use Cases](docs/USE_CASES.md)
+[Live Demo](https://ymstudio-lab.github.io/ymstudio-ai-creator-os/) | [Use Cases](docs/USE_CASES.md) | [Promotion Kit](docs/PROMOTION_KIT.md)
 
 ![YMSTUDIO AI Creator OS dashboard](docs/assets/dashboard-desktop.png)
 
@@ -206,6 +206,8 @@ rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|docu
 - [v1 public launch checklist](docs/V1_PUBLIC_LAUNCH.md)
 - [v1.0.2 release notes](docs/releases/v1.0.2.md)
 - [UI review notes](docs/UI_REVIEW.md)
+- [Promotion kit](docs/PROMOTION_KIT.md)
+- [Promotion log](docs/PROMOTION_LOG.md)
 
 ## Roadmap
 
