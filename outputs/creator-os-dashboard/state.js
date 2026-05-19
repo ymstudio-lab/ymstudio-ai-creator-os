@@ -90,6 +90,20 @@
       businessUse: "Useful for thumbnail testing packs, creator content systems, and repeatable design briefs.",
       businessUseKo: "썸네일 테스트 묶음, 크리에이터 콘텐츠 시스템, 반복 가능한 디자인 브리프로 확장하기 좋습니다.",
     },
+    {
+      id: "template-library",
+      name: "Template Library",
+      nameKo: "템플릿 라이브러리",
+      workflow: "Prompting",
+      workflowKo: "프롬프트",
+      status: "ready",
+      link: "../template-library/index.html",
+      outputFolder: "../template-library",
+      value: "Built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes.",
+      valueKo: "훅, 썸네일, 대본, 샷 플랜, 캘린더, 자산, 캐릭터, ComfyUI 레시피처럼 영상 제작자가 반복해서 쓰는 템플릿을 모읍니다.",
+      businessUse: "Useful before a server marketplace: test which templates people save, rate, copy, and import most.",
+      businessUseKo: "서버 마켓 전 단계로 사람들이 어떤 템플릿을 저장, 별점, 복사, 가져오기 하는지 먼저 검증하기 좋습니다.",
+    },
   ];
 
   const plannedModules = [

@@ -129,6 +129,16 @@
     "archived": "보관됨",
   };
 
+  Object.assign(dictionary, {
+    "Template Library": "템플릿 라이브러리",
+    "Templates": "템플릿",
+    "Template": "템플릿",
+    "Target module": "대상 모듈",
+    "Copy template": "템플릿 복사",
+    "Import to module": "모듈로 가져오기",
+    "Suggest a template": "템플릿 제안하기",
+  });
+
   const beginnerCopy = {
     "creator-os-dashboard": {
       title: "처음 쓰는 순서",
@@ -186,6 +196,23 @@
         "이미지 생성 프롬프트를 복사하거나 JSON으로 백업합니다.",
       ],
     },
+    "template-library": {
+      title: "泥섏쓬 ?곕뒗 ?쒖꽌",
+      steps: [
+        "필터로 필요한 영상 제작 템플릿을 찾습니다.",
+        "자주 쓸 템플릿은 저장하거나 별점을 남깁니다.",
+        "복사하거나 지원되는 모듈로 가져와서 실제 작업에 맞게 수정합니다.",
+      ],
+    },
+  };
+
+  beginnerCopy["template-library"] = {
+    title: "\uCC98\uC74C \uC4F0\uB294 \uC21C\uC11C",
+    steps: [
+      "\uD544\uD130\uB85C \uD544\uC694\uD55C \uC601\uC0C1 \uC81C\uC791 \uD15C\uD50C\uB9BF\uC744 \uCC3E\uC2B5\uB2C8\uB2E4.",
+      "\uC790\uC8FC \uC4F8 \uD15C\uD50C\uB9BF\uC740 \uC800\uC7A5\uD558\uAC70\uB098 \uBCC4\uC810\uC744 \uB0A8\uAE41\uB2C8\uB2E4.",
+      "\uBCF5\uC0AC\uD558\uAC70\uB098 \uC9C0\uC6D0\uB418\uB294 \uBAA8\uB4C8\uB85C \uAC00\uC838\uC640\uC11C \uC2E4\uC81C \uC791\uC5C5\uC5D0 \uB9DE\uAC8C \uC218\uC815\uD569\uB2C8\uB2E4.",
+    ],
   };
 
   function getLanguage() {

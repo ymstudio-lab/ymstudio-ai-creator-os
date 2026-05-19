@@ -6,13 +6,14 @@ const state = require("./state.js");
 const dashboardDir = __dirname;
 
 function testModuleDefinitions() {
-  assert.strictEqual(state.modules.length, 6, "expected six creator modules");
+  assert.strictEqual(state.modules.length, 7, "expected seven creator modules");
   const ids = state.modules.map((module) => module.id).sort();
   assert.deepStrictEqual(ids, [
     "ai-shot-planner",
     "api-cost-tracker",
     "creator-asset-manager",
     "creator-prompt-board",
+    "template-library",
     "thumbnail-idea-board",
     "youtube-calendar",
   ]);
@@ -28,7 +29,7 @@ function testLinksExist() {
 }
 
 function testWorkflowFiltering() {
-  assert.strictEqual(state.filterModules("", "All").length, 6);
+  assert.strictEqual(state.filterModules("", "All").length, 7);
   assert.deepStrictEqual(
     state.filterModules("", "Publishing").map((module) => module.id).sort(),
     ["thumbnail-idea-board", "youtube-calendar"]
@@ -37,17 +38,15 @@ function testWorkflowFiltering() {
     state.filterModules("썸네일 아이디어", "All", "ko").map((module) => module.id),
     ["thumbnail-idea-board"]
   );
-  assert.deepStrictEqual(
-    state.filterModules("자산", "All", "ko").map((module) => module.id),
-    ["creator-asset-manager"]
-  );
+  assert.ok(state.filterModules("자산", "All", "ko").some((module) => module.id === "creator-asset-manager"));
+  assert.ok(state.filterModules("template library", "All").some((module) => module.id === "template-library"));
   assert.strictEqual(state.getWorkflowAreas("ko")[0].label, "전체");
 }
 
 function testStatusSummary() {
   const summary = state.getStatusSummary();
-  assert.strictEqual(summary.total, 6);
-  assert.strictEqual(summary.finalVerified, 6);
+  assert.strictEqual(summary.total, 7);
+  assert.strictEqual(summary.finalVerified, 7);
 }
 
 function testPlannedModules() {
@@ -112,4 +111,4 @@ function testStaticUiBindings() {
   testStaticUiBindings,
 ].forEach((test) => test());
 
-console.log("creator-os-dashboard tests passed (6)");
+console.log("creator-os-dashboard tests passed (7)");

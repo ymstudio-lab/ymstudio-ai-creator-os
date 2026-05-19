@@ -18,6 +18,7 @@ YMSTUDIO AI Creator OS is a browser-based MVP bundle for AI video and content cr
 | YouTube Calendar | Manage content ideas, status, upload dates, and weekly plans |
 | Creator Asset Manager | Organize generated images, videos, prompts, licenses, and file paths |
 | Thumbnail Idea Board | Plan thumbnail hooks, Korean overlay text, layouts, palettes, and image prompts |
+| Template Library | Use built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes |
 | Creator OS Dashboard | Open all modules from one local control panel |
 
 ## Quick Start
@@ -89,6 +90,7 @@ rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|docu
 
 - Move data between modules with shared JSON exports
 - Add one shared project profile for channel, campaign, and client metadata
+- Expand the template library based on saved/rated/copied template patterns
 - Prepare optional automation adapters after the offline-first workflow is stable
 
 ## License

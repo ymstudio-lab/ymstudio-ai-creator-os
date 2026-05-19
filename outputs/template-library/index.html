@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YMSTUDIO Template Library</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">YMSTUDIO Creator OS</p>
+        <h1>Template Library</h1>
+        <p>AI 제작자가 반복해서 쓰는 프롬프트, 썸네일 공식, 샷 플랜, 캘린더, 자산, 캐릭터, ComfyUI 템플릿을 모아둔 로컬 라이브러리입니다.</p>
+      </div>
+      <div class="summary">
+        <strong data-total>0</strong>
+        <span>templates</span>
+        <small data-summary>saved 0 · rated 0</small>
+      </div>
+    </header>
+
+    <main class="shell">
+      <section class="insight">
+        <div>
+          <p class="eyebrow">왜 이 방식인가?</p>
+          <h2>생성기가 아니라 제작 흐름 템플릿</h2>
+        </div>
+        <p>AI 썸네일, 훅, 숏폼 대본, 캐릭터 일관성, ComfyUI 레시피는 2026년에도 반복 수요가 큽니다. 이 라이브러리는 서버 마켓 전에 먼저 검증할 수 있는 내장 템플릿 묶음입니다.</p>
+      </section>
+
+      <section class="toolbar" aria-label="템플릿 필터">
+        <label>
+          검색
+          <input id="search" type="search" placeholder="예: 썸네일, 쇼츠, 캐릭터, ComfyUI" />
+        </label>
+        <label>
+          카테고리
+          <select id="categoryFilter"></select>
+        </label>
+        <label>
+          대상
+          <select id="audienceFilter"></select>
+        </label>
+        <label>
+          연결 모듈
+          <select id="moduleFilter"></select>
+        </label>
+        <label>
+          인기 기준
+          <select id="popularityFilter">
+            <option value="0">전체</option>
+            <option value="4">4+</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <label class="check">
+          <input id="savedOnly" type="checkbox" />
+          저장한 것만
+        </label>
+      </section>
+
+      <section class="layout">
+        <aside class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Library</p>
+              <h2>템플릿 목록</h2>
+            </div>
+            <span id="count">0</span>
+          </div>
+          <div id="templateList" class="template-list"></div>
+          <p id="emptyState" class="empty" hidden>현재 필터와 일치하는 템플릿이 없습니다.</p>
+        </aside>
+
+        <section class="panel detail">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Template</p>
+              <h2 id="detailTitle">템플릿 선택</h2>
+            </div>
+            <div class="actions">
+              <button id="saveTemplate" type="button">저장</button>
+              <button id="copyTemplate" type="button">복사</button>
+              <button id="importTemplate" type="button">내 모듈로 가져오기</button>
+            </div>
+          </div>
+
+          <div class="meta-grid">
+            <div>
+              <span>카테고리</span>
+              <strong id="detailCategory">-</strong>
+            </div>
+            <div>
+              <span>대상</span>
+              <strong id="detailAudience">-</strong>
+            </div>
+            <div>
+              <span>연결 모듈</span>
+              <strong id="detailModule">-</strong>
+            </div>
+            <div>
+              <span>인기/수요</span>
+              <strong id="detailPopularity">-</strong>
+            </div>
+          </div>
+
+          <article class="detail-block">
+            <h3>왜 인기 있는가</h3>
+            <p id="detailReason"></p>
+          </article>
+
+          <article class="detail-block">
+            <h3>템플릿</h3>
+            <pre id="detailContent"></pre>
+          </article>
+
+          <article class="detail-block">
+            <h3>사용 방식</h3>
+            <p id="detailUsage"></p>
+          </article>
+
+          <label class="rating">
+            내 별점
+            <input id="rating" type="range" min="0" max="5" step="1" />
+            <span id="ratingValue">0/5</span>
+          </label>
+
+          <div class="export-actions">
+            <button id="exportJson" type="button">Export JSON</button>
+            <label class="file-button">
+              Import JSON
+              <input id="importFile" type="file" accept="application/json" hidden />
+            </label>
+            <a class="issue-link" href="https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues/new?template=feature_request.yml" target="_blank" rel="noreferrer">템플릿 제안하기</a>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="../i18n-lite.js"></script>
+    <script src="state.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
