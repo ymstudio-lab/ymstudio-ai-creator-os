@@ -166,24 +166,6 @@
         <div class="ops-grid" data-ops-grid></div>
       </details>
 
-      <section class="toolbar" aria-label="Launchpad module filters">
-        <label>
-          <span data-i18n="languageLabel">언어</span>
-          <select data-language>
-            <option value="ko">한국어</option>
-            <option value="en">English</option>
-          </select>
-        </label>
-        <label>
-          <span data-i18n="searchLabel">모듈 검색</span>
-          <input data-search type="search">
-        </label>
-        <label>
-          <span data-i18n="workflowLabel">워크플로우 영역</span>
-          <select data-workflow></select>
-        </label>
-      </section>
-
       <details class="section progress-section dashboard-fold" aria-labelledby="progress-title">
         <summary>
           <span>
@@ -202,6 +184,23 @@
         <div class="section-heading">
           <h2 id="modules-title" data-i18n="launchpadEyebrow">런치패드</h2>
         </div>
+        <section class="toolbar" aria-label="Launchpad module filters">
+          <label>
+            <span data-i18n="languageLabel">언어</span>
+            <select data-language>
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+          <label>
+            <span data-i18n="searchLabel">모듈 검색</span>
+            <input data-search type="search">
+          </label>
+          <label>
+            <span data-i18n="workflowLabel">워크플로우 영역</span>
+            <select data-workflow></select>
+          </label>
+        </section>
         <p data-empty-state class="empty-state" hidden></p>
         <div class="module-grid" data-module-grid></div>
       </section>

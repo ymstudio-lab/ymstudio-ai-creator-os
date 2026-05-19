@@ -381,7 +381,7 @@
       topLine.className = "module-topline";
       topLine.append(
         createTextElement("span", "order-pill", order ? `${order}순서` : "추천"),
-        createTextElement("span", "workflow-pill", module.workflow)
+        createTextElement("span", "workflow-pill", module.displayWorkflow || module.workflow)
       );
 
       const title = createTextElement("h3", "", module.displayName);
@@ -415,7 +415,7 @@
       const topLine = document.createElement("div");
       topLine.className = "module-topline";
       topLine.append(
-        createTextElement("span", "workflow-pill", module.workflow),
+        createTextElement("span", "workflow-pill", module.displayWorkflow || module.workflow),
         createTextElement("span", "coming-pill", state.getCopy(getLanguage()).comingSoon)
       );
 
