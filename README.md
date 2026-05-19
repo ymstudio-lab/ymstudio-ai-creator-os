@@ -2,6 +2,8 @@
 
 AI 영상/콘텐츠 제작자를 위한 로컬 우선 Creator OS MVP입니다.
 
+Live Demo: https://ymstudio-lab.github.io/ymstudio-ai-creator-os/
+
 이 프로젝트는 브라우저에서 바로 여는 정적 웹앱 묶음입니다. 서버, 로그인, 외부 API 호출 없이 `localStorage`에 데이터를 저장합니다.
 
 ## 포함 모듈
