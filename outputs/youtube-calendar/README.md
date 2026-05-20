@@ -1,6 +1,6 @@
 # YMSTUDIO YouTube Calendar
 
-Local-first YouTube planning board for AI creators, automation builders, tutorial channels, and monetization experiments.
+Local-first YouTube planning board for AI creators, automation builders, and tutorial channels.
 
 It keeps video ideas, script outlines, title variants, thumbnail prompts, production status, upload dates, tools, performance notes, weekly density, and pipeline counts in one browser app.
 
@@ -11,7 +11,7 @@ AI creators often plan content across ChatGPT, Claude, Discord, YouTube Studio n
 ## Features
 
 - Idea board for Shorts, long-form, live, community, and clip content
-- Better demo niches for AI Shorts, AI tools, automation, monetization, and tutorial content
+- Better demo niches for AI Shorts, AI tools, automation, and tutorial content
 - Script outline per content item with richer title variant and thumbnail prompt examples
 - Production status workflow
 - Upload calendar grouped by date or week
@@ -58,12 +58,11 @@ node --check test.js
 - `state.js` - local state, summaries, import/export, and pure helpers
 - `app.js` - browser UI wiring
 - `test.js` - Node tests for state logic and static UI targets
-- `PROMOTION.md` - pitch, launch copy, target users, extension ideas, and roadmap
+- No upload copy, channel strategy, or private promotion notes are stored in this public module.
 
-## Monetization Direction
+## Public Scope
 
-- 30-day niche content calendar packs
-- Shorts script and thumbnail prompt template packs
-- Creator launch workflow setup service
-- Future YouTube Studio analytics importer
-- Team version with review notes and approval status
+- Local content calendar examples
+- Script and thumbnail prompt planning fields
+- Future YouTube Studio analytics importer concept without OAuth in this MVP
+- Review notes and approval status for local planning

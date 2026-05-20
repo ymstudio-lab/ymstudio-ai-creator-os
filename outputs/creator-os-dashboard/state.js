@@ -17,8 +17,8 @@
       outputFolder: "../creator-prompt-board",
       value: "Reusable prompt library for video concepts, scripts, thumbnails, and production tasks.",
       valueKo: "영상 콘셉트, 스크립트, 썸네일, 제작 작업에 반복해서 쓰는 프롬프트 보드입니다.",
-      businessUse: "Useful for prompt packs, reusable creator templates, and team workflow boards.",
-      businessUseKo: "프롬프트 묶음, 크리에이터 템플릿, 팀 작업 보드로 확장하기 좋습니다.",
+      publicUse: "Useful for collecting repeatable prompts, comparing results, and keeping production notes searchable.",
+      publicUseKo: "반복 프롬프트를 모으고, 결과를 비교하고, 제작 메모를 쉽게 찾는 데 유용합니다.",
     },
     {
       id: "ai-shot-planner",
@@ -31,8 +31,8 @@
       outputFolder: "../ai-shot-planner",
       value: "Scene and shot planning system that turns concepts into prompt-ready production plans.",
       valueKo: "아이디어를 장면과 샷 단위로 나누고 바로 생성에 쓸 수 있는 제작 계획으로 정리합니다.",
-      businessUse: "Useful for video templates, production playbooks, and client-ready planning workflows.",
-      businessUseKo: "영상 템플릿, 제작 플레이북, 클라이언트용 기획 워크플로우로 확장하기 좋습니다.",
+      publicUse: "Useful for turning a rough idea into scenes, shots, prompts, and review notes before generation.",
+      publicUseKo: "거친 아이디어를 생성 전 장면, 샷, 프롬프트, 검토 메모로 정리하는 데 유용합니다.",
     },
     {
       id: "api-cost-tracker",
@@ -45,8 +45,8 @@
       outputFolder: "../api-cost-tracker",
       value: "Manual AI tool usage, monthly budget, credit tracking, warning levels, and report exports.",
       valueKo: "AI 도구 사용량, 월 예산, 크레딧 소모, 경고 단계, 리포트를 로컬에서 관리합니다.",
-      businessUse: "Useful for operator dashboards, agency reporting, and cost-control starter kits.",
-      businessUseKo: "운영 대시보드, 에이전시 리포트, 비용 관리 스타터 키트로 확장하기 좋습니다.",
+      publicUse: "Useful for seeing local estimates, credit use, and budget warnings before connecting any accounts.",
+      publicUseKo: "계정 연결 없이 로컬 추정 비용, 크레딧 사용량, 예산 경고를 확인하는 데 유용합니다.",
     },
     {
       id: "youtube-calendar",
@@ -59,8 +59,8 @@
       outputFolder: "../youtube-calendar",
       value: "Content pipeline for ideas, title variants, thumbnail prompts, status, and upload planning.",
       valueKo: "영상 아이디어, 제목 후보, 썸네일 프롬프트, 제작 상태, 업로드 일정을 한곳에서 관리합니다.",
-      businessUse: "Useful for channel calendars, launch planners, and repeatable publishing systems.",
-      businessUseKo: "채널 캘린더, 론칭 플래너, 반복 가능한 발행 시스템으로 확장하기 좋습니다.",
+      publicUse: "Useful for planning content status, upload dates, title variants, and review notes in one place.",
+      publicUseKo: "콘텐츠 상태, 업로드 날짜, 제목 후보, 검토 메모를 한곳에서 계획하는 데 유용합니다.",
     },
     {
       id: "creator-asset-manager",
@@ -73,8 +73,8 @@
       outputFolder: "../creator-asset-manager",
       value: "Local catalog for generated assets, source tools, usage rights, project relations, and collections.",
       valueKo: "AI 생성 이미지, 영상, 프롬프트, 파일 경로, 출처 도구, 사용권, 프로젝트, 컬렉션을 정리합니다.",
-      businessUse: "Useful for asset packs, license tracking, and reusable production archives.",
-      businessUseKo: "자산 묶음, 라이선스 추적, 재사용 가능한 제작 아카이브로 확장하기 좋습니다.",
+      publicUse: "Useful for tracking generated files, source tools, usage notes, and project relationships locally.",
+      publicUseKo: "생성 파일, 출처 도구, 사용 메모, 프로젝트 관계를 로컬에서 추적하는 데 유용합니다.",
     },
     {
       id: "thumbnail-idea-board",
@@ -87,8 +87,8 @@
       outputFolder: "../thumbnail-idea-board",
       value: "Thumbnail hooks, Korean overlay text, layout notes, palettes, scores, and image prompts.",
       valueKo: "썸네일 훅, 한글 문구, 레이아웃, 컬러, 점수, 이미지 생성 프롬프트를 정리합니다.",
-      businessUse: "Useful for thumbnail testing packs, creator content systems, and repeatable design briefs.",
-      businessUseKo: "썸네일 테스트 묶음, 크리에이터 콘텐츠 시스템, 반복 가능한 디자인 브리프로 확장하기 좋습니다.",
+      publicUse: "Useful for comparing hooks, Korean overlay text, layout notes, and image prompts before design work.",
+      publicUseKo: "디자인 전에 훅, 한글 문구, 레이아웃 메모, 이미지 프롬프트를 비교하는 데 유용합니다.",
     },
     {
       id: "template-library",
@@ -101,8 +101,8 @@
       outputFolder: "../template-library",
       value: "Built-in creator templates for hooks, thumbnails, scripts, shot plans, calendars, assets, characters, and ComfyUI recipes.",
       valueKo: "훅, 썸네일, 대본, 샷 플랜, 캘린더, 자산, 캐릭터, ComfyUI 레시피처럼 영상 제작자가 반복해서 쓰는 템플릿을 모읍니다.",
-      businessUse: "Useful before a server marketplace: test which templates people save, rate, copy, and import most.",
-      businessUseKo: "서버 마켓 전 단계로 사람들이 어떤 템플릿을 저장, 별점, 복사, 가져오기 하는지 먼저 검증하기 좋습니다.",
+      publicUse: "Useful for testing which local templates are worth saving, rating, copying, and reusing.",
+      publicUseKo: "어떤 로컬 템플릿을 저장, 별점, 복사, 재사용할 가치가 있는지 확인하는 데 유용합니다.",
     },
     {
       id: "script-generator",
@@ -115,8 +115,8 @@
       outputFolder: "../script-generator",
       value: "Hook, outline, scene narration, CTA, short-form scripts, and reusable script drafts.",
       valueKo: "훅, 개요, 장면 내레이션, CTA, 숏폼 대본, 반복 가능한 대본 초안을 만듭니다.",
-      businessUse: "Useful for turning a saved Creator Project into a first script draft before prompt and shot planning.",
-      businessUseKo: "저장된 Creator Project를 프롬프트와 샷 플랜 전에 바로 쓸 수 있는 첫 대본 초안으로 바꿀 때 유용합니다.",
+      publicUse: "Useful for turning a saved Creator Project into a first script draft before prompt and shot planning.",
+      publicUseKo: "저장된 Creator Project를 프롬프트와 샷 플랜 전에 바로 쓸 수 있는 첫 대본 초안으로 바꿀 때 유용합니다.",
     },
     {
       id: "comfyui-workflow-manager",
@@ -129,8 +129,8 @@
       outputFolder: "../comfyui-workflow-manager",
       value: "Reusable local generation recipes for model notes, resolution, steps, batch, prompts, and failure fixes.",
       valueKo: "모델 메모, 해상도, steps, batch, 프롬프트, 실패 수정법을 반복 생성 레시피로 저장합니다.",
-      businessUse: "Useful for ComfyUI recipe packs, local setup guides, and creator workflow consulting.",
-      businessUseKo: "ComfyUI 레시피 묶음, 로컬 셋업 가이드, 제작 워크플로우 컨설팅으로 확장하기 좋습니다.",
+      publicUse: "Useful for keeping model notes, settings, prompts, and failure fixes attached to a project.",
+      publicUseKo: "모델 메모, 설정, 프롬프트, 실패 수정법을 프로젝트와 함께 보관하는 데 유용합니다.",
     },
     {
       id: "character-consistency-tool",
@@ -143,8 +143,8 @@
       outputFolder: "../character-consistency-tool",
       value: "Character bible for face, hair, outfit, silhouette, reference notes, prompts, and scene consistency checks.",
       valueKo: "얼굴, 헤어, 의상, 실루엣, 기준 이미지, 프롬프트, 장면별 일관성 체크를 캐릭터 바이블로 정리합니다.",
-      businessUse: "Useful for character bible packs, AI video continuity templates, and client production guides.",
-      businessUseKo: "캐릭터 바이블 묶음, AI 영상 일관성 템플릿, 클라이언트용 제작 가이드로 확장하기 좋습니다.",
+      publicUse: "Useful for keeping faces, outfits, reference notes, prompts, and scene consistency checks together.",
+      publicUseKo: "얼굴, 의상, 기준 메모, 프롬프트, 장면별 일관성 체크를 함께 관리하는 데 유용합니다.",
     },
   ];
 
@@ -224,10 +224,10 @@
       summarySuffix: " modules ready for local use",
       finalVerified: "Ready",
       openModule: "Open module",
-      monetizationEyebrow: "Business use",
-      monetizationTitle: "Bundle strategy",
-      monetizationCopy1: "The bundle can be positioned as a local-first creator operations kit: prompts, shot planning, cost control, publishing calendars, thumbnail ideas, and asset governance.",
-      monetizationCopy2: "Good next offers include creator templates, agency workflow packs, education products, and setup services for AI video production teams.",
+      publicNotesEyebrow: "Public scope",
+      publicNotesTitle: "Local-first MVP",
+      publicNotesCopy1: "The bundle is a static browser workspace for prompts, shot planning, cost tracking, publishing calendars, thumbnail ideas, and asset notes.",
+      publicNotesCopy2: "It avoids login, backend storage, upload automation, account linking, and paid API calls in this public MVP.",
       publishingEyebrow: "Publishing",
       githubTitle: "GitHub checklist",
       architectureEyebrow: "Architecture",
@@ -254,10 +254,10 @@
       summarySuffix: "개 모듈이 로컬 사용 준비 완료",
       finalVerified: "사용 준비 완료",
       openModule: "모듈 열기",
-      monetizationEyebrow: "비즈니스 활용",
-      monetizationTitle: "번들 전략",
-      monetizationCopy1: "이 모듈 묶음은 프롬프트 시스템, 샷 기획, 비용 관리, 발행 캘린더, 썸네일 아이디어, 자산 관리를 포함한 로컬 우선 크리에이터 운영 번들로 사용할 수 있습니다.",
-      monetizationCopy2: "다음 단계의 상품 아이디어는 크리에이터 템플릿, 에이전시 워크플로우 팩, 교육 상품, AI 영상 제작팀용 셋업 서비스입니다.",
+      publicNotesEyebrow: "공개 범위",
+      publicNotesTitle: "로컬 우선 MVP",
+      publicNotesCopy1: "이 모듈 묶음은 프롬프트, 샷 기획, 비용 관리, 발행 캘린더, 썸네일 아이디어, 자산 메모를 위한 정적 브라우저 작업 공간입니다.",
+      publicNotesCopy2: "공개 MVP에서는 로그인, 백엔드 저장, 업로드 자동화, 계정 연결, 유료 API 호출을 사용하지 않습니다.",
       publishingEyebrow: "공개 준비",
       githubTitle: "GitHub 체크리스트",
       architectureEyebrow: "구조",
@@ -275,14 +275,14 @@
   function localizeModule(module, language) {
     const lang = normalizeLanguage(language);
     if (lang === "en") {
-      return { ...module, displayName: module.name, displayWorkflow: module.workflow, displayValue: module.value, displayMonetization: module.businessUse };
+      return { ...module, displayName: module.name, displayWorkflow: module.workflow, displayValue: module.value, displayPublicUse: module.publicUse };
     }
     return {
       ...module,
       displayName: module.nameKo || module.name,
       displayWorkflow: module.workflowKo || module.workflow,
       displayValue: module.valueKo || module.value,
-      displayMonetization: module.businessUseKo || module.businessUse,
+      displayPublicUse: module.publicUseKo || module.publicUse,
     };
   }
 
@@ -312,8 +312,8 @@
         module.workflowKo,
         module.value,
         module.valueKo,
-        module.businessUse,
-        module.businessUseKo,
+        module.publicUse,
+        module.publicUseKo,
       ].join(" ").toLowerCase();
       return matchesWorkflow && (!normalizedQuery || searchableText.includes(normalizedQuery));
     }).sort((a, b) => launchpadOrder.indexOf(a.id) - launchpadOrder.indexOf(b.id)).map((module) => localizeModule(module, language));

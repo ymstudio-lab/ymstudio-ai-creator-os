@@ -71,7 +71,7 @@ This page explains who can use YMSTUDIO AI Creator OS and what each person can m
 
 ## 4. Tutorial / Course Creator
 
-**Who it is for:** A person making software tutorials, course lessons, knowledge products, or step-by-step explanations.
+**Who it is for:** A person making software tutorials, course lessons, or step-by-step explanations.
 
 **Start with:**
 
@@ -104,7 +104,7 @@ This page explains who can use YMSTUDIO AI Creator OS and what each person can m
 
 **Recommended flow:**
 
-1. Template Library: choose `크리에이터 상품 소개 영상` or `소상공인 제안 영상 템플릿`
+1. Template Library: choose `크리에이터 프로젝트 소개 영상` or `소상공인 설명 영상 템플릿`
 2. Script Generator: draft the problem, promise, proof, offer, and CTA
 3. Thumbnail Idea Board: create a clear before/after or offer thumbnail
 4. YouTube Calendar: plan publish and review timing

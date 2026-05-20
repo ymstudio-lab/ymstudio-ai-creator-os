@@ -93,6 +93,17 @@ def cover_crop(image: Image.Image, size: tuple[int, int]) -> Image.Image:
     return resized.crop((left, top, left + target_w, top + target_h))
 
 
+def contain_fit(image: Image.Image, size: tuple[int, int], fill=(250, 252, 248)) -> Image.Image:
+    target_w, target_h = size
+    scale = min(target_w / image.width, target_h / image.height)
+    resized = image.resize((int(image.width * scale), int(image.height * scale)), Image.Resampling.LANCZOS)
+    canvas = Image.new("RGB", size, fill)
+    left = (target_w - resized.width) // 2
+    top = (target_h - resized.height) // 2
+    canvas.paste(resized, (left, top))
+    return canvas
+
+
 def focus_crop(image: Image.Image, focus: tuple[float, float, float, float]) -> Image.Image:
     x1, y1, x2, y2 = focus
     return image.crop((int(image.width * x1), int(image.height * y1), int(image.width * x2), int(image.height * y2)))
@@ -126,7 +137,7 @@ def make_frame(series_key: str, scene: tuple, index: int, total: int) -> Path:
     background = cover_crop(source, (W, H)).filter(ImageFilter.GaussianBlur(18))
     canvas = Image.alpha_composite(background.convert("RGBA"), Image.new("RGBA", (W, H), (15, 34, 29, 120)))
 
-    shot = cover_crop(focus_crop(source, focus), (940, 1000))
+    shot = contain_fit(source, (940, 1000))
     shot = shot.filter(ImageFilter.UnsharpMask(radius=1.2, percent=120, threshold=3))
 
     card = Image.new("RGBA", (980, 1040), (255, 255, 255, 0))

@@ -1,36 +1,46 @@
 # Privacy
 
-## 요약
+## Summary
 
-이 앱은 서버로 데이터를 보내지 않습니다.
+YMSTUDIO AI Creator OS does not send app data to a server. It is a static browser app that stores user-created data in the current browser's `localStorage`.
 
-사용자가 입력한 데이터는 브라우저의 `localStorage`에 저장됩니다. 같은 PC, 같은 브라우저, 같은 로컬 파일/도메인에서 다시 열면 이어서 사용할 수 있습니다.
+## Data Stored Locally
 
-## 저장되는 데이터 예시
+Depending on the module, the app may store:
 
-- 프롬프트 제목과 본문
-- 영상 샷 플랜
-- 비용 기록
-- 유튜브 일정
-- 에셋 메모와 파일 경로
-- 언어 선택
+- prompt titles and prompt text
+- script drafts
+- shot planning notes
+- thumbnail ideas
+- content calendar items
+- cost-tracking entries
+- asset notes and file paths
+- character consistency notes
+- language preference
 
-## 저장되지 않는 것
+This data stays in the browser unless you manually export it.
 
-이 앱 자체는 다음을 서버로 보내거나 수집하지 않습니다.
+## Data Not Collected By This App
 
-- 계정 정보
-- 결제 정보
-- 분석 이벤트
-- 원격 로그
-- 외부 API 호출 결과
+The public MVP does not collect or transmit:
 
-## 백업
+- account information
+- payment information
+- analytics events
+- remote logs
+- external API responses
+- uploaded files
 
-각 모듈의 `Export JSON`을 사용해 직접 백업하세요.
+## Backup And Restore
 
-브라우저 데이터를 삭제하거나 다른 브라우저에서 열면 기존 데이터가 보이지 않을 수 있습니다.
+Use each module's `Export JSON` button to create a local backup. Use `Import JSON` in the same module to restore that backup in another browser profile or after clearing site data.
 
-## 민감 정보 주의
+JSON exports are plain files. Do not store them in public folders if they include private project notes.
 
-현재 버전은 공개 데모/로컬 MVP입니다. API 키, 비밀번호, 개인정보, 고객 자료는 입력하지 않는 것을 권장합니다.
+## Sensitive Data Warning
+
+Do not enter API keys, passwords, customer personal data, payment data, private contract information, or internal workflow notes into the public demo.
+
+## Browser Storage Limits
+
+Clearing browser site data can delete local app data. Different browsers, devices, or profiles do not automatically share data.

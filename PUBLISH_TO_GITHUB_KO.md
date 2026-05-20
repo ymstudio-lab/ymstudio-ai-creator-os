@@ -1,69 +1,74 @@
-# GitHub에 올리는 방법
+# GitHub 공개 전 확인 방법
 
-## 1. GitHub CLI 로그인 확인
+이 문서는 public repo를 공개하기 전에 확인할 항목만 다룹니다. 실제 `git add`, `git commit`, `git push`, GitHub Pages 설정은 Polaris 승인 후에만 실행합니다.
+
+## 1. GitHub 로그인 확인
 
 ```powershell
 gh auth status
 ```
 
-`Logged in to github.com`와 GitHub 아이디가 보이면 준비 완료입니다.
+`Logged in to github.com`과 계정명이 보이면 로그인은 준비된 상태입니다.
 
-## 2. 공개 전 점검
+## 2. 공개 범위 확인
 
 ```powershell
-cd path\to\YMStudioCreatorOS
 git status --short --ignored
 git add -n .
 ```
 
-`reports`, `reviews`, `plan.md`, `status.json`, `tasks.json`, `PROMOTION.md`가 업로드 대상에 들어가면 안 됩니다.
+확인 기준:
 
-## 3. 저장소 생성과 업로드
+- `reports/`, `reviews/`, `plan.md`, `status.json`, `tasks.json`는 공개 대상이 아닙니다.
+- 홍보/채널 운영 문서는 공개 대상이 아닙니다.
+- `.env`, API 키, 토큰, 비밀번호, 계정 정보는 절대 공개 대상이 아닙니다.
+- 앱 코드, README, 공개 문서, 스크린샷, 공개 데모 영상, 보안/개인정보 문서는 공개 대상입니다.
+
+## 3. 공개 전 테스트
 
 ```powershell
-git init
-git add .
-git commit -m "Initial public MVP package"
-gh repo create ymstudio-ai-creator-os --public --source=. --remote=origin --push
+node test.js
+python scripts\test_creator_os_interactions.py
+python scripts\test_creator_os_sample_flow.py
+python scripts\capture_creator_os_screenshots.py
 ```
 
-이미 같은 이름의 저장소가 있으면 다른 이름을 쓰거나 기존 저장소에 push해야 합니다.
+각 모듈 폴더의 `test.js`도 함께 실행합니다.
 
-## 4. GitHub Pages로 데모 열기
+## 4. 보안 스캔
 
-1. GitHub 저장소 페이지로 이동
-2. `Settings`
-3. `Pages`
-4. Source: `Deploy from a branch`
-5. Branch: `main`
-6. Folder: `/root`
-7. Save
+```powershell
+rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|document\.write|api[_-]?key|secret|password" outputs
+rg -n -i "api[_-]?key|secret|token|oauth|password|\.env" README.md docs outputs scripts
+```
 
-잠시 뒤 아래 주소로 열립니다.
+정상 기준:
+
+- 실제 자격증명이나 계정 정보가 없어야 합니다.
+- 보안 문서 안의 금지 예시는 괜찮지만, 실제 값은 없어야 합니다.
+
+## 5. GitHub Pages 확인
+
+Polaris 승인 후 배포가 끝나면 아래 주소를 확인합니다.
 
 ```text
-https://thdudals12345-max.github.io/ymstudio-ai-creator-os/
+https://ymstudio-lab.github.io/ymstudio-ai-creator-os/
 ```
 
-## 5. 공개 후 확인
+확인 기준:
 
-- README 첫 화면이 이해되는지
-- 루트 `index.html`이 대시보드로 이동하는지
-- 한국어가 깨지지 않는지
-- 대시보드에서 5개 모듈이 열리는지
-- `Export JSON`이 다운로드되는지
-- 저장소에 내부 운영 파일이 올라가지 않았는지
+- 루트 페이지가 Creator OS Dashboard로 이동합니다.
+- Dashboard, Template Library, Script Generator가 열립니다.
+- 샘플 프로젝트 버튼이 동작합니다.
+- `Export JSON` 다운로드가 동작합니다.
+- 모바일 폭에서 가로 스크롤이 생기지 않습니다.
 
-## 6. 처음 홍보 문구
+## 6. 공개 설명 문구
 
-짧게:
+짧은 설명:
 
-> AI 영상/콘텐츠 제작자를 위한 로컬 우선 Creator OS MVP를 공개했습니다. 프롬프트, 샷 플랜, API 비용, 유튜브 일정, 자산을 브라우저에서 바로 관리할 수 있습니다.
-
-조금 길게:
-
-> YMSTUDIO AI Creator OS는 AI 크리에이터가 프롬프트, 영상 샷 플랜, API 비용, 유튜브 일정, 자산을 한곳에서 관리할 수 있게 만든 로컬 우선 MVP입니다. 서버, 로그인, API 호출 없이 브라우저에서 바로 실행합니다.
+> YMSTUDIO AI Creator OS는 AI 영상/콘텐츠 제작자를 위한 로컬 우선 브라우저 MVP입니다. 프롬프트, 샷 플랜, 비용, 일정, 자산 메모를 서버, 로그인, 외부 API 호출 없이 관리합니다.
 
 주의 문구:
 
-> 현재는 공개 데모/로컬 MVP입니다. 데이터는 브라우저 localStorage에 저장되므로 중요한 자료는 Export JSON으로 백업하세요.
+> 현재 버전은 공개 데모용 로컬 MVP입니다. 데이터는 브라우저 `localStorage`에 저장되므로 중요한 자료는 `Export JSON`으로 백업하세요.

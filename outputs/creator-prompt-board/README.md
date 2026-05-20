@@ -1,6 +1,6 @@
 # YMSTUDIO Creator Prompt Board
 
-Creator Prompt Board is a local-first prompt workspace for AI video, image, and content creators. It is part of the `YMSTUDIO AI Creator OS`, a practical toolkit for storing repeatable creator workflows before they become paid templates, client systems, or studio operating procedures.
+Creator Prompt Board is a local-first prompt workspace for AI video, image, and content creators. It is part of the `YMSTUDIO AI Creator OS`, a practical toolkit for storing repeatable creator workflows before they become larger project systems.
 
 Use it to collect prompts for YouTube Shorts, product ads, character consistency, thumbnails, storyboards, and ComfyUI/Runway/Kling/Pika workflows without needing a login, backend, or paid API.
 
@@ -61,13 +61,13 @@ The tests cover prompt creation, updates, search/filter behavior, favorite toggl
 - Import a valid export and confirm a success toast appears.
 - Try importing invalid JSON and confirm an error toast appears without clearing the current library.
 
-## Monetization Direction
+## Public Scope
 
-This MVP can become a paid creator operating system by adding:
+This public MVP focuses on local prompt organization:
 
-- Premium prompt packs for specific channels, formats, tools, and client niches
+- Prompt examples for specific channels, formats, tools, and project niches
 - Importable workflow templates for short-form video production, thumbnails, ads, and AI spokesperson systems
-- Team/project workspaces for small studios
+- Project workspaces for repeated creator tasks
 - Version history and result comparison for prompt iteration
 - Optional desktop packaging or private hosted sync for creators who need multi-device access
 

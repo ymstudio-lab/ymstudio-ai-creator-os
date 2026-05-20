@@ -115,7 +115,7 @@ def main() -> int:
 
         template = OUTPUTS / "template-library" / "index.html"
         page.goto(file_url(template), wait_until="networkidle")
-        page.select_option("#categoryFilter", "썸네일")
+        page.select_option("#categoryFilter", "Thumbnail")
         template_count_text = page.locator("#count").inner_text(timeout=3000)
         detail_result = page.locator("#detailResult").inner_text(timeout=3000)
         checks.append({

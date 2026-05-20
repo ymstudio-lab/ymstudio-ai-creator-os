@@ -50,7 +50,7 @@ The catalog remains in the browser profile that opened the file. Use `Export JSO
 
 ## Future Folder Scanner Roadmap
 
-Automatic scanning is out of scope for this MVP. A future paid/local extension could add an explicit folder review workflow:
+Automatic scanning is out of scope for this MVP. A future local extension could add an explicit folder review workflow:
 
 1. User chooses a folder with a browser-supported picker or local desktop wrapper.
 2. The app lists candidate files locally and waits for confirmation.
@@ -78,10 +78,10 @@ node --check test.js
 - Payment flows
 - External API imports
 
-## Monetization Direction
+## Public Scope
 
-- Creator file system setup service
+- Local file system conventions
 - Asset organization templates
-- Character bible and prompt library packs
+- Character bible and prompt library examples
 - Future folder scanner extension
-- Team review workflow
+- Team review workflow concepts

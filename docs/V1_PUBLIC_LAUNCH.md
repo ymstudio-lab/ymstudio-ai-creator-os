@@ -27,14 +27,13 @@ This is a browser-based MVP for AI video and content creators. It runs as static
 7. Open Character Consistency Tool and create from project.
 8. Export JSON from the dashboard or a module.
 
-## Public Posting Targets
+## Public Demo Surfaces
 
 - GitHub repository README
-- YouTube community or short demo video
-- AI creator Discord communities
-- ComfyUI communities
-- Korean creator/AI communities
-- X/Threads short build log
+- GitHub Pages demo
+- Public screenshots
+- Public demo videos
+- GitHub Issues feedback templates
 
 ## Safe Public Wording
 
@@ -77,4 +76,4 @@ https://github.com/ymstudio-lab/ymstudio-ai-creator-os/issues
 - Which screen looked too complex?
 - Would you use this for a real video project?
 - Which template would you want more of?
-- Would you pay for template packs, ComfyUI recipe packs, setup help, or a hosted sync version?
+- Which local workflow would you want improved first?

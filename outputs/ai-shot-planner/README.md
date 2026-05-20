@@ -50,11 +50,11 @@ node --check state.js
 node --check test.js
 ```
 
-## Monetization Direction
+## Public Scope
 
-- Storyboard templates for short-form ads, faceless videos, creator launches, product demos, and local business promos
-- AI ad/video production packs with reusable scene structures, continuity bibles, prompt systems, and export handoff formats
-- Creator setup service that installs local workflows, folder conventions, generation handoff templates, and repeatable shot-planning habits
+- Repeatable scene structures for short-form, tutorial, product demo, and local project videos
+- Continuity notes, prompt systems, and export handoff formats for public demo workflows
+- Local folder and shot-planning habits that can be tested without accounts or uploads
 
 ## Scope Notes
 

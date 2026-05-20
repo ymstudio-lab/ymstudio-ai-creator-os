@@ -1,46 +1,64 @@
 # Security Policy
 
-## 현재 보안 범위
+## Current Security Scope
 
-YMSTUDIO AI Creator OS는 로컬 우선 정적 웹앱입니다.
+YMSTUDIO AI Creator OS is a static, local-first browser MVP.
 
-- 서버 없음
-- 로그인 없음
-- 외부 API 호출 없음
-- 브라우저 `localStorage` 저장
-- 파일 시스템 자동 접근 없음
-- 폴더 자동 업로드 없음
+- No backend server is required.
+- No login is required.
+- No external API call is made by the app.
+- App data is stored in browser `localStorage`.
+- Files and folders are not scanned automatically.
+- Uploading or publishing is not automated.
 
-## 입력하지 말아야 할 정보
+## Do Not Enter Sensitive Data
 
-현재 MVP에는 암호화, 계정 권한, 클라우드 백업이 없습니다.
+This MVP does not provide account permissions, encrypted sync, role-based access, or cloud backup.
 
-다음 정보는 입력하지 마세요.
+Do not enter:
 
-- API 키
-- 비밀번호
-- 고객 개인정보
-- 결제 정보
-- 비공개 계약 정보
-- 외부에 공개되면 안 되는 프롬프트나 소스 자료
+- API keys
+- OAuth secrets
+- access tokens
+- passwords
+- customer personal data
+- payment data
+- private contract information
+- private prompts, source files, or paths that should not be public
 
-## 알려진 제한
+## Known Limits
 
-- 브라우저 캐시나 사이트 데이터를 삭제하면 저장된 데이터가 사라질 수 있습니다.
-- 다른 브라우저나 PC로 데이터가 자동 동기화되지 않습니다.
-- GitHub Pages 또는 정적 호스팅에 올릴 경우 같은 도메인의 스크립트가 `localStorage`에 접근할 수 있습니다.
+- If browser site data is deleted, locally saved data can be lost.
+- Data does not automatically sync across browsers or devices.
+- Any script served from the same static origin could access the same origin's `localStorage`, so only run trusted copies of the app.
+- JSON exports are plain files. Store them only in locations you trust.
 
-## 공개 전 검증
+## Public Release Checks
 
-공개 전 다음 검사를 수행했습니다.
+Before a public update, run:
 
-- 외부 네트워크 호출 패턴 검사
-- `eval`, `new Function`, `document.write` 검사
-- API 키, 시크릿, 비밀번호 문자열 검사
-- 데스크톱/모바일 스크린샷 검증
-- 한글 UTF-8 깨짐 검증
-- 독립 코드 리뷰
+```powershell
+node test.js
+python scripts\test_creator_os_interactions.py
+python scripts\test_creator_os_sample_flow.py
+python scripts\capture_creator_os_screenshots.py
+rg -n "window\.prompt|fetch\(|XMLHttpRequest|sendBeacon|eval\(|new Function|document\.write|api[_-]?key|secret|password" outputs
+```
 
-## 신고
+Also check:
 
-보안 문제가 보이면 GitHub Issue로 재현 방법, 브라우저, 모듈명, 입력 데이터 형태를 알려주세요. 실제 비밀값이나 개인정보는 포함하지 마세요.
+- Screenshots do not expose private paths or private data.
+- Public docs do not include internal operating notes.
+- Release notes describe only public app behavior.
+
+## Reporting
+
+If you find a security issue, open a GitHub issue with:
+
+- affected module
+- browser
+- reproduction steps
+- expected behavior
+- actual behavior
+
+Do not include real secrets, customer data, or private files in the issue.

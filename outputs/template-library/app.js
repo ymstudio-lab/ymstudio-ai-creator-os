@@ -37,9 +37,9 @@ const els = {
 
 const beginnerPickIds = ["classic_video_hook_map", "script_hook_loop", "thumb_emotion_contrast"];
 const beginnerPickReasons = {
-  classic_video_hook_map: "영상 주제의 첫 훅과 시청 이유를 정합니다.",
+  classic_video_hook_map: "영상 주제의 첫 문장과 시청 이유를 정합니다.",
   script_hook_loop: "훅을 고른 뒤 바로 첫 대본 구조를 만듭니다.",
-  thumb_emotion_contrast: "제목과 함께 볼 첫 썸네일 방향을 정합니다.",
+  thumb_emotion_contrast: "제목과 함께 보일 첫 썸네일 방향을 정합니다.",
 };
 
 function clear(node) {
@@ -96,7 +96,7 @@ function renderSummary() {
   const saved = localState.saved.length;
   const rated = Object.values(localState.ratings).filter((value) => Number(value) > 0).length;
   els.total.textContent = State.templates.length;
-  els.summary.textContent = `saved ${saved} · rated ${rated}`;
+  els.summary.textContent = `saved ${saved} / rated ${rated}`;
 }
 
 function renderBeginnerPicks() {
@@ -153,7 +153,7 @@ function renderList() {
 
     const meta = document.createElement("span");
     meta.className = "meta";
-    meta.textContent = `${template.category} · ${template.audience}`;
+    meta.textContent = `${template.category} / ${template.audience}`;
 
     const reason = document.createElement("span");
     reason.className = "reason";

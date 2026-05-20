@@ -133,7 +133,7 @@ function testDeleteUndoWorkflow() {
 
 function testDemoDataCoversCreatorNiches() {
   const niches = State.createDemoState().items.map((item) => item.niche.toLowerCase()).join(" ");
-  ["shorts", "tools", "automation", "monetization", "tutorial"].forEach((term) => {
+  ["shorts", "tools", "automation", "budget", "tutorial"].forEach((term) => {
     assert.equal(niches.includes(term), true, `demo niches should include ${term}`);
   });
 }

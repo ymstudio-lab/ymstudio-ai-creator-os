@@ -511,7 +511,7 @@
       const title = createTextElement("h3", "", module.displayName);
       const value = createTextElement("p", "module-value", module.displayValue);
       const queue = createTextElement("p", "queue-line", state.getCopy(getLanguage()).localReady);
-      const money = createTextElement("p", "module-money", module.displayMonetization);
+      const publicUse = createTextElement("p", "module-note", module.displayPublicUse);
 
       const link = document.createElement("a");
       link.className = "launch-link";
@@ -519,7 +519,7 @@
       link.textContent = state.getCopy(getLanguage()).openModule;
       link.setAttribute("aria-label", `${state.getCopy(getLanguage()).openModule}: ${module.displayName}`);
 
-      card.append(topLine, title, value, queue, money, link);
+      card.append(topLine, title, value, queue, publicUse, link);
       return card;
     });
 
@@ -545,7 +545,7 @@
 
       const title = createTextElement("h3", "", module.name);
       const value = createTextElement("p", "module-value", module.value);
-      const reason = createTextElement("p", "module-money", module.reason);
+      const reason = createTextElement("p", "module-note", module.reason);
 
       card.append(topLine, title, value, reason);
       return card;

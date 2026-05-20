@@ -69,6 +69,6 @@ node --check test.js
 - Exact token-price modeling for every provider plan.
 - Payment processing or subscription management.
 
-## Monetization direction
+## Public Scope
 
-This module can become a paid template for creator operations dashboards, a setup service for studios that need provider-specific cost categories and budget rules, and a future importer bundle for OpenAI, Anthropic, image/video providers, automation runners, and MCP tool logs. The current MVP stays local and manual so creators can start tracking spend immediately without connecting accounts.
+This module stays local and manual in the public MVP. It helps creators compare provider categories, budget rules, and credit usage without connecting accounts, importing billing data, or storing credentials.

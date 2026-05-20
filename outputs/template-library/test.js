@@ -13,8 +13,7 @@ function memoryStorage() {
 
 function testDefinitions() {
   assert.ok(State.templates.length >= 30);
-  assert.ok(State.categories.includes("Thumbnail"));
-  ["쇼츠", "롱폼", "튜토리얼", "리뷰", "비교", "썸네일", "후킹"].forEach((category) => {
+  ["Shorts", "Longform", "Tutorial", "Review", "Comparison", "Thumbnail", "Hook"].forEach((category) => {
     assert.ok(State.categories.includes(category));
     assert.ok(State.templates.some((item) => item.category === category));
   });
@@ -33,7 +32,7 @@ function testDefinitions() {
 function testFiltering() {
   const localState = { ratings: {}, saved: ["thumb_before_after"] };
   assert.ok(State.filterTemplates(State.templates, { query: "thumbnail" }, localState).length >= 2);
-  assert.ok(State.filterTemplates(State.templates, { category: "썸네일" }, localState).some((item) => item.category === "Thumbnail"));
+  assert.ok(State.filterTemplates(State.templates, { category: "Thumbnail" }, localState).every((item) => item.category === "Thumbnail"));
   assert.ok(State.filterTemplates(State.templates, { category: "ComfyUI" }, localState).every((item) => item.category === "ComfyUI"));
   assert.ok(State.filterTemplates(State.templates, { savedOnly: true }, localState).every((item) => item.id === "thumb_before_after"));
   assert.ok(State.filterTemplates(State.templates, { minPopularity: 5 }, localState).every((item) => item.popularity >= 5));
@@ -112,7 +111,7 @@ function testBeginnerPicksUiBindings() {
   assert.ok(app.includes("script_hook_loop"));
   assert.ok(app.includes("thumb_emotion_contrast"));
   assert.ok(app.includes("beginnerPickReasons"));
-  assert.ok(app.includes("영상 주제의 첫 훅과 시청 이유"));
+  assert.ok(app.includes("영상 주제의 첫 문장과 시청 이유"));
   assert.ok(app.includes("scrollIntoView"));
 }
 
@@ -120,7 +119,7 @@ function testResultUiBindings() {
   const index = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
   const app = fs.readFileSync(path.join(__dirname, "app.js"), "utf8");
   assert.ok(index.includes("detailResult"));
-  assert.ok(index.includes("이 템플릿으로 남는 결과"));
+  assert.ok(index.includes("이 템플릿으로 얻는 결과"));
   assert.ok(app.includes("detailResult"));
   assert.ok(app.includes("resultKo"));
 }

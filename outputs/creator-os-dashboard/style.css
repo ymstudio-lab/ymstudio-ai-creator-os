@@ -737,7 +737,7 @@ h2 {
   background: #fbfbf8;
 }
 
-.planned-card .module-money {
+.planned-card .module-note {
   display: block;
   font-size: 0.84rem;
 }
@@ -795,14 +795,14 @@ h2 {
 }
 
 .module-value,
-.module-money,
+.module-note,
 .queue-line {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
 }
 
-.module-money {
+.module-note {
   display: none;
 }
 
