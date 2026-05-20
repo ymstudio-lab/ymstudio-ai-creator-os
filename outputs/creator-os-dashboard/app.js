@@ -34,17 +34,28 @@
   const PROJECT_KEY = "ymstudio.creatorProject.v1";
   const projectFields = ["channelName", "videoTopic", "targetAudience", "videoGoal", "platform", "tone", "aiTools", "folderName"];
   const workflowSteps = [
-    { title: "1단계: 주제 입력", detail: "Creator Project에 채널, 주제, 타깃, 목적을 먼저 저장합니다.", href: "#", label: "현재 화면" },
-    { title: "2단계: 훅 고르기", detail: "Template Library에서 일반 영상/AI 영상에 맞는 훅 템플릿을 고릅니다.", href: "../template-library/index.html", label: "템플릿 열기" },
-    { title: "3단계: 프롬프트 저장", detail: "쓸 만한 프롬프트와 대본 구조를 Prompt Board에 저장합니다.", href: "../creator-prompt-board/index.html", label: "프롬프트 열기" },
-    { title: "4단계: ComfyUI 레시피 선택", detail: "내 PC 성능에 맞는 모델, 해상도, steps, batch, 실패 수정법을 저장합니다.", href: "../comfyui-workflow-manager/index.html", label: "ComfyUI 열기" },
-    { title: "5단계: 캐릭터 고정 규칙", detail: "같은 캐릭터가 필요한 영상은 얼굴, 헤어, 의상, 기준 이미지 메모를 먼저 고정합니다.", href: "../character-consistency-tool/index.html", label: "캐릭터 열기" },
-    { title: "6단계: 샷 나누기", detail: "Shot Planner에서 장면, 컷, 생성 프롬프트, 촬영 메모를 나눕니다.", href: "../ai-shot-planner/index.html", label: "샷 플랜 열기" },
-    { title: "7단계: 썸네일 후보 만들기", detail: "Thumbnail Idea Board에서 제목과 썸네일 방향을 비교합니다.", href: "../thumbnail-idea-board/index.html", label: "썸네일 열기" },
-    { title: "8단계: 업로드 계획", detail: "YouTube Calendar에 일정과 업로드 후 리뷰 메모를 남깁니다.", href: "../youtube-calendar/index.html", label: "캘린더 열기" },
-    { title: "9단계: 자산/비용 정리", detail: "Asset Manager와 Cost Tracker에 파일, 라이선스, 사용 비용을 기록합니다.", href: "../creator-asset-manager/index.html", label: "자산 열기" },
+    { title: "Step 1: Enter the topic", titleKo: "1단계: 주제 입력", detail: "Save the channel, topic, audience, and goal in Creator Project first.", detailKo: "Creator Project에 채널, 주제, 타깃, 목적을 먼저 저장합니다.", href: "#", label: "Current screen", labelKo: "현재 화면" },
+    { title: "Step 2: Choose a hook", titleKo: "2단계: 훅 고르기", detail: "Pick a hook template for a standard or AI video in Template Library.", detailKo: "Template Library에서 일반 영상/AI 영상에 맞는 훅 템플릿을 고릅니다.", href: "../template-library/index.html", label: "Open templates", labelKo: "템플릿 열기" },
+    { title: "Step 3: Save prompts", titleKo: "3단계: 프롬프트 저장", detail: "Save useful prompts and script structures in Prompt Board.", detailKo: "쓸 만한 프롬프트와 대본 구조를 Prompt Board에 저장합니다.", href: "../creator-prompt-board/index.html", label: "Open prompts", labelKo: "프롬프트 열기" },
+    { title: "Step 4: Pick a ComfyUI recipe", titleKo: "4단계: ComfyUI 레시피 선택", detail: "Save model, resolution, steps, batch, and failure-fix notes for your PC.", detailKo: "내 PC 성능에 맞는 모델, 해상도, steps, batch, 실패 수정법을 저장합니다.", href: "../comfyui-workflow-manager/index.html", label: "Open ComfyUI", labelKo: "ComfyUI 열기" },
+    { title: "Step 5: Lock character rules", titleKo: "5단계: 캐릭터 고정 규칙", detail: "For character-led videos, lock face, hair, outfit, and reference notes first.", detailKo: "같은 캐릭터가 필요한 영상은 얼굴, 헤어, 의상, 기준 이미지 메모를 먼저 고정합니다.", href: "../character-consistency-tool/index.html", label: "Open characters", labelKo: "캐릭터 열기" },
+    { title: "Step 6: Break into shots", titleKo: "6단계: 샷 나누기", detail: "Use Shot Planner to split scenes, cuts, generation prompts, and filming notes.", detailKo: "Shot Planner에서 장면, 컷, 생성 프롬프트, 촬영 메모를 나눕니다.", href: "../ai-shot-planner/index.html", label: "Open shot plan", labelKo: "샷 플랜 열기" },
+    { title: "Step 7: Make thumbnail candidates", titleKo: "7단계: 썸네일 후보 만들기", detail: "Compare title and thumbnail directions in Thumbnail Idea Board.", detailKo: "Thumbnail Idea Board에서 제목과 썸네일 방향을 비교합니다.", href: "../thumbnail-idea-board/index.html", label: "Open thumbnails", labelKo: "썸네일 열기" },
+    { title: "Step 8: Plan upload", titleKo: "8단계: 업로드 계획", detail: "Leave schedules and post-upload review notes in YouTube Calendar.", detailKo: "YouTube Calendar에 일정과 업로드 후 리뷰 메모를 남깁니다.", href: "../youtube-calendar/index.html", label: "Open calendar", labelKo: "캘린더 열기" },
+    { title: "Step 9: Organize assets and costs", titleKo: "9단계: 자산/비용 정리", detail: "Record files, licenses, and usage cost in Asset Manager and Cost Tracker.", detailKo: "Asset Manager와 Cost Tracker에 파일, 라이선스, 사용 비용을 기록합니다.", href: "../creator-asset-manager/index.html", label: "Open assets", labelKo: "자산 열기" },
   ];
-  const sampleProject = {
+  const sampleProjects = {
+    en: {
+      channelName: "YMSTUDIO",
+      videoTopic: "Production workflow for AI and traditional video creators",
+      targetAudience: "Solo creators starting video production",
+      videoGoal: "Use templates to move from planning to upload without getting stuck",
+      platform: "YouTube Long, Shorts",
+      tone: "Clear, practical, calm",
+      aiTools: "Claude, ChatGPT, ComfyUI",
+      folderName: "20260519-creator-workflow",
+    },
+    ko: {
     channelName: "YMSTUDIO",
     videoTopic: "AI와 일반 영상 제작자가 함께 쓰는 제작 워크플로우",
     targetAudience: "영상 제작을 처음 시작하는 1인 크리에이터",
@@ -53,10 +64,12 @@
     tone: "쉽게, 실전형, 차분하게",
     aiTools: "Claude, ChatGPT, ComfyUI",
     folderName: "20260519-creator-workflow",
+    },
   };
 
   function seedSampleModules() {
     const now = new Date().toISOString();
+    const sampleProject = getSampleProject();
     const setIfEmpty = (key, value) => {
       if (!localStorage.getItem(key)) localStorage.setItem(key, value);
     };
@@ -180,23 +193,31 @@
   }
 
   const progressSources = [
-    { key: PROJECT_KEY, label: "프로젝트", href: "#", read: (data) => projectFields.filter((field) => data && data[field]).length },
-    { key: "ymstudio.templateLibrary.v1", label: "템플릿", href: "../template-library/index.html", read: (data) => data && Array.isArray(data.saved) ? data.saved.length : data && data.localState && Array.isArray(data.localState.saved) ? data.localState.saved.length : 0 },
-    { key: "ymstudio.scriptGenerator.v1", label: "대본", href: "../script-generator/index.html", read: (data) => Array.isArray(data) ? data.length : 0 },
+    { key: PROJECT_KEY, label: "Project", labelKo: "프로젝트", href: "#", read: (data) => projectFields.filter((field) => data && data[field]).length },
+    { key: "ymstudio.templateLibrary.v1", label: "Templates", labelKo: "템플릿", href: "../template-library/index.html", read: (data) => data && Array.isArray(data.saved) ? data.saved.length : data && data.localState && Array.isArray(data.localState.saved) ? data.localState.saved.length : 0 },
+    { key: "ymstudio.scriptGenerator.v1", label: "Scripts", labelKo: "대본", href: "../script-generator/index.html", read: (data) => Array.isArray(data) ? data.length : 0 },
     { key: "ymstudio.comfyWorkflowManager.v1", label: "ComfyUI", href: "../comfyui-workflow-manager/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.workflows) ? data.workflows.length : 0 },
-    { key: "ymstudio.characterConsistencyTool.v1", label: "캐릭터", href: "../character-consistency-tool/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.characters) ? data.characters.length : 0 },
-    { key: "ymstudio.aiShotPlanner.v1", label: "샷 플랜", href: "../ai-shot-planner/index.html", read: (data) => data && Array.isArray(data.shots) ? data.shots.length : 0 },
-    { key: "ymstudio.thumbnailIdeaBoard.v1", label: "썸네일", href: "../thumbnail-idea-board/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.ideas) ? data.ideas.length : 0 },
-    { key: "ymstudio.youtubeCalendar.v1", label: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },
-    { key: "ymstudio.creatorAssetManager.v1", label: "자산", href: "../creator-asset-manager/index.html", read: (data) => data && Array.isArray(data.assets) ? data.assets.length : 0 },
+    { key: "ymstudio.characterConsistencyTool.v1", label: "Characters", labelKo: "캐릭터", href: "../character-consistency-tool/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.characters) ? data.characters.length : 0 },
+    { key: "ymstudio.aiShotPlanner.v1", label: "Shot plan", labelKo: "샷 플랜", href: "../ai-shot-planner/index.html", read: (data) => data && Array.isArray(data.shots) ? data.shots.length : 0 },
+    { key: "ymstudio.thumbnailIdeaBoard.v1", label: "Thumbnails", labelKo: "썸네일", href: "../thumbnail-idea-board/index.html", read: (data) => Array.isArray(data) ? data.length : data && Array.isArray(data.ideas) ? data.ideas.length : 0 },
+    { key: "ymstudio.youtubeCalendar.v1", label: "Calendar", labelKo: "캘린더", href: "../youtube-calendar/index.html", read: (data) => data && Array.isArray(data.items) ? data.items.length : 0 },
+    { key: "ymstudio.creatorAssetManager.v1", label: "Assets", labelKo: "자산", href: "../creator-asset-manager/index.html", read: (data) => data && Array.isArray(data.assets) ? data.assets.length : 0 },
   ];
 
   const requiredProjectFields = ["channelName", "videoTopic", "targetAudience", "videoGoal"];
 
   const setupRecommendations = {
     cloud: {
-      title: "저사양/노트북 추천: 유료 웹/API 우선",
+      title: "Low-spec/laptop recommendation: paid web/API first",
+      titleKo: "저사양/노트북 추천: 유료 웹/API 우선",
       lines: [
+        "LLM: Use web/API models such as ChatGPT, Claude, Gemini, or Kimi for scripts and prompts, and keep local tools for saving and organizing.",
+        "Local models: If needed, use only small 2B-4B Gemma/Qwen/Llama-family models for short note cleanup.",
+        "Context: Start at 8K-32K and split long material by scene or section.",
+        "Speed expectation: CPU-only systems can be very slow even with 2B models, so cloud is better for quality work and local is better for repeat organization.",
+        "ComfyUI: Prefer 768px or lower, low steps, batch 1, and cloud GPU or RunComfy-style support.",
+      ],
+      linesKo: [
         "LLM: ChatGPT, Claude, Gemini, Kimi 같은 웹/API 모델로 대본과 프롬프트를 만들고 로컬은 저장/정리용으로 씁니다.",
         "로컬 모델: 필요하면 Gemma/Qwen/Llama 계열 2B-4B급만 짧은 메모 정리에 사용합니다.",
         "컨텍스트: 8K-32K부터 시작하고 긴 자료는 장면/섹션 단위로 나눕니다.",
@@ -205,8 +226,15 @@
       ],
     },
     balanced: {
-      title: "중간 사양 추천: 로컬 소형 + 유료 보조",
+      title: "Mid-spec recommendation: small local models plus paid support",
+      titleKo: "중간 사양 추천: 로컬 소형 + 유료 보조",
       lines: [
+        "LLM: Use local 4B-8B models for drafts, classification, and tags, then send final scripts and complex decisions to paid web/API models.",
+        "Context: Start around 16K-64K and attach only short project JSON.",
+        "Speed expectation: Iterate drafts locally, then reduce context and output length if it slows down.",
+        "ComfyUI: Work around 1024px, batch 1, and validate images before moving to video workflows.",
+      ],
+      linesKo: [
         "LLM: 로컬 4B-8B급은 초안/분류/태그에 쓰고, 최종 대본과 복잡한 판단은 유료 웹/API로 넘깁니다.",
         "컨텍스트: 16K-64K 범위에서 시작하고 프로젝트 JSON만 짧게 붙입니다.",
         "속도 기대치: 초안은 로컬로 빠르게 반복하고, 느려지면 컨텍스트와 출력 길이를 줄입니다.",
@@ -214,8 +242,16 @@
       ],
     },
     local: {
-      title: "고사양 GPU 추천: 로컬 LLM/ComfyUI 우선",
+      title: "High-end GPU recommendation: local LLM/ComfyUI first",
+      titleKo: "고사양 GPU 추천: 로컬 LLM/ComfyUI 우선",
       lines: [
+        "LLM: Use 8B-14B+ local models for prompt variations, character rules, and asset-note automation.",
+        "Paid models: Keep them as support for final planning review, long research, and complex strategy decisions.",
+        "Context: You can expand toward 32K-128K, but keep the habit of passing only project-level JSON.",
+        "Speed expectation: Token speed depends heavily on GPU, quantization, and context length, so short iterations are safer than long outputs.",
+        "ComfyUI: Try high-resolution and video workflows, but lower resolution, steps, and batch first if VRAM runs out.",
+      ],
+      linesKo: [
         "LLM: 8B-14B급 이상 로컬 모델을 프롬프트 변형, 캐릭터 규칙, 자산 메모 자동화에 적극 사용합니다.",
         "유료 모델: 최종 기획 검토, 긴 리서치, 복잡한 전략 판단에만 보조로 씁니다.",
         "컨텍스트: 32K-128K까지 늘려도 되지만, 프로젝트별 JSON만 넣는 습관을 유지합니다.",
@@ -224,8 +260,15 @@
       ],
     },
     manual: {
-      title: "모르겠을 때 안전 추천",
+      title: "Safe recommendation when you are not sure",
+      titleKo: "모르겠을 때 안전 추천",
       lines: [
+        "Start with paid web/API tools for scripts and prompts, then save only the results and JSON in Creator OS.",
+        "Test local LLMs from 2B-4B first; if they feel slow, reduce context and output length before changing model size.",
+        "Start ComfyUI with a single-image workflow and add video or high-resolution work later.",
+        "If you split prompts, shots, thumbnails, and assets per project, even low-spec PCs can keep the workflow organized.",
+      ],
+      linesKo: [
         "처음에는 유료 웹/API로 대본과 프롬프트를 만들고, Creator OS에는 결과와 JSON만 저장합니다.",
         "로컬 LLM은 2B-4B급부터 테스트하고, 느리면 모델 크기보다 컨텍스트와 출력 길이를 먼저 줄입니다.",
         "ComfyUI는 이미지 1장 생성 워크플로우부터 시작하고 영상/고해상도는 나중에 붙입니다.",
@@ -236,6 +279,18 @@
 
   function getLanguage() {
     return localStorage.getItem(LANGUAGE_KEY) || "ko";
+  }
+
+  function getText() {
+    return state.getCopy(getLanguage());
+  }
+
+  function isKorean() {
+    return getLanguage() === "ko";
+  }
+
+  function getSampleProject() {
+    return sampleProjects[isKorean() ? "ko" : "en"];
   }
 
   function createTextElement(tag, className, text) {
@@ -293,26 +348,27 @@
 
   function renderProject() {
     const project = loadProject();
+    const text = getText();
     elements.projectFields.forEach((input) => {
       input.value = project[input.dataset.projectField] || "";
     });
     const filled = projectFields.filter((field) => project[field]).length;
-    const title = project.videoTopic || "저장된 프로젝트 없음";
+    const title = project.videoTopic || text.noSavedProjectTitle;
     elements.projectStatus.textContent = filled
-      ? `현재 프로젝트: ${title} · ${filled}/${projectFields.length}개 항목 입력됨`
-      : "아직 저장된 프로젝트가 없습니다.";
+      ? `${text.currentProjectPrefix} ${title} · ${filled}/${projectFields.length}${isKorean() ? "" : " "}${text.fieldsEnteredSuffix}`
+      : text.noSavedProjectStatus;
   }
 
   function renderWorkflowSteps() {
     elements.workflowSteps.replaceChildren(
       ...workflowSteps.map((step) => {
         const item = document.createElement("li");
-        const title = createTextElement("strong", "", step.title);
-        const detail = createTextElement("p", "", step.detail);
+        const title = createTextElement("strong", "", isKorean() ? step.titleKo : step.title);
+        const detail = createTextElement("p", "", isKorean() ? step.detailKo : step.detail);
         const link = document.createElement("a");
         link.href = step.href;
         link.className = "workflow-link";
-        link.textContent = step.label;
+        link.textContent = isKorean() ? step.labelKo : step.label;
         item.append(title, detail, link);
         return item;
       })
@@ -328,13 +384,14 @@
   }
 
   function renderProgress() {
+    const text = getText();
     const cards = getProgressItems().map((source) => {
       const card = document.createElement("a");
       card.href = source.href;
       card.className = "progress-card" + (source.count > 0 ? " is-started" : "");
       card.append(
         createTextElement("strong", "", source.label),
-        createTextElement("span", "", source.count > 0 ? `${source.count}개 저장됨` : "아직 없음")
+        createTextElement("span", "", source.count > 0 ? `${source.count}${isKorean() ? "" : " "}${text.savedSuffix}` : text.noneYet)
       );
       return card;
     });
@@ -344,6 +401,7 @@
   function getProgressItems() {
     return progressSources.map((source) => ({
       ...source,
+      label: isKorean() ? source.labelKo || source.label : source.label,
       count: source.read(readStorageJson(source.key)),
     }));
   }
@@ -372,45 +430,51 @@
   }
 
   function renderOpsDashboard() {
+    const text = getText();
     const project = loadProject();
     const missingProjectFields = requiredProjectFields.filter((field) => !project[field]);
     const progressItems = getProgressItems();
     const moduleItems = progressItems.filter((item) => item.key !== PROJECT_KEY);
     const startedModules = moduleItems.filter((item) => item.count > 0);
     const nextItem = moduleItems.find((item) => item.count === 0) || moduleItems[moduleItems.length - 1];
-    const projectTitle = project.videoTopic || project.channelName || "프로젝트 없음";
+    const projectTitle = project.videoTopic || project.channelName || text.noProjectTitle;
     const projectDetail = missingProjectFields.length
-      ? `필수 항목 ${missingProjectFields.length}개가 비어 있습니다. 채널명, 주제, 타깃, 목적부터 채우세요.`
-      : `${projectTitle} 기준으로 ${startedModules.length}/${moduleItems.length}개 모듈에 작업 데이터가 있습니다.`;
+      ? isKorean()
+        ? `필수 항목 ${missingProjectFields.length}${text.projectMissingPrefix}`
+        : `${missingProjectFields.length} ${text.projectMissingPrefix}`
+      : isKorean()
+        ? `${projectTitle} ${text.projectDataPrefix} ${startedModules.length}/${moduleItems.length}${text.projectDataSuffix}`
+        : `${projectTitle} ${text.projectDataPrefix} ${startedModules.length}/${moduleItems.length} ${text.projectDataSuffix}`;
     const backupDetail = startedModules.length
-      ? `${startedModules.map((item) => item.label).join(", ")} 데이터가 있습니다. 중요한 작업은 각 모듈의 Export JSON으로 백업하세요.`
-      : "아직 백업할 모듈 데이터가 없습니다. 프로젝트를 저장한 뒤 템플릿이나 대본부터 만들어보세요.";
+      ? `${startedModules.map((item) => item.label).join(", ")} ${text.backupHasDataSuffix}`
+      : text.noBackupData;
     const healthDetail = [
-      "정적 파일 실행",
-      "로컬 저장소 사용",
-      "로그인 없음",
-      "외부 API 호출 없음",
+      text.staticFileRun,
+      text.localStorageUse,
+      text.noLogin,
+      text.noExternalApiCall,
     ].join(" · ");
     elements.opsGrid.replaceChildren(
-      makeOpsCard("프로젝트", projectTitle, projectDetail, { href: "#", label: "프로젝트 확인" }),
-      makeOpsCard("다음 집중 작업", nextItem.label, nextItem.count > 0 ? "기본 흐름이 모두 시작되었습니다. 캘린더와 리뷰 메모를 보강하세요." : `${nextItem.label} 모듈이 아직 비어 있습니다.`, { href: nextItem.href, label: `${nextItem.label} 열기` }),
-      makeOpsCard("백업 알림", startedModules.length ? `${startedModules.length}개 모듈 저장됨` : "백업 대기", backupDetail, { exportProject: true, label: "프로젝트 JSON 내보내기" }),
-      makeOpsCard("로컬 상태", "안전 모드", healthDetail, { href: "../../PUBLISHING_CHECKLIST.md", label: "공개 체크리스트" })
+      makeOpsCard(text.opsProject, projectTitle, projectDetail, { href: "#", label: text.checkProject }),
+      makeOpsCard(text.opsNextFocus, nextItem.label, nextItem.count > 0 ? text.allStartedDetail : `${nextItem.label} ${text.moduleEmptySuffix}`, { href: nextItem.href, label: isKorean() ? `${nextItem.label} ${text.openSuffix}` : `${text.openSuffix} ${nextItem.label}` }),
+      makeOpsCard(text.opsBackup, startedModules.length ? `${startedModules.length}${isKorean() ? "" : " "}${text.moduleSavedSuffix}` : text.backupWaiting, backupDetail, { exportProject: true, label: text.exportProjectJson }),
+      makeOpsCard(text.opsLocalStatus, text.safeMode, healthDetail, { href: "../../PUBLISHING_CHECKLIST.md", label: text.publicChecklist })
     );
   }
 
   function getWebGlRenderer() {
     const canvas = document.createElement("canvas");
     const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    if (!gl) return "WebGL 정보 없음";
+    if (!gl) return getText().webglUnavailable;
     const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
-    if (!debugInfo) return "GPU 이름 비공개";
-    return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || "GPU 이름 비공개";
+    if (!debugInfo) return getText().gpuNamePrivate;
+    return gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL) || getText().gpuNamePrivate;
   }
 
   function detectHardware() {
-    const threads = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} 논리 스레드` : "브라우저에서 확인 불가";
-    const memory = navigator.deviceMemory ? `약 ${navigator.deviceMemory}GB 이상으로 추정` : "브라우저에서 확인 불가";
+    const text = getText();
+    const threads = navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} ${text.logicalThreads}` : text.browserUnavailable;
+    const memory = navigator.deviceMemory ? `${text.memoryEstimatePrefix} ${navigator.deviceMemory}${isKorean() ? "" : " "}${text.memoryEstimateSuffix}` : text.browserUnavailable;
     elements.specCpu.textContent = threads;
     elements.specMemory.textContent = memory;
     elements.specGpu.textContent = getWebGlRenderer();
@@ -418,9 +482,9 @@
 
   function renderSetupRecommendation() {
     const selected = setupRecommendations[elements.performanceTier.value] || setupRecommendations.manual;
-    const title = createTextElement("strong", "", selected.title);
+    const title = createTextElement("strong", "", isKorean() ? selected.titleKo : selected.title);
     const list = document.createElement("ul");
-    selected.lines.forEach((line) => {
+    (isKorean() ? selected.linesKo : selected.lines).forEach((line) => {
       const item = document.createElement("li");
       item.textContent = line;
       list.appendChild(item);
@@ -457,7 +521,7 @@
         }, {});
         saveProject(project);
       } catch (error) {
-        elements.projectStatus.textContent = "프로젝트 JSON을 읽을 수 없습니다.";
+        elements.projectStatus.textContent = getText().importProjectError;
       } finally {
         elements.importProjectFile.value = "";
       }
@@ -476,10 +540,13 @@
   }
 
   function renderStaticCopy() {
-    const text = state.getCopy(getLanguage());
+    const text = getText();
     document.documentElement.lang = getLanguage();
     document.querySelectorAll("[data-i18n]").forEach((node) => {
       node.textContent = text[node.dataset.i18n] || "";
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
+      node.setAttribute("placeholder", text[node.dataset.i18nPlaceholder] || "");
     });
     elements.search.placeholder = text.searchPlaceholder;
     elements.emptyState.textContent = text.emptyState;
@@ -504,7 +571,7 @@
       const topLine = document.createElement("div");
       topLine.className = "module-topline";
       topLine.append(
-        createTextElement("span", "order-pill", order ? `${order}순서` : "추천"),
+        createTextElement("span", "order-pill", order ? `${order}${isKorean() ? "" : " "}${getText().orderSuffix}` : getText().recommended),
         createTextElement("span", "workflow-pill", module.displayWorkflow || module.workflow)
       );
 
@@ -585,8 +652,8 @@
     });
     elements.saveProject.addEventListener("click", () => saveProject(projectFromFields()));
     elements.sampleProject.addEventListener("click", () => {
-      if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) {
-        saveProject(sampleProject);
+      if (confirmProjectOverwrite(getText().confirmSampleOverwrite)) {
+        saveProject(getSampleProject());
         seedSampleModules();
         renderProgress();
         renderOpsDashboard();
@@ -594,8 +661,8 @@
     });
     if (elements.sampleProjectShortcut) {
       elements.sampleProjectShortcut.addEventListener("click", () => {
-        if (confirmProjectOverwrite("기존 프로젝트를 샘플 프로젝트로 바꿀까요?")) {
-          saveProject(sampleProject);
+        if (confirmProjectOverwrite(getText().confirmSampleOverwrite)) {
+          saveProject(getSampleProject());
           seedSampleModules();
           renderProgress();
           renderOpsDashboard();
@@ -604,7 +671,7 @@
     }
     elements.exportProject.addEventListener("click", downloadProject);
     elements.importProject.addEventListener("click", () => {
-      if (confirmProjectOverwrite("기존 프로젝트를 가져온 JSON으로 바꿀까요?")) elements.importProjectFile.click();
+      if (confirmProjectOverwrite(getText().confirmImportOverwrite)) elements.importProjectFile.click();
     });
     elements.importProjectFile.addEventListener("change", () => importProjectFile(elements.importProjectFile.files[0]));
     elements.opsGrid.addEventListener("click", (event) => {

@@ -142,6 +142,74 @@
     "Suggest a template": "템플릿 제안하기",
   });
 
+  Object.assign(dictionary, {
+    "Korean": "한국어",
+    "Filter": "필터",
+    "Filters": "필터",
+    "Score": "점수",
+    "Minimum score": "최소 점수",
+    "Favorites": "즐겨찾기",
+    "Favorite": "즐겨찾기",
+    "Favorite only": "즐겨찾기만",
+    "New idea": "새 아이디어",
+    "Send to calendar": "캘린더로 보내기",
+    "Thumbnail candidates": "썸네일 후보",
+    "Edit idea": "아이디어 편집",
+    "Emotion hook": "감정 훅",
+    "Layout": "레이아웃",
+    "Screen subject": "화면 주제",
+    "Thumbnail text": "썸네일 문구",
+    "Color palette": "컬러 팔레트",
+    "Image generation prompt": "이미지 생성 프롬프트",
+    "No ideas match the current filter.": "현재 필터와 일치하는 아이디어가 없습니다.",
+    "No recipes match the current filter.": "현재 필터와 일치하는 레시피가 없습니다.",
+    "Workflow list": "워크플로우 목록",
+    "New recipe": "새 레시피",
+    "Create recipe from project": "프로젝트로 레시피 만들기",
+    "Recipe editor": "레시피 편집",
+    "Save": "저장",
+    "Copy": "복사",
+    "Workflow name": "워크플로우 이름",
+    "Recommended environment": "권장 환경",
+    "Model/tool": "모델/도구",
+    "Resolution": "해상도",
+    "Input/output, speed, and failure-fix notes": "입출력, 속도, 실패 수정 메모",
+    "Input rules": "입력 규칙",
+    "Output notes": "출력 메모",
+    "Context settings": "컨텍스트 설정",
+    "Speed/performance notes": "속도/성능 메모",
+    "Node preset notes": "노드 프리셋 메모",
+    "Failure fixes": "실패 시 수정법",
+    "Mark as important recipe": "중요한 레시피로 표시",
+    "Copy-ready recipe": "복사용 레시피",
+    "Why this approach?": "왜 이 방식인가?",
+    "New thumbnail idea": "새 썸네일 아이디어",
+    "No text": "문구 없음",
+    "Prompt copied.": "프롬프트를 복사했습니다.",
+    "Copy was blocked. Copy the selected prompt manually.": "복사가 막혔습니다. 선택된 프롬프트를 직접 복사하세요.",
+    "Idea deleted.": "아이디어를 삭제했습니다.",
+    "Idea restored.": "아이디어를 복원했습니다.",
+    "JSON imported.": "JSON을 가져왔습니다.",
+    "Import failed: check that this is a valid JSON file.": "가져오기 실패: 올바른 JSON 파일인지 확인하세요.",
+    "Demo data restored.": "데모 데이터를 복원했습니다.",
+    "localStorage is not available.": "localStorage를 사용할 수 없습니다.",
+    "Created a thumbnail-based upload idea in the calendar.": "캘린더에 썸네일 기반 업로드 아이디어를 만들었습니다.",
+    "Added the thumbnail prompt to the calendar.": "캘린더에 썸네일 프롬프트를 추가했습니다.",
+    "Could not read the existing calendar JSON. Back it up or reset it in Calendar first.": "기존 캘린더 JSON을 읽지 못했습니다. 캘린더에서 먼저 백업하거나 초기화하세요.",
+    "Video topic, emotion, text, layout, and image prompts in one thumbnail planning board.": "영상 주제, 감정, 문구, 레이아웃, 이미지 프롬프트를 한곳에서 정리하는 썸네일 기획 보드입니다.",
+    "Example: cost, before/after, character": "예: 비용, 전후 비교, 캐릭터",
+    "Example: cost warning dashboard and surprised creator": "예: 비용 경고 대시보드와 놀란 크리에이터",
+    "Example: 5 places money leaks": "예: 돈 새는 곳 5개",
+    "Example: deep green, white, orange": "예: 딥그린, 화이트, 오렌지",
+    "Example: thumbnail, low spec, Flux, upscale": "예: 썸네일, 저사양, Flux, 업스케일",
+    "Example: SDXL, Flux, RunComfy": "예: SDXL, Flux, RunComfy",
+    "Example: 768x768": "예: 768x768",
+    "Upload slipping?": "업로드 밀림?",
+    "Choose the next public example": "다음 공개 예제를 골라주세요",
+    "What should an AI channel show first?": "AI 채널은 무엇을 먼저 보여줘야 할까요?",
+    "Poll: templates, checklist, tutorial": "투표: 템플릿, 점검표, 튜토리얼",
+  });
+
   const beginnerCopy = {
     "creator-os-dashboard": {
       title: "처음 쓰는 순서",
@@ -230,14 +298,55 @@
     return localStorage.getItem(LANGUAGE_KEY) || "ko";
   }
 
+  const reverseDictionary = Object.keys(dictionary).reduce((reverse, english) => {
+    const korean = dictionary[english];
+    if (typeof korean === "string" && !reverse[korean]) reverse[korean] = english;
+    return reverse;
+  }, {});
+
   function translateExact(text) {
     const trimmed = String(text || "").trim();
     if (!trimmed) return text;
-    return dictionary[trimmed] || text;
+    const source = getLanguage() === "ko" ? dictionary : reverseDictionary;
+    const translated = source[trimmed];
+    if (translated) return String(text).replace(trimmed, translated);
+    if (getLanguage() !== "en") return text;
+    let next = String(text);
+    Object.keys(reverseDictionary)
+      .sort((a, b) => b.length - a.length)
+      .forEach((korean) => {
+        if (next.includes(korean)) next = next.split(korean).join(reverseDictionary[korean]);
+      });
+    if (containsHangul(next)) next = fallbackEnglishText(next);
+    return next;
+  }
+
+  function containsHangul(text) {
+    return /[\uac00-\ud7af]/.test(String(text || ""));
+  }
+
+  function fallbackEnglishText(text) {
+    const source = String(text || "").trim();
+    if (!source) return text;
+    if (source.startsWith("Prompt:")) return source.replace(/Prompt:.*/, "Prompt: Sample production prompt.");
+    if (source.startsWith("Result:")) return source.replace(/Result:.*/, "Result: Sample production result note.");
+    if (source.startsWith("License:")) return source.replace(/License:.*/, "License: Sample generated asset. Check model terms before external use.");
+    if (source.startsWith("Notes:")) return source.replace(/Notes:.*/, "Notes: Sample planning note.");
+    if (source.startsWith("Titles:")) return "Titles: Sample title option 1 | Sample title option 2 | Sample title option 3";
+    if (source.startsWith("Thumbnails:")) return "Thumbnails: Sample thumbnail direction with clear subject, contrast, and readable text area";
+    if (source.startsWith("Tags:")) return "Tags: sample, creator, workflow";
+    if (source.includes("·")) {
+      return source
+        .split("·")
+        .map((part) => containsHangul(part) ? "Sample" : part.trim())
+        .join(" · ");
+    }
+    if (source.length <= 28) return "Sample item";
+    if (source.length <= 90) return "Sample production note.";
+    return "Sample production content for the public demo.";
   }
 
   function translateTextNodes(root) {
-    if (getLanguage() !== "ko") return;
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     const nodes = [];
     while (walker.nextNode()) nodes.push(walker.currentNode);
@@ -249,7 +358,6 @@
   }
 
   function translateAttributes(root) {
-    if (getLanguage() !== "ko") return;
     root.querySelectorAll("input[placeholder], textarea[placeholder], [title], [aria-label]").forEach((node) => {
       ["placeholder", "title", "aria-label"].forEach((attr) => {
         if (!node.hasAttribute(attr)) return;
@@ -350,6 +458,32 @@
   function applyTranslations() {
     translateTextNodes(document.body);
     translateAttributes(document.body);
+  }
+
+  function observeTranslations() {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            const translated = translateExact(node.nodeValue);
+            if (translated !== node.nodeValue) node.nodeValue = translated;
+          }
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            translateTextNodes(node);
+            translateAttributes(node);
+          }
+        });
+        if (mutation.type === "attributes" && mutation.target.nodeType === Node.ELEMENT_NODE) {
+          translateAttributes(mutation.target.parentElement || document.body);
+        }
+      });
+    });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["placeholder", "title", "aria-label"],
+    });
   }
 
   function injectStyles() {
@@ -461,6 +595,7 @@
     ensureProjectBanner();
     ensureBeginnerGuide();
     applyTranslations();
+    observeTranslations();
   }
 
   if (document.readyState === "loading") {

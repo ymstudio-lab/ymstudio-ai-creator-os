@@ -9,9 +9,9 @@
   <body>
     <header class="hero">
       <div>
-        <p class="eyebrow" data-i18n="heroEyebrow">로컬 런처 - 크리에이터 번들 확장 중</p>
-        <h1 data-i18n="heroTitle">YMSTUDIO AI Creator OS 대시보드</h1>
-        <p class="hero-copy" data-i18n="heroCopy">영상 아이디어를 주제, 훅, 프롬프트, 샷 플랜, 썸네일, 업로드 일정, 자산, 리뷰 메모로 바꾸는 로컬 작업대입니다.</p>
+        <p class="eyebrow" data-i18n="heroEyebrow">Local launcher - active creator bundle</p>
+        <h1 data-i18n="heroTitle">YMSTUDIO AI Creator OS Dashboard</h1>
+        <p class="hero-copy" data-i18n="heroCopy">Turn a video idea into a clear production plan: topic, hook, prompt, shot plan, thumbnail, upload schedule, assets, and review notes.</p>
       </div>
       <aside class="hero-status" aria-label="Completion summary">
         <span data-summary></span>
@@ -21,54 +21,54 @@
     <main>
       <section class="promise-strip" aria-label="What this dashboard helps with">
         <article>
-          <strong>아이디어를 작업 순서로</strong>
-          <span>주제, 타깃, 목적을 먼저 정하고 다음 행동을 고릅니다.</span>
+          <strong data-i18n="promiseOrderTitle">Turn ideas into order</strong>
+          <span data-i18n="promiseOrderCopy">Choose the topic, audience, and goal first, then pick the next action.</span>
         </article>
         <article>
-          <strong>반복 작업을 템플릿으로</strong>
-          <span>훅, 대본, 샷, 썸네일을 빈 화면에서 시작하지 않습니다.</span>
+          <strong data-i18n="promiseTemplateTitle">Start repeat work from templates</strong>
+          <span data-i18n="promiseTemplateCopy">Do not begin hooks, scripts, shots, or thumbnails from a blank screen.</span>
         </article>
         <article>
-          <strong>자료를 한 프로젝트로</strong>
-          <span>모듈마다 같은 프로젝트 정보를 보고 JSON으로 백업합니다.</span>
+          <strong data-i18n="promiseProjectTitle">Keep assets in one project</strong>
+          <span data-i18n="promiseProjectCopy">Every module reads the same project info and can be backed up as JSON.</span>
         </article>
       </section>
 
       <section class="quickstart-strip" aria-label="3 minute beginner start">
         <article class="quickstart-card quickstart-main">
           <div>
-            <span class="step-badge">1단계</span>
-            <strong>샘플 프로젝트로 시작</strong>
-            <p>무엇을 적어야 할지 모르겠다면 샘플 프로젝트를 채운 뒤 내 주제로 바꿉니다.</p>
+            <span class="step-badge" data-i18n="quickstartStep1">Step 1</span>
+            <strong data-i18n="quickstartSampleTitle">Start with a sample project</strong>
+            <p data-i18n="quickstartSampleCopy">If you are not sure what to write, fill the sample project and replace it with your own topic.</p>
           </div>
-          <button class="primary-action" type="button" data-sample-project-shortcut>샘플 프로젝트로 바로 시작</button>
+          <button class="primary-action" type="button" data-sample-project-shortcut data-i18n="quickstartSampleButton">Start from sample project</button>
         </article>
         <a class="quickstart-card" href="#modules-title">
           <div>
-            <span class="step-badge">2단계</span>
-            <strong>템플릿 고르기</strong>
-            <p>아래 런치패드에서 1순서 템플릿 라이브러리를 엽니다.</p>
+            <span class="step-badge" data-i18n="quickstartStep2">Step 2</span>
+            <strong data-i18n="quickstartTemplateTitle">Choose a template</strong>
+            <p data-i18n="quickstartTemplateCopy">Open the first module, Template Library, from the launchpad below.</p>
           </div>
         </a>
         <a class="quickstart-card" href="#modules-title">
           <div>
-            <span class="step-badge">3단계</span>
-            <strong>첫 대본 만들기</strong>
-            <p>아래 런치패드에서 2순서 스크립트 생성기를 엽니다.</p>
+            <span class="step-badge" data-i18n="quickstartStep3">Step 3</span>
+            <strong data-i18n="quickstartScriptTitle">Make the first script</strong>
+            <p data-i18n="quickstartScriptCopy">Open the second module, Script Generator, from the launchpad below.</p>
           </div>
         </a>
       </section>
 
       <section class="output-preview" aria-label="Expected creator outputs">
         <div>
-          <span>결과 예시</span>
-          <strong>이 흐름을 따라가면 영상 1개에 필요한 작업 묶음이 남습니다.</strong>
+          <span data-i18n="outputPreviewEyebrow">Output example</span>
+          <strong data-i18n="outputPreviewTitle">Following this flow leaves a complete work bundle for one video.</strong>
         </div>
         <ul>
-          <li>쇼츠/롱폼 대본 초안</li>
-          <li>샷 플랜과 썸네일 후보</li>
-          <li>업로드 일정과 자산 메모</li>
-          <li>AI/API 비용 기록</li>
+          <li data-i18n="outputPreviewItem1">Short-form or long-form script draft</li>
+          <li data-i18n="outputPreviewItem2">Shot plan and thumbnail candidates</li>
+          <li data-i18n="outputPreviewItem3">Upload schedule and asset notes</li>
+          <li data-i18n="outputPreviewItem4">AI/API cost records</li>
         </ul>
       </section>
 
@@ -76,39 +76,39 @@
         <article class="panel project-panel">
           <div class="section-heading compact-heading">
             <p class="eyebrow">Creator Project</p>
-            <h2>새 영상 프로젝트 시작</h2>
-            <p class="section-note">이 정보가 다른 모듈의 현재 프로젝트 배너로 이어집니다.</p>
+            <h2 data-i18n="projectTitle">Start a new video project</h2>
+            <p class="section-note" data-i18n="projectNote">This information becomes the current project banner in other modules.</p>
           </div>
           <div class="project-form project-form-primary" data-project-form>
-            <label><span>채널명</span><input data-project-field="channelName" type="text" placeholder="예: YMSTUDIO"></label>
-            <label><span>영상 주제</span><input data-project-field="videoTopic" type="text" placeholder="예: AI 영상 제작 워크플로우"></label>
-            <label><span>타깃 시청자</span><input data-project-field="targetAudience" type="text" placeholder="예: 영상 제작 초보자"></label>
-            <label><span>영상 목적</span><input data-project-field="videoGoal" type="text" placeholder="예: 템플릿 기반 제작 흐름 소개"></label>
+            <label><span data-i18n="fieldChannelName">Channel name</span><input data-project-field="channelName" type="text" placeholder="Example: YMSTUDIO" data-i18n-placeholder="placeholderChannelName"></label>
+            <label><span data-i18n="fieldVideoTopic">Video topic</span><input data-project-field="videoTopic" type="text" placeholder="Example: AI video production workflow" data-i18n-placeholder="placeholderVideoTopic"></label>
+            <label><span data-i18n="fieldTargetAudience">Target audience</span><input data-project-field="targetAudience" type="text" placeholder="Example: beginner video creators" data-i18n-placeholder="placeholderTargetAudience"></label>
+            <label><span data-i18n="fieldVideoGoal">Video goal</span><input data-project-field="videoGoal" type="text" placeholder="Example: introduce a template-based production flow" data-i18n-placeholder="placeholderVideoGoal"></label>
           </div>
           <details class="inline-disclosure">
-            <summary>추가 프로젝트 정보</summary>
+            <summary data-i18n="additionalProjectInfo">Additional project info</summary>
             <div class="project-form">
-              <label><span>업로드 플랫폼</span><input data-project-field="platform" type="text" placeholder="예: YouTube, Shorts, Instagram"></label>
-              <label><span>톤앤매너</span><input data-project-field="tone" type="text" placeholder="예: 쉽게, 실전형, 차분하게"></label>
-              <label><span>사용할 AI 도구</span><input data-project-field="aiTools" type="text" placeholder="예: Claude, ChatGPT, ComfyUI"></label>
-              <label><span>프로젝트 폴더명</span><input data-project-field="folderName" type="text" placeholder="예: 20260519-creator-workflow"></label>
+              <label><span data-i18n="fieldPlatform">Upload platform</span><input data-project-field="platform" type="text" placeholder="Example: YouTube, Shorts, Instagram" data-i18n-placeholder="placeholderPlatform"></label>
+              <label><span data-i18n="fieldTone">Tone</span><input data-project-field="tone" type="text" placeholder="Example: clear, practical, calm" data-i18n-placeholder="placeholderTone"></label>
+              <label><span data-i18n="fieldAiTools">AI tools</span><input data-project-field="aiTools" type="text" placeholder="Example: Claude, ChatGPT, ComfyUI" data-i18n-placeholder="placeholderAiTools"></label>
+              <label><span data-i18n="fieldFolderName">Project folder name</span><input data-project-field="folderName" type="text" placeholder="Example: 20260519-creator-workflow" data-i18n-placeholder="placeholderFolderName"></label>
             </div>
           </details>
           <div class="project-actions">
-            <button class="primary-action" type="button" data-save-project>프로젝트 저장</button>
-            <button class="secondary-action" type="button" data-sample-project>샘플 다시 채우기</button>
-            <button class="secondary-action" type="button" data-export-project>JSON 내보내기</button>
-            <button class="secondary-action" type="button" data-import-project>JSON 가져오기</button>
+            <button class="primary-action" type="button" data-save-project data-i18n="saveProject">Save project</button>
+            <button class="secondary-action" type="button" data-sample-project data-i18n="refillSample">Refill sample</button>
+            <button class="secondary-action" type="button" data-export-project data-i18n="exportJson">Export JSON</button>
+            <button class="secondary-action" type="button" data-import-project data-i18n="importJson">Import JSON</button>
             <input data-import-project-file type="file" accept="application/json,.json" hidden>
           </div>
-          <p class="project-status" data-project-status>아직 저장된 프로젝트가 없습니다.</p>
+          <p class="project-status" data-project-status>No project saved yet.</p>
         </article>
 
         <details class="panel workflow-panel">
           <summary>
             <span>
               <small>Guided workflow</small>
-              <strong>따라 하기 순서 보기</strong>
+              <strong data-i18n="workflowSummaryTitle">View guided steps</strong>
             </span>
           </summary>
           <ol class="workflow-steps" data-workflow-steps></ol>
@@ -118,46 +118,46 @@
       <details class="section hardware-section dashboard-fold" aria-labelledby="hardware-title">
         <summary>
           <span>
-            <small>선택 설정</small>
-            <strong>내 작업 환경 체크</strong>
+            <small data-i18n="hardwareSummaryEyebrow">Optional setup</small>
+            <strong data-i18n="hardwareSummaryTitle">Check my work environment</strong>
           </span>
-          <em>PC 성능/LLM/ComfyUI 추천이 필요할 때만 펼치기</em>
+          <em data-i18n="hardwareSummaryCopy">Open only when you need PC, LLM, or ComfyUI recommendations</em>
         </summary>
         <div class="section-heading">
           <p class="eyebrow">Creator Setup</p>
-          <h2 id="hardware-title">내 작업 환경 체크</h2>
-          <p class="section-note">PC 성능이 낮아도 시작할 수 있게 로컬 LLM, 유료 웹/API, ComfyUI 권장 흐름을 나눠서 안내합니다.</p>
+          <h2 id="hardware-title" data-i18n="hardwareTitle">Check my work environment</h2>
+          <p class="section-note" data-i18n="hardwareNote">Split recommendations across local LLMs, paid web/API tools, and ComfyUI so you can start even on a low-spec PC.</p>
         </div>
         <div class="hardware-grid">
           <article class="hardware-card">
             <div class="hardware-card-heading">
-              <strong>브라우저가 확인한 정보</strong>
-              <button class="secondary-action" type="button" data-detect-hardware>내 환경 확인</button>
+              <strong data-i18n="browserInfoTitle">Information the browser can check</strong>
+              <button class="secondary-action" type="button" data-detect-hardware data-i18n="detectHardware">Check environment</button>
             </div>
             <dl class="hardware-specs" data-hardware-specs>
-              <div><dt>CPU</dt><dd data-spec-cpu>확인 전</dd></div>
-              <div><dt>RAM</dt><dd data-spec-memory>확인 전</dd></div>
-              <div><dt>GPU</dt><dd data-spec-gpu>확인 전</dd></div>
+              <div><dt>CPU</dt><dd data-spec-cpu data-i18n="notChecked">Not checked</dd></div>
+              <div><dt>RAM</dt><dd data-spec-memory data-i18n="notChecked">Not checked</dd></div>
+              <div><dt>GPU</dt><dd data-spec-gpu data-i18n="notChecked">Not checked</dd></div>
             </dl>
-            <p class="hardware-note">브라우저 보안상 실제 VRAM, 전체 RAM, 정확한 모델명은 일부만 표시될 수 있습니다.</p>
+            <p class="hardware-note" data-i18n="browserSecurityNote">Browser security may hide exact VRAM, total RAM, and model names.</p>
           </article>
           <article class="hardware-card">
-            <strong>내 성능에 맞는 추천</strong>
+            <strong data-i18n="setupRecommendationTitle">Recommendation for my performance level</strong>
             <div class="hardware-controls">
               <label>
-                <span>작업 환경</span>
+                <span data-i18n="performanceTierLabel">Work environment</span>
                 <select data-performance-tier>
-                  <option value="cloud">저사양 또는 노트북: 유료 웹/API 우선</option>
-                  <option value="balanced">중간 사양: 로컬 소형 + 유료 보조</option>
-                  <option value="local">고사양 GPU: 로컬 LLM/ComfyUI 우선</option>
-                  <option value="manual">모르겠음: 안전 설정 추천</option>
+                  <option value="cloud" data-i18n="performanceCloud">Low-spec or laptop: paid web/API first</option>
+                  <option value="balanced" data-i18n="performanceBalanced">Mid-spec: small local models plus paid support</option>
+                  <option value="local" data-i18n="performanceLocal">High-end GPU: local LLM/ComfyUI first</option>
+                  <option value="manual" data-i18n="performanceManual">Not sure: safe default recommendation</option>
                 </select>
               </label>
-              <button class="primary-action" type="button" data-recommend-setup>추천 보기</button>
+              <button class="primary-action" type="button" data-recommend-setup data-i18n="showRecommendation">Show recommendation</button>
             </div>
             <div class="setup-recommendation" data-setup-recommendation>
-              <strong>추천 대기 중</strong>
-              <p>내 환경 확인 또는 추천 보기를 누르면 모델, 컨텍스트, 토큰 속도, ComfyUI 시작 설정을 보여줍니다.</p>
+              <strong data-i18n="recommendationWaiting">Waiting for recommendation</strong>
+              <p data-i18n="recommendationWaitingCopy">Use Check environment or Show recommendation to see model, context, token speed, and ComfyUI startup guidance.</p>
             </div>
           </article>
         </div>
@@ -166,15 +166,15 @@
       <details class="section ops-section dashboard-fold" aria-labelledby="ops-title">
         <summary>
           <span>
-            <small>상태 점검</small>
-            <strong>오늘의 작업 상태</strong>
+            <small data-i18n="opsSummaryEyebrow">Status check</small>
+            <strong data-i18n="opsSummaryTitle">Today's work status</strong>
           </span>
-          <em>저장/백업/다음 작업 확인</em>
+          <em data-i18n="opsSummaryCopy">Check save, backup, and next action</em>
         </summary>
         <div class="section-heading">
           <p class="eyebrow">Creator Dashboard</p>
-          <h2 id="ops-title">오늘의 작업 상태</h2>
-          <p class="section-note">저장된 프로젝트와 각 모듈의 로컬 데이터를 읽어서 다음 작업, 백업, 상태 점검을 보여줍니다.</p>
+          <h2 id="ops-title" data-i18n="opsTitle">Today's work status</h2>
+          <p class="section-note" data-i18n="opsNote">Read the saved project and local module data to show next work, backup, and status checks.</p>
         </div>
         <div class="ops-grid" data-ops-grid></div>
       </details>
@@ -182,13 +182,13 @@
       <details class="section progress-section dashboard-fold" aria-labelledby="progress-title">
         <summary>
           <span>
-            <small>진행 현황</small>
-            <strong>프로젝트 진행률</strong>
+            <small data-i18n="progressSummaryEyebrow">Progress</small>
+            <strong data-i18n="progressSummaryTitle">Project progress</strong>
           </span>
-          <em>모듈별 저장 데이터가 쌓였는지 보기</em>
+          <em data-i18n="progressSummaryCopy">See whether each module has saved data</em>
         </summary>
         <div class="section-heading">
-          <h2 id="progress-title">프로젝트 진행률</h2>
+          <h2 id="progress-title" data-i18n="progressTitle">Project progress</h2>
         </div>
         <div class="progress-grid" data-progress-grid></div>
       </details>
@@ -201,7 +201,7 @@
           <label>
             <span data-i18n="languageLabel">언어</span>
             <select data-language>
-              <option value="ko">한국어</option>
+              <option value="ko" data-i18n="languageKo">한국어</option>
               <option value="en">English</option>
             </select>
           </label>
